@@ -71,10 +71,6 @@ module.exports =
       console.log(error);
       message.channel.send(error.message);
     }
-
-	if (voiceChannel.members.size == 1)
-      voiceChannel.disconnect();
-
   },
 
   play(message, song) {
