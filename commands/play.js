@@ -79,7 +79,11 @@ module.exports =
       return;
     }
 
+<<<<<<< HEAD
     server.dispatcher = connection.playStream(ytdl(song.url, {filter: "audioonly"}));
+=======
+    server.dispatcher = server.connection.play(ytdl(song.url, {filter: "audioonly"}));
+>>>>>>> 55df95f645d7830aa0258bfac5810b452c42e7ee
 
     server.queue.shift();
 
