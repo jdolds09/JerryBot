@@ -34,16 +34,14 @@ module.exports =
           queue: [],
           volume: 5,
           voiceChannel: voiceChannel,
-          connection: null
         }
 
         servers[message.guild.id].queue.push(song);
 
         try
         {
-          message.member.voiceChannel.join().then(function(connection){
-            this.play(connection, message, servers)
-          })
+          var connection = message.memner.voice.channel.join();
+          this.play(connection, message, servers);
         }
 
         catch(err)
