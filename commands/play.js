@@ -41,10 +41,9 @@ module.exports =
 
         try
         {
-          var connection = await voiceChannel.join();
-          servers[message.guild.id].connection = connection;
-          var server = servers[message.guild.id];
-          this.play(message, server)
+          message.member.voiceChannel.join().then(function(connection){
+            this.play(connection, message, servers)
+          })
         }
 
         catch(err)
@@ -69,8 +68,9 @@ module.exports =
     }
   },
 
-  play(message, server) 
+  play(connection, message, servers) 
   {
+    var server = servers[message.guild.id];
     var song = server.queue[0];
 
     if (!song) 
@@ -79,14 +79,14 @@ module.exports =
       return;
     }
 
-    server.dispatcher = server.connection.play(ytdl(song.url, {filter: "audioonly"}));
+    server.dispatcher = connection.playStream(ytdl(song.url, {filter: "audioonly"}));
 
     server.queue.shift();
 
     server.dispatcher.on("end", () => {
         if(server.queue[0])
         {
-          this.play(message, server);
+          this.play(connection, message, servers);
   		  }
       })
       .on("error", error => console.error(error));

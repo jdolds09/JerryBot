@@ -33,7 +33,7 @@ client.on('message', async message => {
     catch (error) 
     {
 		console.error(error);
-		message.reply('There was an error trying to execute that command!');
+		message.reply('That command doesn\'t exist dumbass.');
 	}
 });
 
