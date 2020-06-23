@@ -72,7 +72,7 @@ module.exports =
       message.channel.send(error.message);
     }
 
-	if (voiceChannel.members.size == 0)
+	if (voiceChannel.members.size == 1)
       voiceChannel.disconnect();
 
   },
