@@ -9,12 +9,11 @@ module.exports =
     try 
     {
       const args = message.content.split(" ");
-      const queue = message.client.queue;
-      const serverQueue = message.client.queue.get(message.guild.id);
+      var servers = {};
 
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
-        return message.channel.send("You need to be in a voice channel to play music!");
+        return message.channel.send("You need to be in a voice channel to play music dumbass.");
       const permissions = voiceChannel.permissionsFor(message.client.user);
       if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) 
       {
@@ -28,42 +27,38 @@ module.exports =
         url: songInfo.video_url
       };
 
-      if (!serverQueue) 
+      if(!servers[message.guild.id])
       {
-        const queueContruct = 
+        servers[message.guild.id] = 
         {
-          textChannel: message.channel,
-          voiceChannel: voiceChannel,
-          connection: null,
-          songs: [],
+          queue: [],
           volume: 5,
-          playing: true
-        };
+          voiceChannel: voiceChannel,
+          connection: null
+        }
 
-        queue.set(message.guild.id, queueContruct);
+        servers[message.guild.id].queue.push(song);
 
-        queueContruct.songs.push(song);
-
-        try 
+        try
         {
           var connection = await voiceChannel.join();
-          queueContruct.connection = connection;
-          this.play(message, queueContruct.songs[0]);
-        } 
-        catch (err) 
+          servers[message.guild.id].connection = connection;
+          this.play(message, servers[message.guild.id].queue[0])
+        }
+
+        catch(err)
         {
           console.log(err);
-          queue.delete(message.guild.id);
-          return message.channel.send(err);
+          message.channel.send(err.message);
         }
-      } 
 
-      else 
-      {
-        serverQueue.songs.push(song);
-        return message.channel.send(`${song.title} has been added to the queue!`);
       }
-
+      
+      else
+      {
+        servers[message.guild.id].queue.push(song);
+        return message.channel.send(`${song.title} has been added to the queue.`)
+      }
     } 
     
     catch (error) 
@@ -74,27 +69,26 @@ module.exports =
   },
 
   play(message, song) {
-    const queue = message.client.queue;
-    const guild = message.guild;
-    const serverQueue = queue.get(message.guild.id);
+
+    var server = servers[message.guild.id];
 
     if (!song) {
-      serverQueue.voiceChannel.leave();
-      queue.delete(guild.id);
+      server.queue.shift();
       return;
     }
 
-    const dispatcher = serverQueue.connection
-      .playStream(ytdl(song.url, {filter: "audioonly"}))
-      .on("end", () => {
-        serverQueue.songs.shift();
-        if(serverQueue.songs[0])
+    server.dispatcher = server.connection.play(ytdl(song.url, {filter: "audioonly"}));
+
+    server.queue.shift();
+
+    server.dispatcher.on("end", () => {
+        if(server.queue[0])
         {
-          this.play(message, serverQueue.songs[0]);
-  		}
+          this.play(message, song);
+  		  }
       })
       .on("error", error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    server.dispatcher.setVolumeLogarithmic(server.volume / 5);
+    message.channel.send(`Start playing: **${song.title}**`);
   }
 };
