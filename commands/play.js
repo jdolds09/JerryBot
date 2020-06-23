@@ -40,7 +40,7 @@ module.exports =
 
         try
         {
-          var connection = message.memner.voice.channel.join();
+          var connection = message.member.voice.channel.join();
           this.play(connection, message, servers);
         }
 
