@@ -43,7 +43,8 @@ module.exports =
         {
           var connection = await voiceChannel.join();
           servers[message.guild.id].connection = connection;
-          this.play(message, servers[message.guild.id].queue[0])
+          var server = servers[message.guild.id];
+          this.play(message, server)
         }
 
         catch(err)
@@ -68,11 +69,12 @@ module.exports =
     }
   },
 
-  play(message, song) {
+  play(message, server) 
+  {
+    var song = server.queue[0];
 
-    var server = servers[message.guild.id];
-
-    if (!song) {
+    if (!song) 
+    {
       server.queue.shift();
       return;
     }
@@ -84,11 +86,10 @@ module.exports =
     server.dispatcher.on("end", () => {
         if(server.queue[0])
         {
-          this.play(message, song);
+          this.play(message, server);
   		  }
       })
       .on("error", error => console.error(error));
     server.dispatcher.setVolumeLogarithmic(server.volume / 5);
-    message.channel.send(`Start playing: **${song.title}**`);
   }
 };
