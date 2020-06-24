@@ -4,10 +4,10 @@ module.exports = {
   name: "play",
   description: "Play a song in your channel!",
   async execute(message) {
-    try {
+    try 
+    {
       const args = message.content.split(" ");
-      const queue = message.client.queue;
-      const serverQueue = message.client.queue.get(message.guild.id);
+      var servers = {};
 
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
@@ -27,57 +27,62 @@ module.exports = {
         url: songInfo.video_url
       };
 
-      if (!serverQueue) {
-        const queueContruct = {
+      if (!servers[message.guild.id]) 
+      {
+        servers[message.guild.id] = 
+        {
           textChannel: message.channel,
           voiceChannel: voiceChannel,
           connection: null,
           songs: [],
           volume: 5,
-          playing: true
         };
 
-        queue.set(message.guild.id, queueContruct);
-
-        queueContruct.songs.push(song);
-
-        try {
+        try 
+        {
           var connection = await voiceChannel.join();
-          queueContruct.connection = connection;
-          this.play(message, queueContruct.songs[0]);
-        } catch (err) {
+          var server = servers[message.guild.id];
+          server.connection = connection;
+          this.play(message, server);
+        } 
+        catch (err) 
+        {
           console.log(err);
-          queue.delete(message.guild.id);
+          servers.delete(message.guild.id);
           return message.channel.send(err);
         }
-      } else {
-        serverQueue.songs.push(song);
-        return message.channel.send(
-          `${song.title} has been added to the queue!`
-        );
+      } 
+      
+      else 
+      {
+        servers[message.guild.id].songs.push(song);
+        return message.channel.send(`${song.title} has been added to the queue!`);
       }
-    } catch (error) {
+    } 
+    
+    catch (error) 
+    {
       console.log(error);
       message.channel.send(error.message);
     }
   },
 
-  play(message, song) {
-    const queue = message.client.queue;
-    const guild = message.guild;
-    const serverQueue = queue.get(message.guild.id);
+  play(message, server) {
+    
+    var song = server.songs[0];
 
-    if (!song) {
-      serverQueue.voiceChannel.leave();
-      queue.delete(guild.id);
+    if (!song) 
+    {
+      server.voiceChannel.leave();
+      server.delete(guild.id);
       return;
     }
 
-    const dispatcher = serverQueue.connection
+    const dispatcher = server.connection
       .play(ytdl(song.url, {filter: "audioonly"}))
-      .on("finish", () => {
-        serverQueue.songs.shift();
-        this.play(message, serverQueue.songs[0]);
+      .on("end", () => {
+        server.songs.shift();
+        this.play(message, server.songs[0]);
       })
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
