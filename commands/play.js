@@ -1,5 +1,4 @@
 const ytdl = require("ytdl-core");
-require("ffmpeg-binaries");
 
 module.exports = {
   name: "play",
