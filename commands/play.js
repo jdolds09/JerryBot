@@ -43,6 +43,7 @@ module.exports = {
           var connection = await voiceChannel.join();
           var server = servers[message.guild.id];
           server.connection = connection;
+          server.songs.push(song);
           this.play(message, server);
         } 
         catch (err) 
