@@ -48,7 +48,6 @@ module.exports = {
         catch (err) 
         {
           console.log(err);
-          servers.delete(message.guild.id);
           return message.channel.send(err);
         }
       } 
@@ -74,7 +73,6 @@ module.exports = {
     if (!song) 
     {
       server.voiceChannel.leave();
-      server.delete(guild.id);
       return;
     }
 
