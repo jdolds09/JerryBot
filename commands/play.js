@@ -1,5 +1,4 @@
 const ytdl = require("ytdl-core");
-const ffmpeg = require("ffmpeg");
 
 module.exports = {
   name: "play",
@@ -78,14 +77,14 @@ module.exports = {
       return;
     }
 
-    const dispatcher = server.connection
+    server.dispatcher = server.connection
       .play(ytdl(song.url, {filter: "audioonly"}))
       .on("end", () => {
         server.songs.shift();
         this.play(message, server.songs[0]);
       })
       .on("error", error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    server.dispatcher.setVolumeLogarithmic(server.volume / 5);
+    message.channel.send(`Start playing: **${song.title}**`);
   }
 };
