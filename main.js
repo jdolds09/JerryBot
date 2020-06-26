@@ -45,7 +45,7 @@ client.on('message', async message => {
         }
     }
 
-    if(message.content.toLowerCase.includes("alex") && message.content.toLowerCase.includes("fuck") && message.content.toLowerCase.includes("off"))
+    if(message.content.toLowerCase().includes("alex") && message.content.toLowerCase().includes("fuck") && message.content.toLowerCase().includes("off"))
         message.channel.send("Fuck off Alex you dick muncher.");
 });
 
