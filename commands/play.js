@@ -75,7 +75,7 @@ module.exports = {
 
     server.dispatcher = server.connection
       .play(ytdl(song.url, {filter: "audioonly"}))
-      .on("end", () => {
+      .on("finish", () => {
         songs.shift();
         this.play(message, songs[0]);
       })
