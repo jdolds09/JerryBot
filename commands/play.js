@@ -8,6 +8,7 @@ module.exports = {
     {
       const args = message.content.split(" ");
       var servers = {};
+      var songs = [];
 
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
@@ -34,29 +35,24 @@ module.exports = {
           textChannel: message.channel,
           voiceChannel: voiceChannel,
           connection: null,
-          songs: [],
           volume: 5,
         };
-
-        try 
-        {
-          var connection = await voiceChannel.join();
-          var server = servers[message.guild.id];
-          server.connection = connection;
-          server.songs.push(song);
-          this.play(message, server);
-        } 
-        catch (err) 
-        {
-          console.log(err);
-          return message.channel.send(err);
-        }
-      } 
-      
-      else 
+      }
+      try 
       {
-        servers[message.guild.id].songs.push(song);
-        return message.channel.send(`${song.title} has been added to the queue!`);
+        var connection = await voiceChannel.join();
+        const server = servers[message.guild.id];
+        server.connection = connection;
+        songs.push(song);
+        if(songs.length == 1)
+          this.play(message, server, songs);
+        else
+          return message.channel.send(`${song.title} has been added to the queue!`);
+      } 
+      catch (err) 
+      {
+        console.log(err);
+        return message.channel.send(err);
       }
     } 
     
@@ -67,9 +63,9 @@ module.exports = {
     }
   },
 
-  play(message, server) {
+  play(message, server, songs) {
     
-    var song = server.songs[0];
+    var song = songs[0];
 
     if (!song) 
     {
@@ -80,8 +76,8 @@ module.exports = {
     server.dispatcher = server.connection
       .play(ytdl(song.url, {filter: "audioonly"}))
       .on("end", () => {
-        server.songs.shift();
-        this.play(message, server.songs[0]);
+        songs.shift();
+        this.play(message, songs[0]);
       })
       .on("error", error => console.error(error));
     server.dispatcher.setVolumeLogarithmic(server.volume / 5);
