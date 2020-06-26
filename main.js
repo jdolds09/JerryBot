@@ -38,13 +38,15 @@ client.on('message', async message => {
     
     if(message.author.username == "ThatSaltySnipezGuy")
     {
-        var msg = message.content.toLocaleLowerCase();
+        var msg = message.content.toLowerCase();
         if(msg.includes("jerry") && msg.includes("bot"))
         {
             message.channel.send("Fuck you Alex :)");
         }
     }
 
+    if(message.content.toLowerCase.includes("alex") && message.content.toLowerCase.includes("fuck") && message.content.toLowerCase.includes("off"))
+        message.channel.send("Fuck off Alex you dick muncher.");
 });
 
 client.login(process.env.token);
