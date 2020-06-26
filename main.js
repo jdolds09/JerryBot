@@ -23,7 +23,7 @@ client.on('message', async message => {
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName);
 
-    message.channel.send(commands);
+    message.channel.send(client.commands);
 
 	if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
