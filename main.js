@@ -14,6 +14,8 @@ for (const file of command_files)
     client.commands.set(command.name, command);
 }
 
+message.channel.send(commands);
+
 client.once('ready', () => {
     console.log("JerryBot is online!");
 });
