@@ -56,8 +56,7 @@ module.exports = {
       else 
       {
         servers[message.guild.id].songs.push(song);
-        if(servers[message.guild.id].songs.length > 1)
-          return message.channel.send(`${song.title} has been added to the queue!`);
+        return message.channel.send(`${song.title} has been added to the queue!`);
       }
     } 
     
