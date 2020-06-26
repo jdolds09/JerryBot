@@ -39,7 +39,7 @@ client.on('message', async message => {
     if(message.author.username == "ThatSaltySnipezGuy")
     {
         var msg = message.content.toLowerCase();
-        if((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@JerryBot"))
+        if((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@jerrybot"))
         {
             message.channel.send("Fuck you Alex :)");
         }
