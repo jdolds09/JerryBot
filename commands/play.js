@@ -12,7 +12,7 @@ module.exports = {
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
         return message.channel.send(
-          "You need to be in a voice channel to play music!"
+          "You need to be in a voice channel to play music dumbass."
         );
       const permissions = voiceChannel.permissionsFor(message.client.user);
       if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
@@ -56,7 +56,8 @@ module.exports = {
       else 
       {
         servers[message.guild.id].songs.push(song);
-        return message.channel.send(`${song.title} has been added to the queue!`);
+        if(servers[message.guild.id].songs.length > 1)
+          return message.channel.send(`${song.title} has been added to the queue!`);
       }
     } 
     
