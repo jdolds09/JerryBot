@@ -34,7 +34,17 @@ client.on('message', async message => {
     {
 		console.error(error);
 		message.reply('That command doesn\'t exist dumbass.');
-	}
+    }
+    
+    if(message.author.username == "ThatSaltySnipezGuy")
+    {
+        var msg = message.content.toLocaleLowerCase();
+        if(msg.includes("jerry") && msg.includes("bot"))
+        {
+            message.channel.send("Fuck you Alex :)");
+        }
+    }
+
 });
 
 client.login(process.env.token);
