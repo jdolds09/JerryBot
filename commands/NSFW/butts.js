@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    imgur(sub)
+    async imgur(sub)
     {
         try
         {
