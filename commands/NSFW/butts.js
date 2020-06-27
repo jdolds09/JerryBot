@@ -8,14 +8,9 @@ module.exports = {
     execute(message) 
     {
         Client.nsfw.real.butts().then(json => {
-            embed = new Discord.MessageEmbed()
-                .setImage(json.url)
-                .setColor('RANDOM')
-                .setURL(json.url)
-                .setAuthor(json.url);
-            return message.channel.send({embed});
+            console.log(json.url);
+            return message.channel.send(json.url);
             }).catch(error => {
-                console.log(json.url);
                 console.log(error);
             });
     },
