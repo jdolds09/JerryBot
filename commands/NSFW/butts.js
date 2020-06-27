@@ -13,9 +13,9 @@ module.exports = {
                 
         var sub = subreddits[Math.floor(Math.random() * subreddits.length)];
 
-
         if(!message.channel.nsfw)
-            message.channel.send("Must be in a NSFW channel.");
+            return message.channel.send("Must be in a NSFW channel.");
+
         else
         {
             try
@@ -27,18 +27,23 @@ module.exports = {
             catch (error)
             {
                 console.log(error);
-                try
-                {
-                    var result = await rp(sub, "Imgur");
-                    message.channel.send(result);
-                }
-
-                catch(err)
-                {
-                    console.log(error);
-                    message.channel.send(err);
-                }
+                this.imgur(sub);
             }
         }
-	},
+    },
+
+    imgur(sub)
+    {
+        try
+        {
+            var result = await rp(sub, "Imgur");
+            message.channel.send(result);
+        }
+
+        catch (err)
+        {
+            console.log(error);
+            return message.channel.send("There was an issue fetching a butt pic.");
+        }
+    }
 };
