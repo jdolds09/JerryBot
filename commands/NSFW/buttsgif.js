@@ -4,7 +4,7 @@ const Discord = require("discord.js")
 module.exports = {
 	name: 'buttsgif',
 	description: 'Post a gif of a butt (Must be in NSFW channel).',
-    execute(message) {
+    async execute(message) {
         if(!message.channel.nsfw)
             message.channel.send("Must be in a NSFW channel.");
         else
@@ -12,7 +12,7 @@ module.exports = {
             try
             {
                 const Search = new Pornsearch("butts");
-                const gifs = Search.gifs();
+                const gifs = await Search.gifs();
                 const result = Math.floor(Math.random() * gifs.length);
                 const { url } = gifs[result - 1];
                 
