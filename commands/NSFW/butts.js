@@ -17,15 +17,9 @@ module.exports = {
                 "ASSians", "cuteAssCuterface", "AsianAsses", "CuteLittleButts", "brunetteass", "Blondeass", "Redheadass", "beautifulbutt"];
                 
                 var sub = subreddits[Math.floor(Math.random() * subreddits.length)];
-                await Search(sub)
-                    .then(url => {
-                        const embed = new Discord.MessageEmbed()
-                            .setImage(url)
-                            .setColor('RANDOM')
-                            .setURL(url)
-                            .setAuthor(url);
-                        return message.channel.send({embed});
-                    })
+                
+                const image = Search(sub);
+                message.channel.send(image); 
             }
 
             catch (error)
