@@ -14,6 +14,7 @@
     "ffmpeg-static": "^4.2.3",
     "opusscript": "0.0.7",
     "pornsearch": "^2.4.3",
+    "random-puppy": "^1.1.0",
     "ytdl-core": "^2.1.7"
   }
 }
