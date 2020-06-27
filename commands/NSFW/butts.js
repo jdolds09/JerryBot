@@ -27,11 +27,11 @@ module.exports = {
             catch (error)
             {
                 console.log(error);
-                this.imgur(sub);
+                message.channel.send("Imgur pic");
             }
         }
     },
-
+/*
     async imgur(sub)
     {
         try
@@ -46,4 +46,5 @@ module.exports = {
             return message.channel.send("There was an issue fetching a butt pic.");
         }
     }
+*/
 };
