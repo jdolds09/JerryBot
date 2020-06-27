@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 
 module.exports = {
 	name: 'boobsgif',
-	description: 'Post an image of a butt (Must be in NSFW channel).',
+	description: 'Post a boob gif (Must be in NSFW channel).',
     execute(message) 
     {
         Client.nsfw.real.boobsgifs().then(json => {
