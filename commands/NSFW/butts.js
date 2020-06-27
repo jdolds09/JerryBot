@@ -12,7 +12,7 @@ module.exports = {
                 "ASSians", "cuteAssCuterface", "AsianAsses", "CuteLittleButts", "brunetteass", "Blondeass", 
                 "Redheadass", "beautifulbutt"];
                 
-        var sub = subreddits[Math.floor(Math.random() * subreddits.length)];
+        const sub = subreddits[Math.floor(Math.random() * subreddits.length)];
 
         if(!message.channel.nsfw)
             return message.channel.send("Must be in a NSFW channel.");
@@ -22,7 +22,10 @@ module.exports = {
             try
             {
                 const result = await rp(sub, "Reddit");
-                message.channel.send(result);
+                if(result)
+                    message.channel.send(result);
+                else
+                    message.channel.send("Result is empty");
             }
 
             catch (error)
