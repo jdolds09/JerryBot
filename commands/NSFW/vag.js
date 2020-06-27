@@ -1,16 +1,26 @@
+const Images = require("dabi-images");
+const Client = new Images.Client();
 
 module.exports = {
-	name: 'vag',
-	description: 'Post an image of a vajayjay (Must be in NSFW channel).',
-	execute(message) {
-        if(!message.channel.nsfw)
-            message.channel.send("Must be in a NSFW channel.");
-        else
+	name: 'butts',
+	description: 'Post an image of a butt (Must be in NSFW channel).',
+    execute(message) 
+    {
+        try
         {
-            let subreddits = ["cameltoe", "cameltoepics", "ExtremeCameltoe", "shaved_asians", "pussy", "Innie",
-                            "vagina", "AsianPussy", "Innies", "shavedgirls", "PerfectPussy", "TINYlips", "GodPussy",
-                            "shavedpussies", "TinyAsianPussy", "CelebrityPussy", "PerfectPussies", "peachlips", "simps"];
-            return requestHandler.makeRequest("reddit", subreddits[Math.floor(Math.random() *subreddits.length)]);
+            Client.nsfw.real.vag().then(json => {
+                const embed = new Discord.MessageEmbed()
+                    .setImage(json.url)
+                    .setColor('RANDOM')
+                    .setURL(json.url)
+                    .setAuthor(json.url);
+            })
+            return message.channel.send({embed});
         }
-	},
+        
+        catch(error)
+        {
+            console.log(error);
+        }
+    },
 };
