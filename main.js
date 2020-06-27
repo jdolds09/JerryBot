@@ -68,7 +68,7 @@ client.on('message', async message => {
     {
         var result = message.content.toLowerCase().includes("alex") && message.content.toLowerCase().includes("fuck") && message.content.toLowerCase().includes("off");
         console.log(result);
-        return message.channel.send("Fuck off Alex you poo poo head.")
+        return message.channel.send("Fuck off Alex you poo poo head.");
     }
 });
 
