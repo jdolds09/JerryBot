@@ -6,21 +6,15 @@ module.exports = {
 	description: 'Post an image of a butt (Must be in NSFW channel).',
     execute(message) 
     {
-        try
-        {
-            Client.nsfw.real.wiener().then(json => {
-                const embed = new Discord.MessageEmbed()
-                    .setImage(json.url)
-                    .setColor('RANDOM')
-                    .setURL(json.url)
-                    .setAuthor(json.url);
-                return message.channel.send({embed});
-            })
-        }
-        
-        catch(error)
-        {
-            console.log(error);
-        }
+        Client.nsfw.real.wiener().then(json => {
+            embed = new Discord.MessageEmbed()
+                .setImage(json.url)
+                .setColor('RANDOM')
+                .setURL(json.url)
+                .setAuthor(json.url);
+            return message.channel.send({embed});
+            }).catch(error => {
+                console.log(error);
+            });
     },
 };
