@@ -38,23 +38,7 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const commandName = args.shift().toLowerCase();
-	const command = client.commands.get(commandName);
 
-	if (message.author.bot) return;
-	if (!message.content.startsWith(prefix)) return;
-
-    try 
-    {
-        command.execute(message);
-    } 
-    catch (error) 
-    {
-		console.error(error);
-		message.reply('That command doesn\'t exist dumbass.');
-    }
-    
     if(message.author.username == "ThatSaltySnipezGuy")
     {
         var msg = message.content.toLowerCase();
@@ -69,6 +53,23 @@ client.on('message', async message => {
     if(msg.includes("alex") && msg.includes("fuck") && msg.includes("off"))
     {
         return message.channel.send("Fuck off Alex you poo poo head.");
+    }
+
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const commandName = args.shift().toLowerCase();
+    const command = client.commands.get(commandName);
+
+	if (message.author.bot) return;
+	if (!message.content.startsWith(prefix)) return;
+
+    try 
+    {
+        command.execute(message);
+    } 
+    catch (error) 
+    {
+		console.error(error);
+		message.reply('That command doesn\'t exist dumbass.');
     }
 });
 
