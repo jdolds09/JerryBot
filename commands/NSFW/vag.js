@@ -3,8 +3,8 @@ const Client = new Images.Client();
 const Discord = require("discord.js")
 
 module.exports = {
-	name: 'butts',
-	description: 'Post an image of a butt (Must be in NSFW channel).',
+	name: 'vag',
+	description: 'Post an image of a vag (Must be in NSFW channel).',
     execute(message) 
     {
         Client.nsfw.real.vag().then(json => {

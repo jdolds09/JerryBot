@@ -1,10 +1,10 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 
 module.exports = {
-	name: 'butts',
-	description: 'Post an image of a butt (Must be in NSFW channel).',
+	name: 'boobs',
+	description: 'Post an image of boobs (Must be in NSFW channel).',
     execute(message) 
     {
         Client.nsfw.real.boobs().then(json => {

@@ -1,6 +1,6 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 
 module.exports = {
 	name: 'butts',
