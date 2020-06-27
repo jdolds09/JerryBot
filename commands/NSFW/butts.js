@@ -8,6 +8,8 @@ module.exports = {
             message.channel.send("Must be in a NSFW channel.");
         else
         {
+            try
+            {
             let subreddits = ["ass", "CuteLittleButts", "reversecowgirl",
             "facedownassup", "butt", "butts", "cosplaybutts", "girlsinyogapants", 
             "smalltitsbigass", "CelebrityButts", "booty", "NSFW_Pussy_Teen_Ass", "nsfw_college_ass",
@@ -24,6 +26,12 @@ module.exports = {
                         .setAuthor(url);
                     return message.channel.send({embed});
                 })
+            }
+
+            catch (error)
+            {
+                message.channel.send("There was an issue fetching a butt pic.");
+            }
         }
 	},
 };
