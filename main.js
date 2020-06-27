@@ -10,6 +10,7 @@ client.commands = new Discord.Collection();
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
 const misc_command_files = fs.readdirSync('./commands/Misc').filter(file => file.endsWith('.js'));
 const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
+const nsfw_command_files = fs.readdirSync('./commands/Fun').filter(file => file.endsWith('.js'));
 const help_command_file = fs.readdirSync('./commands').filter(file => 'help.js');
 
 for (const file of music_command_files)
@@ -27,6 +28,12 @@ for (const file of misc_command_files)
 for (const file of nsfw_command_files)
 {
     const command = require(`./commands/NSFW/${file}`);
+    client.commands.set(command.name, command);
+}
+
+for (const file of nsfw_command_files)
+{
+    const command = require(`./commands/Fun/${file}`);
     client.commands.set(command.name, command);
 }
 
