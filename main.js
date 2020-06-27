@@ -50,7 +50,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
 
-    if(msg.includes("alex") && msg.includes("fuck") && msg.includes("off"))
+    if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
     {
         message.channel.send("Fuck off Alex you poo poo head.");
     }
