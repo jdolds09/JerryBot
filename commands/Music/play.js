@@ -77,7 +77,8 @@ module.exports = {
       .play(ytdl(song.url))
       .on("finish", () => {
         serverQueue.songs.shift();
-        this.play(message, serverQueue.songs[0]);
+        if(serverQueue.songs[0])
+          this.play(message, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
