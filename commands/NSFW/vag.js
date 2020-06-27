@@ -7,7 +7,7 @@ module.exports = {
 	description: 'Post an image of a vag (Must be in NSFW channel).',
     execute(message) 
     {
-        Client.nsfw.real.butts().then(json => {
+        Client.nsfw.real.vag().then(json => {
             return message.channel.send(json.url);
             }).catch(error => {
                 console.log(error);
