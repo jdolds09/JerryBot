@@ -22,12 +22,12 @@ module.exports = {
                     .setURL(url)
                     .setAuthor(url);
 
-                return msg.channel.send({embed});
+                return message.channel.send({embed});
             }
 
             catch (error)
             {
-                return msg.reply("There was an issue bringing up a porn gif.");
+                return message.reply("There was an issue bringing up a porn gif.");
             }
         }
 	},
