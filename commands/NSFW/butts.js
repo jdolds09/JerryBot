@@ -26,10 +26,11 @@ module.exports = {
                             .setAuthor(url);
                         return message.channel.send({embed});
                     })
-                }
+            }
 
             catch (error)
             {
+                console.log(error);
                 message.channel.send("There was an issue fetching a butt pic.");
             }
         }
