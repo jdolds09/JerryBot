@@ -10,17 +10,17 @@ module.exports = {
 		const nsfw_commandFiles = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
 
 		for (const file of misc_commandFiles) {
-			const command = require(`./${file}`);
+			const command = require(`./Misc/${file}`);
 			str += `${command.name}: ${command.description} \n`;
 		}
 
 		for (const file of music_commandFiles) {
-			const command = require(`./${file}`);
+			const command = require(`./Music/${file}`);
 			str += `${command.name}: ${command.description} \n`;
 		}
 
 		for (const file of nsfw_commandFiles) {
-			const command = require(`./${file}`);
+			const command = require(`./NSFW/${file}`);
 			str += `${command.name}: ${command.description} \n`;
 		}
 
