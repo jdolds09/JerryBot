@@ -22,9 +22,8 @@ module.exports = {
                         .setColor('RANDOM')
                         .setURL(url)
                         .setAuthor(url);
+                    return message.channel.send({embed});
                 })
-            
-            return message.channel.send({embed});
         }
 	},
 };
