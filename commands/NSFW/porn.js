@@ -7,10 +7,15 @@ module.exports = {
 	description: 'Post a porn gif (Must be in NSFW channel).',
     execute(message) 
     {
-        Client.nsfw.real.porn().then(json => {
-            return message.channel.send(json.url);
-            }).catch(error => {
-                console.log(error);
-            });
+        if(!message.channel.nsfw)
+            message.channel.send("Must be in a NSFW channel.");
+        else
+        {
+            Client.nsfw.real.porn().then(json => {
+                return message.channel.send(json.url);
+                }).catch(error => {
+                    console.log(error);
+                });
+        }
     },
 };
