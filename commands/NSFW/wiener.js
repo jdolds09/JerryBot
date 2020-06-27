@@ -1,4 +1,4 @@
-const requestHandler = require("../handler");
+
 module.exports = {
 	name: 'wiener',
 	description: 'Post an image of a wiener (Must be in NSFW channel).',
