@@ -9,13 +9,14 @@ module.exports = {
         try
         {
             Client.nsfw.real.butts().then(json => {
-                const embed = new Discord.MessageEmbed()
+                embed = new Discord.MessageEmbed()
                     .setImage(json.url)
                     .setColor('RANDOM')
                     .setURL(json.url)
                     .setAuthor(json.url);
+                return message.channel.send({embed});
             })
-            return message.channel.send({embed});
+           
         }
         
         catch(error)

@@ -14,8 +14,8 @@ module.exports = {
                     .setColor('RANDOM')
                     .setURL(json.url)
                     .setAuthor(json.url);
+                return message.channel.send({embed});
             })
-            return message.channel.send({embed});
         }
         
         catch(error)
