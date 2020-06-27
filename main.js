@@ -7,10 +7,25 @@ prefix = '!';
 const client = new Client();
 client.commands = new Discord.Collection();
 
-const command_files = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of command_files)
+const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
+const misc_command_files = fs.readdirSync('./commands/Misc').filter(file => file.endsWith('.js'));
+const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
+
+for (const file of music_command_files)
 {
-    const command = require(`./commands/${file}`);
+    const command = require(`./commands/Music/${file}`);
+    client.commands.set(command.name, command);
+}
+
+for (const file of misc_command_files)
+{
+    const command = require(`./commands/Misc/${file}`);
+    client.commands.set(command.name, command);
+}
+
+for (const file of nsfw_command_files)
+{
+    const command = require(`./commands/NSFW/${file}`);
     client.commands.set(command.name, command);
 }
 
@@ -46,7 +61,11 @@ client.on('message', async message => {
     }
 
     if(message.content.toLowerCase().includes("alex") && message.content.toLowerCase().includes("fuck") && message.content.toLowerCase().includes("off"))
-        message.channel.send("Fuck off Alex you dick muncher.");
+    {
+        var result = message.content.toLowerCase().includes("alex") && message.content.toLowerCase().includes("fuck") && message.content.toLowerCase().includes("off");
+        console.log(result);
+        return message.channel.send("Fuck off Alex you poo poo head.")
+    }
 });
 
 client.login(process.env.token);
