@@ -4,7 +4,7 @@ const Discord = require("discord.js")
 module.exports = {
 	name: 'porn',
 	description: 'Post a porn gif (Must be in NSFW channel).',
-	execute(message) {
+	async execute(message) {
         if(!message.channel.nsfw)
             message.channel.send("Must be in a NSFW channel.");
         else
