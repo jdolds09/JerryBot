@@ -10,6 +10,7 @@ module.exports = {
         {
             Client.nsfw.real.butts().then(json => {
                 console.log(json);
+                console.log(json.url);
             })
         }
         catch(error)
