@@ -6,14 +6,13 @@ module.exports = {
         const args = message.content.split(" ");
         if(args.length > 1)
         {
-
             const result = Math.floor(Math.random() * args[1]);
-            message.content.send(`${message.author.username} rolls ${result} (1-${args[1]})`);
+            message.channel.send(`${message.author.username} rolls ${result} (1-${args[1]})`);
         }
         else
         {
             const result = Math.floor(Math.random() * 100);
-            message.content.send(`${message.author.username} rolls ${result} (1-100)`);
+            message.channel.send(`${message.author.username} rolls ${result} (1-100)`);
         }
     },
 };
