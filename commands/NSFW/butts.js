@@ -1,4 +1,6 @@
-const Search = require('random-puppy');
+const {extname} = require('path');
+const fetch = require('node-fetch');
+const rp = require('random-puppy');
 
 module.exports = {
 	name: 'butts',
@@ -18,8 +20,14 @@ module.exports = {
                 
                 var sub = subreddits[Math.floor(Math.random() * subreddits.length)];
                 
-                const image = await Search(sub);
-                message.channel.send(image); 
+                const url = await rp(sub);
+                const result = await fetch(url);
+                await message.channel.send({
+                    files: [{
+                        attachment: result.body,
+                        name: `image${extname(url)}`
+                    }]
+                }) 
             }
 
             catch (error)

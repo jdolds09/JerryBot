@@ -12,9 +12,11 @@
     "discord.js": "^12.2.0",
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.3",
+    "node-fetch": "^2.6.0",
     "opusscript": "0.0.7",
     "pornsearch": "^2.4.3",
     "random-puppy": "^1.1.0",
+    "snekfetch": "^4.0.4",
     "ytdl-core": "^2.1.7"
   }
 }
