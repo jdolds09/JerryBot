@@ -18,7 +18,7 @@ module.exports = {
                 
                 var sub = subreddits[Math.floor(Math.random() * subreddits.length)];
                 
-                const image = Search(sub);
+                const image = await Search(sub);
                 message.channel.send(image); 
             }
 
