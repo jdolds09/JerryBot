@@ -52,7 +52,7 @@ client.on('message', async message => {
 
     if(msg.includes("alex") && msg.includes("fuck") && msg.includes("off"))
     {
-        return message.channel.send("Fuck off Alex you poo poo head.");
+        message.channel.send("Fuck off Alex you poo poo head.");
     }
 
 	const args = message.content.slice(prefix.length).split(/ +/);
