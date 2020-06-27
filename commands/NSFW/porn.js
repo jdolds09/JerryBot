@@ -18,7 +18,7 @@ module.exports = {
                 
                 const embed = new Discord.MessageEmbed()
                     .setImage(url)
-                    .setColor('#ff0000')
+                    .setColor('RANDOM')
                     .setURL(url)
                     .setAuthor(url);
 

@@ -12,7 +12,8 @@ module.exports = {
             "smalltitsbigass", "CelebrityButts", "booty", "NSFW_Pussy_Teen_Ass", "nsfw_college_ass",
             "beautiful_asses", "AsianAss", "cheekyasian", "ThatPerfectAss", "Top_Tier_Asses", "WhiteCheeks",
             "ASSians", "cuteAssCuterface", "AsianAsses", "CuteLittleButts", "brunetteass", "Blondeass", "Redheadass", "beautifulbutt"];
-            return requestHandler.makeRequest("reddit", subreddits[Math.floor(Math.random() *subreddits.length)]);
+            result = requestHandler.makeRequest("reddit", subreddits[Math.floor(Math.random() *subreddits.length)]);
+            console.log(result);
         }
 	},
 };
