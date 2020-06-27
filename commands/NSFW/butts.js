@@ -15,6 +15,7 @@ module.exports = {
                 .setAuthor(json.url);
             return message.channel.send({embed});
             }).catch(error => {
+                console.log(json.url);
                 console.log(error);
             });
     },
