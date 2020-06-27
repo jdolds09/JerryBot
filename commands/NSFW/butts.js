@@ -35,7 +35,7 @@ module.exports = {
             }
         }
     },
-/*
+
     async imgur(sub)
     {
         try
@@ -50,5 +50,5 @@ module.exports = {
             return message.channel.send("There was an issue fetching a butt pic.");
         }
     }
-*/
+
 };
