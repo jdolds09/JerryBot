@@ -21,7 +21,7 @@ module.exports = {
         {
             try
             {
-                const result = await rp(sub, "Reddit");
+                const result = await rp(sub);
                 if(result)
                     message.channel.send(result);
                 else
