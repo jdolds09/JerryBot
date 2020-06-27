@@ -8,7 +8,6 @@ module.exports = {
     execute(message) 
     {
         Client.nsfw.real.butts().then(json => {
-            console.log(json.url);
             return message.channel.send(json.url);
             }).catch(error => {
                 console.log(error);

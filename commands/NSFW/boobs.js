@@ -7,13 +7,8 @@ module.exports = {
 	description: 'Post an image of boobs (Must be in NSFW channel).',
     execute(message) 
     {
-        Client.nsfw.real.boobs().then(json => {
-            embed = new Discord.MessageEmbed()
-                .setImage(json.url)
-                .setColor('RANDOM')
-                .setURL(json.url)
-                .setAuthor(json.url);
-            return message.channel.send({embed});
+        Client.nsfw.real.butts().then(json => {
+            return message.channel.send(json.url);
             }).catch(error => {
                 console.log(error);
             });
