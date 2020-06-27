@@ -14,18 +14,21 @@ const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file
 for (const file of music_command_files)
 {
     const command = require(`./commands/Music/${file}`);
+    console.log(command.name);
     client.commands.set(command.name, command);
 }
 
 for (const file of misc_command_files)
 {
     const command = require(`./commands/Misc/${file}`);
+    console.log(command.name);
     client.commands.set(command.name, command);
 }
 
 for (const file of nsfw_command_files)
 {
     const command = require(`./commands/NSFW/${file}`);
+    console.log(command.name);
     client.commands.set(command.name, command);
 }
 
