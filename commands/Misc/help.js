@@ -5,7 +5,7 @@ module.exports = {
 	description: 'List all available commands.',
 	execute(message) {
         let str = '';
-		const misc_commandFiles = fs.readdirSync('../commands/Misc').filter(file => file.endsWith('.js'));
+		const misc_commandFiles = fs.readdirSync('./Misc').filter(file => file.endsWith('.js'));
 		const music_commandFiles = fs.readdirSync('../commands/Music').filter(file => file.endsWith('.js'));
 		const nsfw_commandFiles = fs.readdirSync('../commands/NSFW').filter(file => file.endsWith('.js'));
 
