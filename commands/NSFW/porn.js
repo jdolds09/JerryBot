@@ -16,11 +16,12 @@ module.exports = {
                 const result = Math.floor(Math.random() * Searcher.length);
                 const { url } = Searcher[result - 1];
 
-                message.channel.send({url});
+                return message.channel.send({url});
             }
             catch(error)
             {
                 console.log(error);
+                return;
             }
         }
     },
