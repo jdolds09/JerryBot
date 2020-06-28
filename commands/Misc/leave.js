@@ -1,6 +1,8 @@
+// Leave command
 module.exports = {
 	name: 'leave',
-	description: 'Make JerryBot leave the voice channel',
+    description: 'Make JerryBot leave the voice channel',
+    // Leave the voice channel
 	execute(message) {
         try
         {
