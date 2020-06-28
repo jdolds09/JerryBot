@@ -40,6 +40,8 @@ module.exports = {
 			const command = require(`./Fun/${file}`);
 			if(command.name === "roll")
 				str += `__**!${command.name} [number]**__: ${command.description} \n`;
+			else if(command.name === "hangman")
+			str += `__**!${command.name} [letter]**__: ${command.description} \n`;
 			else
 				str += `__**!${command.name}**__: ${command.description} \n`;
 		}
