@@ -3,7 +3,7 @@ const Pornsearch = require("pornsearch");
 module.exports = {
 	name: 'buttsgif',
 	description: 'Post a butt gif (Must be in NSFW channel).',
-    execute(message) 
+    async execute(message) 
     {
         if(!message.channel.nsfw)
             message.channel.send("Must be in a NSFW channel.");
