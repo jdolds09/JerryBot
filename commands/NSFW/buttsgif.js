@@ -14,6 +14,7 @@ module.exports = {
             Client.nsfw.real.buttgifs().then(json => {
                 return message.channel.send(json.url);
                 }).catch(error => {
+                    console.log(json.url);
                     console.log(error);
                 });
         }
