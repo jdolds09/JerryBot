@@ -11,14 +11,11 @@ module.exports = {
     execute(message) 
     {
         Client.nsfw.real.meme().then(json => {
+            console.log(json.url);
             return message.channel.send(json.url);
             }).catch(error => {
                 console.log(json.url);
                 console.log(error);
-                const args = message.content.slice(prefix.length).split(/ +/);
-                const commandName = args.shift().toLowerCase();
-                const command = client.commands.get(commandName);
-                command.execute(message);
             });
     },
 };
