@@ -11,10 +11,8 @@ module.exports = {
     execute(message) 
     {
         Client.nsfw.real.meme().then(json => {
-            console.log(json.url);
             return message.channel.send(json.url);
             }).catch(error => {
-                console.log(json.url);
                 console.log(error);
             });
     },

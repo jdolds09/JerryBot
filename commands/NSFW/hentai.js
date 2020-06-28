@@ -15,10 +15,8 @@ module.exports = {
         else
         {
             Client.nsfw.real.hentai().then(json => {
-                console.log(json.url);
                 return message.channel.send(json.url);
                 }).catch(error => {
-                    console.log(json.url);
                     console.log(error);
                 });
         }
