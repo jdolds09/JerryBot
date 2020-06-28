@@ -12,22 +12,22 @@ module.exports = {
 
 		for (const file of misc_commandFiles) {
 			const command = require(`./Misc/${file}`);
-			str += `__**${command.name}**__: ${command.description} \n`;
+			str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		for (const file of music_commandFiles) {
 			const command = require(`./Music/${file}`);
-			str += `__**${command.name}**__: ${command.description} \n`;
+			str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		for (const file of nsfw_commandFiles) {
 			const command = require(`./NSFW/${file}`);
-			str += `__**${command.name}**__: ${command.description} \n`;
+			str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		for (const file of fun_commandFiles) {
 			const command = require(`./Fun/${file}`);
-			str += `__**${command.name}**__: ${command.description} \n`;
+			str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		message.channel.send(str);

@@ -4,7 +4,7 @@ module.exports = {
 	execute(message) {
         try
         {
-            message.guild.me.voice.channel.join();
+            message.member.voice.channel.join();
         }
         catch(error)
         {
