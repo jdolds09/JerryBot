@@ -15,6 +15,10 @@ module.exports = {
                 Searcher.gifs()
                     .then(gif => message.channel.send(gif.url));
             }
+            catch(error)
+            {
+                console.log(error);
+            }
         }
     },
 };
