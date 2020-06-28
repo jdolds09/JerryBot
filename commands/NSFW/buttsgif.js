@@ -15,7 +15,12 @@ module.exports = {
         else
         {
             Client.nsfw.real.buttgifs().then(json => {
-                return message.channel.send(json.url);
+                const embed = new Discord.MessageEmbed()
+                    .setColor("RANDOM")
+                    .setURL(json.url)
+                    .setImage(json.url)
+                    .setAuthor(json.url);
+                return message.channel.send({embed});
                 }).catch(error => {
                     console.log(error);
                 });
