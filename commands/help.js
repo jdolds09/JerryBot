@@ -17,7 +17,10 @@ module.exports = {
 
 		for (const file of music_commandFiles) {
 			const command = require(`./Music/${file}`);
-			str += `__**!${command.name}**__: ${command.description} \n`;
+			if(command.name === "play")
+				str += `__**!${command.name} [youtube link]**__: ${command.description} \n`;
+			else
+				str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		for (const file of nsfw_commandFiles) {
@@ -27,7 +30,10 @@ module.exports = {
 
 		for (const file of fun_commandFiles) {
 			const command = require(`./Fun/${file}`);
-			str += `__**!${command.name}**__: ${command.description} \n`;
+			if(command.name === "roll")
+				str += `__**!${command.name} [number]**__: ${command.description} \n`;
+			else
+				str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 
 		message.channel.send(str);
