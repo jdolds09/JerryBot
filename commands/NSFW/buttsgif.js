@@ -3,6 +3,7 @@ const Client = new Images.Client();
 const Discord = require("discord.js");
 const Client2 = require('../../client/Client');
 const client = new Client2();
+const prefix = '!';
 
 module.exports = {
 	name: 'buttsgif',
