@@ -11,10 +11,11 @@ module.exports = {
         {
             try
             {
-                const Searcher = await Pornsearch.search("teen", "sex").gifs();
+                const Searcher = new Pornsearch.search("teen");
+                const gifs = await Searcher.gifs();
 
-                const result = Math.floor(Math.random() * Searcher.length);
-                const { url } = Searcher[result - 1];
+                const result = Math.floor(Math.random() * gifs.length);
+                const { url } = gifs[result - 1];
 
                 return message.channel.send({url});
             }
