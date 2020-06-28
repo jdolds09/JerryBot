@@ -13,7 +13,7 @@ module.exports = {
             message.channel.send("Must be in a NSFW channel.");
         else
         {
-            Client.nsfw.real.buttsgif().then(json => {
+            Client.nsfw.real.buttgifs().then(json => {
                 return message.channel.send(json.url);
                 }).catch(error => {
                     console.log(json.url);
