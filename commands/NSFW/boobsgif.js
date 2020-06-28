@@ -12,7 +12,7 @@ module.exports = {
         {
             try
             {
-                const Searcher = await Pornsearch.search("boobs", "pornhub").gifs();
+                const Searcher = await Pornsearch.search("boobs").gifs();
 
                 const result = Math.floor(Math.random() * Searcher.length);
                 const { url } = Searcher[result - 1];
