@@ -1,6 +1,8 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
 const Discord = require("discord.js");
+const Client2 = require('../../client/Client');
+const client = new Client2();
 
 module.exports = {
 	name: 'buttsgif',
@@ -11,11 +13,15 @@ module.exports = {
             message.channel.send("Must be in a NSFW channel.");
         else
         {
-            Client.nsfw.real.buttgifs().then(json => {
+            Client.nsfw.real.buttsgif().then(json => {
                 return message.channel.send(json.url);
                 }).catch(error => {
                     console.log(json.url);
                     console.log(error);
+                    const args = message.content.slice(prefix.length).split(/ +/);
+                    const commandName = args.shift().toLowerCase();
+                    const command = client.commands.get(commandName);
+                    command.execute(message);
                 });
         }
     },

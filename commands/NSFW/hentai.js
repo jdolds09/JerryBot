@@ -1,6 +1,8 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
 const Discord = require("discord.js");
+const Client2 = require('../../client/Client');
+const client = new Client2();
 
 module.exports = {
 	name: 'hentai',
@@ -16,6 +18,10 @@ module.exports = {
                 }).catch(error => {
                     console.log(json.url);
                     console.log(error);
+                    const args = message.content.slice(prefix.length).split(/ +/);
+                    const commandName = args.shift().toLowerCase();
+                    const command = client.commands.get(commandName);
+                    command.execute(message);
                 });
         }
     },
