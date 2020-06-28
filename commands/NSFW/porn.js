@@ -11,9 +11,12 @@ module.exports = {
         {
             try
             {
-                const Searcher = new Pornsearch('teen', 'pornhub');
-                Searcher.gifs()
-                    .then(gif => message.channel.send(gif.url));
+                const Searcher = await Pornsearch.search("teen", "pornhub").gifs();
+
+                const result = Math.floor(Math.random() * Searcher.length);
+                const { url } = Searcher[result - 1];
+
+                message.channel.send({url});
             }
             catch(error)
             {
