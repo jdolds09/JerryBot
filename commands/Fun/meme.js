@@ -7,7 +7,7 @@ const prefix = '!';
 
 module.exports = {
 	name: 'meme',
-	description: 'Post a meme (Must be in NSFW channel).',
+	description: 'Post a meme.',
     execute(message) 
     {
         Client.nsfw.real.meme().then(json => {
