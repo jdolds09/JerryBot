@@ -1,9 +1,4 @@
-const Images = require("dabi-images");
-const Client = new Images.Client();
-const Discord = require("discord.js");
-const Client2 = require('../../client/Client');
-const client = new Client2();
-const prefix = '!';
+const Pornsearch = require("pornsearch");
 
 module.exports = {
 	name: 'buttsgif',
@@ -14,16 +9,12 @@ module.exports = {
             message.channel.send("Must be in a NSFW channel.");
         else
         {
-            Client.nsfw.real.buttgifs().then(json => {
-                const embed = new Discord.MessageEmbed()
-                    .setColor("RANDOM")
-                    .setURL(json.url)
-                    .setImage(json.url)
-                    .setAuthor(json.url);
-                return message.channel.send({embed});
-                }).catch(error => {
-                    console.log(error);
-                });
+            try
+            {
+                const Searcher = new Pornsearch('butt', 'pornhub');
+                Searcher.gifs()
+                    .then(gif => message.channel.send(gif.url));
+            }
         }
     },
 };

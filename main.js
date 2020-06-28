@@ -59,7 +59,8 @@ client.on('message', async message => {
 
     if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
     {
-        message.channel.send("Fuck off Alex you poo poo head.");
+        const alex = "ThatSaltySnipezGuy";
+        message.channel.send(alex, "Fuck off Alex you poo poo head.");
     }
 
 	const args = message.content.slice(prefix.length).split(/ +/);
