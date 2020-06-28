@@ -1,4 +1,5 @@
 const Pornsearch = require("pornsearch");
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'boobsgif',
@@ -11,13 +12,19 @@ module.exports = {
         {
             try
             {
-                const Searcher = new Pornsearch.search("boobs");
+                const Searcher = new Pornsearch("boob");
                 const gifs = await Searcher.gifs();
 
                 const result = Math.floor(Math.random() * gifs.length);
                 const { url } = gifs[result - 1];
 
-                return message.channel.send({url});
+                const embed = new Discord.MessageEmbed()
+                    .setImage(url)
+                    .setColor("RANDOM")
+                    .setURL(url)
+                    .setAuthor(url);
+
+                return message.channel.send({embed});
             }
             catch(error)
             {
