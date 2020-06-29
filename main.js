@@ -12,6 +12,7 @@ var letters = [];
 var hits = 0;
 var strikes = 0;
 var hit = false;
+var dashes = false;
 
 // Declare command variale
 const client = new Client();
@@ -99,6 +100,8 @@ client.on('message', async message => {
         // If letter guessed is in word
         if(word.includes(letter))
         {
+            // If no dashes are output, this stays false and player wins
+            dashes = false;
             // Add letters guessed correctly to array 
             letters.push(letter);
 
@@ -113,7 +116,7 @@ client.on('message', async message => {
                 hit = false;
                 for(j = 0; j < letters.length; j++)
                 {
-                    if(letters[j] == word.charAt(i) && !hit)
+                    if(letters[j] == word.charAt(i))
                     {
                         str += `${letters[j]} `;
                         hits += 1;
@@ -121,13 +124,16 @@ client.on('message', async message => {
                     }
                 }
                 if(!hit)
+                {
                     str += '- ';
+                    dashes = true;
+                }
             }
 
             message.channel.send(str);
 
             // Check to see if player won
-            if(hits == word.length)
+            if(!dashes)
             {
                 message.channel.send("**YOU WIN!**");
                 word = random_word();
@@ -154,7 +160,7 @@ client.on('message', async message => {
                 hit = false;
                 for(j = 0; j < letters.length; j++)
                 {
-                    if(letters[j] == word.charAt(i) && !hit)
+                    if(letters[j] == word.charAt(i))
                     {
                         str += `${letters[j]} `;
                         hit = true;
