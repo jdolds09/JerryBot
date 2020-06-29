@@ -88,14 +88,22 @@ client.on('message', async message => {
     if (!message.content.startsWith(prefix)) return;
        
     // Execute command
-    try 
+    if(commandName == "hangman")
     {
-        command.execute(message);
-    } 
-    catch (error) 
+        command.execute(message, servers);
+    }
+
+    else
     {
-        console.error(error);
-        message.reply('That command doesn\'t exist dumbass.');
+        try 
+        {
+            command.execute(message);
+        } 
+        catch (error) 
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass.');
+        }
     }
 });
 

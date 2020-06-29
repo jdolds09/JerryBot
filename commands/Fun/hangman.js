@@ -2,7 +2,7 @@
 module.exports = {
 	name: 'hangman',
 	description: 'Play a game of hangman!',
-    execute(message) 
+    execute(message, servers) 
     {
         if(!servers[message.guild.id])
         {
