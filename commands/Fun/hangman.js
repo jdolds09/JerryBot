@@ -44,7 +44,7 @@ module.exports = {
             message.channel.send(str);
 
             // Check to see if player won
-            if(hangman.get_hits() == hangman.get_word_length())
+            if(hangman.get_hits() == hangman.get_word().length)
             {
                 message.channel.send("**YOU WIN!**");
                 hangman.new_word();
