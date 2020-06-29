@@ -1,5 +1,6 @@
 const Attachment = require('discord.js'); // Needed to send hangman images
 const random_word = require('random-words'); // Needed to create new word when player wins or loses
+const Hangman = require('../../classes/Hangman');
 
 // Hangman command
 module.exports = {
@@ -7,18 +8,7 @@ module.exports = {
 	description: 'Play hangman game.',
     execute(message) 
     {
-        // If hangman hasn't been created
-            if(!hangman)
-            {
-                const hangman =
-                {
-                    word: random_word(),
-                    word_length: word.length,
-                    letters: [],
-                    hits: 0,
-                    strikes: 0
-                };
-            }
+        const hangman = new Hangman();
 
         // Get letter used after !hangman command
         const args = message.content.split(" ");
