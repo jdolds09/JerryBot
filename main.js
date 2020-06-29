@@ -1,12 +1,16 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
+const random_word = require('random-words'); // Random word for hangman game
 
 // This is what must be put immediately before commands
 prefix = '!';
 
-// Times hangman command has been called
-var hangman_attempts = 0;
+// Hangman variables
+const word = random_word();
+var letters = [];
+var hits = 0;
+var strikes = 0;
 
 // Declare command variale
 const client = new Client();
@@ -77,6 +81,87 @@ client.on('message', async message => {
         message.channel.send(alex, "Fuck off Alex you poo poo head.");
     }
 
+    // Hangman command
+    if(message.content.toLowerCase().includes("!hangman"))
+    {
+        const args = message.content.split(" ");
+        const letter = args[1].charAt(0);
+        // If letter guessed is in word
+        if(word.includes(letter))
+        {
+            // Add letters guessed correctly to array 
+            letters.push(letter);
+
+            // Output picture of current state of hangman game
+            message.channel.send("", {files: [`./images/hangman_${strikes}.png`]});
+
+            // Output current state of game
+            var i = 0;
+            var str = "";
+            for(i = 0; i < word.length; i++)
+            {
+                if(letters.includes(word.charAt(i)))
+                {
+                    str += `${letter} `;
+                    hits += 1;
+                }
+                else
+                {
+                    str += "- ";
+                }
+            }
+
+            message.channel.send(str);
+
+            // Check to see if player won
+            if(hits == word.length)
+            {
+                message.channel.send("**YOU WIN!**");
+                word = random_word();
+                letters = [];
+                hits = 0;
+                strikes = 0;
+            }
+        }
+
+        // If letter guessed is not in word
+        else
+        {
+            // Add one to letters incorrectly guessed
+            strikes += 1;
+
+            // Output picture of current state of hangman game
+            message.channel.send("", {files: [`./images/hangman_${strikes}.png`]});
+
+            // Output current state of game
+            var i = 0;
+            var str = "";
+            for(i = 0; i < word.length; i++)
+            {
+                if(letters.includes(word.charAt(i)))
+                {
+                    str += `${letter} `;
+                }
+                else
+                {
+                    str += '- ';
+                }
+            }
+
+            message.channel.send(str);
+
+            // Check to see if player lost
+            if(strikes == 6)
+            {
+                message.channel.send("**HAHAHAHA YOU LOST DUMBASS!**");
+                word = random_word();
+                letters = [];
+                hits = 0;
+                strikes = 0;
+            }
+        }
+    }
+
     // Check to see if discord message sent is a command
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
@@ -87,14 +172,17 @@ client.on('message', async message => {
     if (!message.content.startsWith(prefix)) return;
 
     // Execute command
-    try 
+    else
     {
-        command.execute(message);
-    } 
-    catch (error) 
-    {
-        console.error(error);
-        message.reply('That command doesn\'t exist dumbass.');
+        try 
+        {
+            command.execute(message);
+        } 
+        catch (error) 
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass.');
+        }
     }
     
 });
