@@ -22,23 +22,25 @@ module.exports = {
             hangman.add_letter(letter);
 
             // Output picture of current state of hangman game
-            message.channel.send({files: [`../../images/hangman_${hangman.strikes}`]});
+            message.channel.send({files: [`../../images/hangman_${hangman.strikes}.png`]});
 
             // Output current state of game
             var i = 0;
-
+            var str = "";
             for(i = 0; i < hangman.get_word_length(); i++)
             {
                 if(hangman.get_letters().includes(word.charAt(i)))
                 {
-                    message.channel.send(`${letter} `);
+                    str += `${letter} `;
                     hangman.add_hit();
                 }
                 else
                 {
-                    message.channel.send('- ');
+                    str += "- ";
                 }
             }
+
+            message.channel.send(str);
 
             // Check to see if player won
             if(hangman.get_hits() == hangman.get_word_length())
@@ -55,23 +57,25 @@ module.exports = {
             hangman.add_strike();
 
             // Output picture of current state of hangman game
-            message.channel.send({files: [`../../images/hangman_${hangman.strikes}`]});
+            message.channel.send({files: [`../../images/hangman_${hangman.strikes}.png`]});
 
             // Output current state of game
             var i = 0;
-
+            var str = "";
             for(i = 0; i < hangman.get_word_length(); i++)
             {
                 if(hangman.get_letters().includes(word.charAt(i)))
                 {
-                    message.channel.send(`${letter} `);
+                    str += `${letter} `;
                     hangman.add_hit();
                 }
                 else
                 {
-                    message.channel.send('- ');
+                    str += '- ';
                 }
             }
+
+            message.channel.send(str);
 
             // Check to see if player lost
             if(hangman.get_strikes() == 6)
