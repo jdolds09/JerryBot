@@ -81,11 +81,20 @@ client.on('message', async message => {
         message.channel.send(alex, "Fuck off Alex you poo poo head.");
     }
 
+    // Check to see if discord message sent is a command
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const commandName = args.shift().toLowerCase();
+    const command = client.commands.get(commandName);
+
+    // Not a command so do nothing
+	if (message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
+
     // Hangman command
     if(message.content.toLowerCase().includes("!hangman"))
     {
-        const args = message.content.split(" ");
-        const letter = args[1].charAt(0);
+        const argumnets = message.content.split(" ");
+        const letter = arguments[1].charAt(0);
         // If letter guessed is in word
         if(word.includes(letter))
         {
@@ -161,15 +170,6 @@ client.on('message', async message => {
             }
         }
     }
-
-    // Check to see if discord message sent is a command
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const commandName = args.shift().toLowerCase();
-    const command = client.commands.get(commandName);
-
-    // Not a command so do nothing
-	if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
 
     // Execute command
     else
