@@ -44,7 +44,7 @@ module.exports = {
 				str += `__**!${command.name}**__: ${command.description} \n`;
 		}
 		// Hangman command
-		str+= "__**!hangman**__: Play a game of hangman! \n";
+		str+= "__**!hangman [letter]**__: Play a game of hangman! \n";
 
 		message.channel.send(str);
 	},
