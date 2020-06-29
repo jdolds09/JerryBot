@@ -7,7 +7,7 @@ const random_word = require('random-words'); // Random word for hangman game
 prefix = '!';
 
 // Hangman variables
-const word = random_word();
+var word = random_word();
 var letters = [];
 var hits = 0;
 var strikes = 0;
