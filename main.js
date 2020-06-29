@@ -11,6 +11,7 @@ var word = random_word();
 var letters = [];
 var hits = 0;
 var strikes = 0;
+var hit = false;
 
 // Declare command variale
 const client = new Client();
@@ -109,15 +110,18 @@ client.on('message', async message => {
             var str = "";
             for(i = 0; i < word.length; i++)
             {
-                if(letters.includes(word.charAt(i)))
+                hit = false;
+                for(j = 0; j < letters.length; j++)
                 {
-                    str += `${letter} `;
-                    hits += 1;
+                    if(letters[j] == word.charAt(i) && !hit)
+                    {
+                        str += `${letters[j]} `;
+                        hits += 1;
+                        hit = true;
+                    }
                 }
-                else
-                {
-                    str += "- ";
-                }
+                if(!hit)
+                    str += '- ';
             }
 
             message.channel.send(str);
@@ -147,14 +151,17 @@ client.on('message', async message => {
             var str = "";
             for(i = 0; i < word.length; i++)
             {
-                if(letters.includes(word.charAt(i)))
+                hit = false;
+                for(j = 0; j < letters.length; j++)
                 {
-                    str += `${letter} `;
+                    if(letters[j] == word.charAt(i) && !hit)
+                    {
+                        str += `${letters[j]} `;
+                        hit = true;
+                    }
                 }
-                else
-                {
+                if(!hit)
                     str += '- ';
-                }
             }
 
             message.channel.send(str);
