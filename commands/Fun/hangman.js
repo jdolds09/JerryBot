@@ -13,26 +13,26 @@ module.exports = {
         // Get letter used after !hangman command
         const args = message.content.split(" ");
         const letter = args[1].charAt(0);
+        const word = hangman.get_word();
 
         // If letter guessed is in word
-        if(hangman.word.includes(letter))
+        if(word.includes(letter))
         {
             // Add letters guessed correctly to array 
-            hangman.letters.push(letter);
+            hangman.add_letter(letter);
 
             // Output picture of current state of hangman game
-            const attachment = new Attachment(`../../images/hangman_${hangman.strikes}.png`);
-            message.channel.send(attachment);
+            message.channel.send({files: [`../../images/hangman_${hangman.strikes}`]});
 
             // Output current state of game
             var i = 0;
 
-            for(i = 0; i < hangman.word_length; i++)
+            for(i = 0; i < hangman.get_word_length(); i++)
             {
-                if(hangman.letters.includes(hangman.word.charAt(i)))
+                if(hangman.get_letters().includes(word.charAt(i)))
                 {
                     message.channel.send(`${letter} `);
-                    hangman.hits = hangman.hits + 1;
+                    hangman.add_hit();
                 }
                 else
                 {
@@ -41,36 +41,31 @@ module.exports = {
             }
 
             // Check to see if player won
-            if(hangman.hits == hangman.word_length)
+            if(hangman.get_hits() == hangman.get_word_length())
             {
                 message.channel.send("**YOU WIN!**");
-                hangman.word = random_word();
-                hangman.word_length = hangman.word.length;
-                hangman.hits = 0;
-                hangman.strikes = 0;
-                hangman.letters = [];
+                hangman.new_word();
             }
         }
 
         // If letter guessed is not in word
-        if(hangman.word.includes(letter))
+        if(word.includes(letter))
         {
             // Add one to letters incorrectly guessed
-            hangman.strikes = hangman.strikes + 1;
+            hangman.add_strike();
 
             // Output picture of current state of hangman game
-            const attachment = new Attachment(`../../images/hangman_${hangman.strikes}.png`);
-            message.channel.send(attachment);
+            message.channel.send({files: [`../../images/hangman_${hangman.strikes}`]});
 
             // Output current state of game
             var i = 0;
 
-            for(i = 0; i < hangman.word_length; i++)
+            for(i = 0; i < hangman.get_word_length(); i++)
             {
-                if(hangman.letters.includes(hangman.word.charAt(i)))
+                if(hangman.get_letters().includes(word.charAt(i)))
                 {
                     message.channel.send(`${letter} `);
-                    hangman.hits = hangman.hits + 1;
+                    hangman.add_hit();
                 }
                 else
                 {
@@ -79,14 +74,10 @@ module.exports = {
             }
 
             // Check to see if player lost
-            if(hangman.strikes == 6)
+            if(hangman.get_strikes() == 6)
             {
                 message.channel.send("**HAHAHAHA YOU LOST DUMBASS!**");
-                hangman.word = random_word();
-                hangman.word_length = hangman.word.length;
-                hangman.hits = 0;
-                hangman.strikes = 0;
-                hangman.letters = [];
+                hangman.new_word();
             }
         }
     },
