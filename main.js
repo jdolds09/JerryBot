@@ -100,7 +100,7 @@ client.on('message', async message => {
                 strikes: 0,
                 hit: false,
                 dashes: false
-            }
+            };
         }
 
         const arguments = message.content.split(" ");
@@ -181,7 +181,7 @@ client.on('message', async message => {
             // Check to see if player lost
             if(servers[message.guild.id].strikes == 6)
             {
-                message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS ${word.toUpperCase()} DUMBASS!**`);
+                message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS ${servers[message.guild.id].word.toUpperCase()} DUMBASS!**`);
                 servers[message.guild.id].word = random_word();
                 servers[message.guild.id].letters = [];
                 servers[message.guild.id].strikes = 0;
