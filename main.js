@@ -90,7 +90,15 @@ client.on('message', async message => {
     // Execute command
     if(commandName == "hangman")
     {
-        command.execute(message, servers);
+        try
+        {
+            command.execute(message, servers);
+        }
+        catch(error)
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass.');
+        }
     }
 
     else
