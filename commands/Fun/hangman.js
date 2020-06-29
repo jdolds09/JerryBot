@@ -1,6 +1,5 @@
 const Hangman = require('../../classes/Hangman');
 const Discord = require('discord.js');
-
 // Hangman command
 module.exports = {
 	name: 'hangman',
@@ -24,7 +23,7 @@ module.exports = {
             hangman.push_letter(letter);
 
             // Output picture of current state of hangman game
-            message.channel.send("", {files: [`./images/hangman_${hangman.get_strikes()}`]});
+            message.channel.send("", {files: [`./images/hangman_${hangman.get_strikes()}.png`]});
 
             // Output current state of game
             var i = 0;
@@ -59,7 +58,7 @@ module.exports = {
             hangman.add_strike();
 
             // Output picture of current state of hangman game
-            message.channel.send("", {files: [`./images/hangman_${hangman.get_strikes()}`]});
+            message.channel.send("", {files: [`./images/hangman_${hangman.get_strikes()}.png`]});
 
             // Output current state of game
             var i = 0;
