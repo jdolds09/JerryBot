@@ -23,7 +23,7 @@ module.exports = {
             hangman.push_letter(letter);
 
             // Output picture of current state of hangman game
-            message.channel.send({files: [`../../images/hangman_${hangman.get_strikes()}.png`]});
+            message.channel.send({files: [`./hangman_${hangman.get_strikes()}.png`]});
 
             // Output current state of game
             var i = 0;
@@ -58,7 +58,7 @@ module.exports = {
             hangman.add_strike();
 
             // Output picture of current state of hangman game
-            message.channel.send({files: [`../../images/hangman_${hangman.get_strikes()}.png`]});
+            message.channel.send({files: [`./hangman_${hangman.get_strikes()}.png`]});
 
             // Output current state of game
             var i = 0;
