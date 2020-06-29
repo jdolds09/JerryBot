@@ -2,29 +2,22 @@ const random_word = require('random-words');
 
 module.exports = class Hangman
 {
-    static word = random_word();
-    static letters = [];
-    static strikes = 0;
-    static hits = 0;
+    constructor()
+    {
+        this.word = random_word();
+        this.letters = [];
+        this.hits = 0;
+        this.strikes = 0;
+    }
 
     get_word()
     {
         return this.word;
     }
 
-    get_word_length()
-    {
-        return this.word.length;
-    }
-
-    get_letters()
+    get_letter()
     {
         return this.letters;
-    }
-
-    get_strikes()
-    {
-        return this.strikes;
     }
 
     get_hits()
@@ -32,14 +25,14 @@ module.exports = class Hangman
         return this.hits;
     }
 
-    add_letter(letter)
+    get_strikes()
     {
-        this.letters.push(letter);
+        return this.strikes;
     }
 
-    add_strike()
+    push_letter(letter)
     {
-        this.strikes = this.strikes + 1;
+        this.letters.push(letter);
     }
 
     add_hit()
@@ -47,10 +40,14 @@ module.exports = class Hangman
         this.hits = this.hits + 1;
     }
 
+    add_strike()
+    {
+        this.strikes = this.strikes + 1;
+    }
+
     new_word()
     {
         this.word = random_word();
-        this.word_length = this.word.length;
         this.letters = [];
         this.hits = 0;
         this.strikes = 0;

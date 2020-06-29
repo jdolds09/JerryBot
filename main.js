@@ -1,6 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
+const Hangman = require('./classes/Hangman'); // For hangman game
 
 // This is what must be put immediately before commands
 prefix = '!';
@@ -8,6 +9,9 @@ prefix = '!';
 // Declare command variale
 const client = new Client();
 client.commands = new Discord.Collection();
+
+// Declare hangman object
+const hangman = new Hangman();
 
 // Get all commands
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
@@ -82,7 +86,20 @@ client.on('message', async message => {
 
     // Not a command so do nothing
 	if (message.author.bot) return;
-	if (!message.content.startsWith(prefix)) return;
+    if (!message.content.startsWith(prefix)) return;
+    
+    if(commandName == "hangman")
+    {
+        try
+        {
+            command.execute(message, hangman);
+        }
+        catch (error)
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass');
+        }
+    }
 
     // Execute the command
     try 
