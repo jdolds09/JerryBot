@@ -12,7 +12,7 @@ module.exports = class Hangman
         return this.word;
     }
 
-    get_letter()
+    get_letters()
     {
         return this.letters;
     }
