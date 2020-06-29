@@ -7,42 +7,42 @@ module.exports = class Hangman
     strikes = 0;
     hits = 0;
 
-    static get_word()
+    get_word()
     {
         return this.word;
     }
 
-    static get_word_length()
+    get_word_length()
     {
         return this.word.length;
     }
 
-    static get_letters()
+    get_letters()
     {
         return this.letters;
     }
 
-    static get_strikes()
+    get_strikes()
     {
         return this.strikes;
     }
 
-    static get_hits()
+    get_hits()
     {
         return this.hits;
     }
 
-    static add_letter(letter)
+    add_letter(letter)
     {
         this.letters.push(letter);
     }
 
-    static add_strike()
+    add_strike()
     {
         this.strikes = this.strikes + 1;
     }
 
-    static add_hit()
+    add_hit()
     {
         this.hits = this.hits + 1;
     }
