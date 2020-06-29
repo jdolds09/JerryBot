@@ -1,11 +1,16 @@
-const random_word = require('random-words'); // Needed to create new word when player wins or loses
+const Hangman = require('../../classes/Hangman');
 
 // Hangman command
 module.exports = {
 	name: 'hangman',
 	description: 'Play hangman game.',
-    execute(message, hangman) 
+    execute(message, hangman_attempts) 
     {
+        const hangman = new Hangman();
+
+        // If hangman_attempts == 0, then create hangman object
+        if(hangman_attempts == 0)
+            hangman.new_word();
 
         // Get letter used after !hangman command
         const args = message.content.split(" ");
@@ -23,7 +28,7 @@ module.exports = {
             // Output current state of game
             var i = 0;
             var str = "";
-            for(i = 0; i < hangman.get_word_length(); i++)
+            for(i = 0; i < hangman.get_word().length; i++)
             {
                 if(hangman.get_letters().includes(word.charAt(i)))
                 {
@@ -58,7 +63,7 @@ module.exports = {
             // Output current state of game
             var i = 0;
             var str = "";
-            for(i = 0; i < hangman.get_word_length(); i++)
+            for(i = 0; i < hangman.get_word().length; i++)
             {
                 if(hangman.get_letters().includes(word.charAt(i)))
                 {

@@ -2,13 +2,10 @@ const random_word = require('random-words');
 
 module.exports = class Hangman
 {
-    constructor()
-    {
-        this.word = random_word();
-        this.letters = [];
-        this.hits = 0;
-        this.strikes = 0;
-    }
+    word;
+    letters;
+    hits;
+    strikes;
 
     get_word()
     {
