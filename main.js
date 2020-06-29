@@ -103,14 +103,17 @@ client.on('message', async message => {
     }
 
     // Execute the command
-    try 
+    else
     {
-        command.execute(message);
-    } 
-    catch (error) 
-    {
-		console.error(error);
-		message.reply('That command doesn\'t exist dumbass.');
+        try 
+        {
+            command.execute(message);
+        } 
+        catch (error) 
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass.');
+        }
     }
 });
 
