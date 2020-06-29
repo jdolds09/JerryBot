@@ -51,7 +51,7 @@ module.exports = {
         }
 
         // If letter guessed is not in word
-        if(word.includes(letter))
+        else
         {
             // Add one to letters incorrectly guessed
             hangman.add_strike();
