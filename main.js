@@ -126,7 +126,7 @@ client.on('message', async message => {
                 {
                     if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
                     {
-                        str += `${letters[j]} `;
+                        str += `${servers[message.guild.id].letters[j]} `;
                         servers[message.guild.id].hit = true;
                     }
                 }
@@ -168,7 +168,7 @@ client.on('message', async message => {
                 {
                     if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
                     {
-                        str += `${letters[j]} `;
+                        str += `${servers[message.guild.id].letters[j]} `;
                         servers[message.guild.id].hit = true;
                     }
                 }
