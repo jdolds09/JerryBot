@@ -175,7 +175,7 @@ client.on('message', async message => {
             // Check to see if player lost
             if(strikes == 6)
             {
-                message.channel.send("**HAHAHAHA YOU LOST DUMBASS!**");
+                message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS ${word} DUMBASS!**`);
                 word = random_word();
                 letters = [];
                 hits = 0;
