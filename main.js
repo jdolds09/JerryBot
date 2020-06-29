@@ -93,7 +93,7 @@ client.on('message', async message => {
     // Hangman command
     if(message.content.toLowerCase().includes("!hangman"))
     {
-        const argumnets = message.content.split(" ");
+        const arguments = message.content.split(" ");
         const letter = arguments[1].charAt(0);
         // If letter guessed is in word
         if(word.includes(letter))
