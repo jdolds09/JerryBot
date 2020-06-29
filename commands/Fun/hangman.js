@@ -8,6 +8,9 @@ module.exports = {
 	description: 'Play hangman game.',
     execute(message) 
     {
+        // Hangman object
+        const hangman = new Hangman ();
+
         // Get letter used after !hangman command
         const args = message.content.split(" ");
         const letter = args[1].charAt(0);
