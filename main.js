@@ -6,6 +6,14 @@ const random_word = require('random-words'); // Random word for hangman game
 // This is what must be put immediately before commands
 prefix = '!';
 
+// Hangman variables
+var word = random_word();
+var letters = [];
+var hits = 0;
+var strikes = 0;
+var hit = false;
+var dashes = false;
+
 // Servers variable so all servers aint playing same hangman game screwing it up
 var servers = {}
 
@@ -90,62 +98,51 @@ client.on('message', async message => {
     // Hangman command
     if(message.content.toLowerCase().includes("!hangman"))
     {
-        if(!servers[message.guild.id])
-        {
-            servers[message.guild.id] = 
-            {
-                // Hangman variables
-                word: random_word(),
-                letters = [],
-                strikes = 0,
-                hit = false,
-                dashes = false
-            }
-        }
-
         const arguments = message.content.split(" ");
         const letter = arguments[1].charAt(0);
         // If letter guessed is in word
-        if(servers[message.guild.id].word.includes(letter))
+        if(word.includes(letter))
         {
             // If no dashes are output, this stays false and player wins
-            servers[message.guild.id].dashes = false;
+            dashes = false;
             // Add letters guessed correctly to array 
-            servers[message.guild.id].letters.push(letter);
+            letters.push(letter);
 
             // Output picture of current state of hangman game
-            message.channel.send("", {files: [`./images/hangman_${servers[message.guild.id].strikes}.png`]});
+            message.channel.send("", {files: [`./images/hangman_${strikes}.png`]});
 
             // Output current state of game
             var i = 0;
             var str = "";
-            for(i = 0; i < servers[message.guild.id].word.length; i++)
+            for(i = 0; i < word.length; i++)
             {
-                servers[message.guild.id].hit = false;
-                for(j = 0; j < servers[message.guild.id].letters.length; j++)
+                hit = false;
+                for(j = 0; j < letters.length; j++)
                 {
-                    if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
+                    if(letters[j] == word.charAt(i))
                     {
                         str += `${letters[j]} `;
-                        servers[message.guild.id].hit = true;
+                        hits += 1;
+                        hit = true;
                     }
                 }
-                if(!servers[message.guild.id].hit)
+                if(!hit)
                 {
                     str += '- ';
-                    servers[message.guild.id].dashes = true;
+                    dashes = true;
                 }
             }
 
             message.channel.send(str);
 
             // Check to see if player won
-            if(!servers[message.guild.id].dashes)
+            if(!dashes)
             {
                 message.channel.send("**YOU WIN!**");
-                servers[message.guild.id].word = random_word();
-                servers[message.guild.id].letters = [];
-                servers[message.guild.id].strikes = 0;
+                word = random_word();
+                letters = [];
+                hits = 0;
+                strikes = 0;
             }
         }
 
@@ -153,38 +150,39 @@ client.on('message', async message => {
         else
         {
             // Add one to letters incorrectly guessed
-            servers[message.guild.id].strikes += 1;
+            strikes += 1;
 
             // Output picture of current state of hangman game
-            message.channel.send("", {files: [`./images/hangman_${servers[message.guild.id].strikes}.png`]});
+            message.channel.send("", {files: [`./images/hangman_${strikes}.png`]});
 
             // Output current state of game
             var i = 0;
             var str = "";
-            for(i = 0; i < servers[message.guild.id].word.length; i++)
+            for(i = 0; i < word.length; i++)
             {
-                servers[message.guild.id].hit = false;
-                for(j = 0; j < servers[message.guild.id].letters.length; j++)
+                hit = false;
+                for(j = 0; j < letters.length; j++)
                 {
-                    if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
+                    if(letters[j] == word.charAt(i))
                     {
                         str += `${letters[j]} `;
-                        servers[message.guild.id].hit = true;
+                        hit = true;
                     }
                 }
-                if(!servers[message.guild.id].hit)
+                if(!hit)
                     str += '- ';
             }
 
             message.channel.send(str);
 
             // Check to see if player lost
-            if(servers[message.guild.id].strikes == 6)
+            if(strikes == 6)
             {
                 message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS ${word.toUpperCase()} DUMBASS!**`);
-                servers[message.guild.id].word = random_word();
-                servers[message.guild.id].letters = [];
-                servers[message.guild.id].strikes = 0;
+                word = random_word();
+                letters = [];
+                hits = 0;
+                strikes = 0;
             }
         }
     }
