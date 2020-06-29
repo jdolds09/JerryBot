@@ -17,7 +17,6 @@ const music_command_files = fs.readdirSync('./commands/Music').filter(file => fi
 const misc_command_files = fs.readdirSync('./commands/Misc').filter(file => file.endsWith('.js'));
 const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
 const fun_command_files = fs.readdirSync('./commands/Fun').filter(file => file.endsWith('.js'));
-const help_command_file = fs.readdirSync('./commands').filter(file => 'help.js');
 
 // Set all music commands
 for (const file of music_command_files)
@@ -87,19 +86,20 @@ client.on('message', async message => {
 	if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
 
-    // Execute hangman command
     if(commandName == "hangman")
     {
-        try
+
+        try 
         {
             hangman_attempts += 1;
             command.execute(message, hangman_attempts - 1);
-        }
+        } 
         catch (error) 
         {
             console.error(error);
             message.reply('That command doesn\'t exist dumbass.');
         }
+
     }
 
     // Execute the command

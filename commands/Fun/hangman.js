@@ -1,5 +1,6 @@
 const Hangman = require('../../classes/Hangman');
 const Discord = require('discord.js');
+
 // Hangman command
 module.exports = {
 	name: 'hangman',
