@@ -30,7 +30,7 @@ module.exports = {
             var str = "";
             for(i = 0; i < hangman.get_word().length; i++)
             {
-                if(hangman.get_letters().includes(word.charAt(i)))
+                if(hangman.get_letters().includes(hangman.get_word().charAt(i)))
                 {
                     str += `${letter} `;
                     hangman.add_hit();
@@ -65,7 +65,7 @@ module.exports = {
             var str = "";
             for(i = 0; i < hangman.get_word().length; i++)
             {
-                if(hangman.get_letters().includes(word.charAt(i)))
+                if(hangman.get_letters().includes(hangman.get_word().charAt(i)))
                 {
                     str += `${letter} `;
                     hangman.add_hit();
