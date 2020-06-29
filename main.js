@@ -86,35 +86,17 @@ client.on('message', async message => {
 	if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
 
-    if(commandName == "hangman")
+    // Execute command
+    try 
     {
-
-        try 
-        {
-            hangman_attempts += 1;
-            command.execute(message, hangman_attempts - 1);
-        } 
-        catch (error) 
-        {
-            console.error(error);
-            message.reply('That command doesn\'t exist dumbass.');
-        }
-
-    }
-
-    // Execute the command
-    else
+        command.execute(message);
+    } 
+    catch (error) 
     {
-        try 
-        {
-            command.execute(message);
-        } 
-        catch (error) 
-        {
-            console.error(error);
-            message.reply('That command doesn\'t exist dumbass.');
-        }
+        console.error(error);
+        message.reply('That command doesn\'t exist dumbass.');
     }
+    
 });
 
 client.login(process.env.token);
