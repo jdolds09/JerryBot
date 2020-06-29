@@ -3,7 +3,7 @@ const random_word = require('random-words');
 module.exports = class Hangman
 {
     word = random_word();
-    word_length = word.length;
+    word_length = this.word.length;
     letters = [];
     strikes = 0;
     hits = 0;
