@@ -73,8 +73,7 @@ client.on('message', async message => {
     // Kindly tell Alex to fuck off if requested
     if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
     {
-        const alex = "ThatSaltySnipezGuy";
-        message.channel.send(alex, "Fuck off Alex you poo poo head.");
+        message.channel.send("Fuck off Alex you doo doo head");
     }
 
     // Check to see if discord message sent is a command
