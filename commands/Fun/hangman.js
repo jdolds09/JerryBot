@@ -23,7 +23,7 @@ module.exports = {
         // Get letter guessed
         const arguments = message.content.split(" ");
         const letter = arguments[1].charAt(0);
-        
+
         // If letter guessed is in word
         if(servers[message.guild.id].word.includes(letter))
         {
@@ -100,7 +100,7 @@ module.exports = {
             // Check to see if player lost
             if(servers[message.guild.id].strikes == 6)
             {
-                message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS ${servers[message.guild.id].word.toUpperCase()} DUMBASS!**`);
+                message.channel.send(`**HAHAHAHA YOU LOST! THE WORD WAS __${servers[message.guild.id].word.toUpperCase()}__ DUMBASS!**`);
                 servers[message.guild.id].word = random_word();
                 servers[message.guild.id].letters = [];
                 servers[message.guild.id].strikes = 0;
