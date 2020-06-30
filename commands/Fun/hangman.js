@@ -1,3 +1,5 @@
+const random_word = require('random-words');
+
 // Hangman command
 module.exports = {
 	name: 'hangman',
