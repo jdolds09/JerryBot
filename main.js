@@ -87,6 +87,9 @@ client.on('message', async message => {
     if(msg.includes("pog"))
         message.channel.send("", {files: ['./images/pog.jpg']});
 
+    if(msg.includes("kapp"))
+        message.channel.send("", {files: ['./images/kapp.png']});
+
     // Tell Alex to fuck off if he says anything about JerryBot
     if(message.author.username == "ThatSaltySnipezGuy")
     {
