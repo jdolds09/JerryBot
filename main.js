@@ -90,6 +90,9 @@ client.on('message', async message => {
     if(msg.includes("kapp"))
         message.channel.send("", {files: ['./images/kapp.png']});
 
+    if(msg.includes("4head"))
+        message.channel.send("", {files: ['./images/4head.jpg']});
+
     // Tell Alex to fuck off if he says anything about JerryBot
     if(message.author.username == "ThatSaltySnipezGuy")
     {
