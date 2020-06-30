@@ -58,17 +58,43 @@ client.once('ready', () => {
 // Listen to discord messages
 client.on('message', async message => {
 
+    var msg = message.content.toLowerCase();
+
+    if(msg.includes("monka"))
+        message.channel.send("", {files: ['./images/Monkaw.jpg']});
+
+    if(msg.includes("corona"))
+        message.channel.send("", {files: ['./images/4head.jpg']});
+
+    if(msg.includes("gachi"))
+        message.channel.send("", {files: ['./images/gachi.gif']});
+
+    if(msg.includes("gasm"))
+        message.channel.send("", {files: ['./images/gasm.png']});
+        
+    if(msg.includes("kek"))
+        message.channel.send("", {files: ['./images/kek.gif']});
+
+    if(msg.includes("lul"))
+        message.channel.send("", {files: ['./images/lul.png']});
+
+    if(msg.includes("pepega"))
+        message.channel.send("", {files: ['./images/pepega.png']});
+
+    if(msg.includes("pepehands"))
+        message.channel.send("", {files: ['./images/pepehands.jpg']});
+
+    if(msg.includes("pog"))
+        message.channel.send("", {files: ['./images/pog.jpg']});
+
     // Tell Alex to fuck off if he says anything about JerryBot
     if(message.author.username == "ThatSaltySnipezGuy")
     {
-        var msg = message.content.toLowerCase();
         if((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@jerrybot"))
         {
             message.channel.send("Fuck you Alex :)");
         }
     }
-
-    var msg = message.content.toLowerCase();
 
     // Kindly tell Alex to fuck off if requested
     if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
