@@ -86,7 +86,7 @@ client.on('message', async message => {
 	if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
        
-    // Execute command
+    // Execute hangman command
     if(commandName == "hangman")
     {
         try
@@ -100,6 +100,7 @@ client.on('message', async message => {
         }
     }
 
+    // Execute all other commands
     else
     {
         try 

@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Play a game of hangman!',
     execute(message, servers) 
     {
+        // Make hangman game unique to your discord server
         if(!servers[message.guild.id])
         {
             servers[message.guild.id] = 
@@ -19,8 +20,10 @@ module.exports = {
             };
         }
 
+        // Get letter guessed
         const arguments = message.content.split(" ");
         const letter = arguments[1].charAt(0);
+        
         // If letter guessed is in word
         if(servers[message.guild.id].word.includes(letter))
         {

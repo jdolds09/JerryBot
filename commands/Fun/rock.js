@@ -5,7 +5,7 @@ module.exports = {
     execute(message) 
     {
         // Generate a random number from 1-3
-        const result = Math.floor(Math.random() * 3);
+        const result = Math.floor(Math.random() * 3) + 1;
         // If random number == 1, JerryBot chooses Rock
         if(result == 1)
             message.channel.send("Rock. Fuck we tied. Go againe.");
