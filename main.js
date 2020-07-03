@@ -53,6 +53,7 @@ client.commands.set(command.name, command);
 // Announce that the bot is online
 client.once('ready', () => {
     console.log("JerryBot is online!");
+    client.user.setActivity("Your every move", {type: "WATCHING"});
 });
 
 // Listen to discord messages

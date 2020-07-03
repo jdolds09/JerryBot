@@ -1,6 +1,6 @@
 {
   "name": "jerrybot",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Discord bot to play music and display NSFW images",
   "main": "main.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "Jerry Olds",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "dabi-images": "^2.7.5",
     "discord.js": "^12.2.0",
     "ffmpeg": "0.0.4",
