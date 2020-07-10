@@ -94,7 +94,7 @@ client.on('message', async message => {
     if(msg.includes("4head"))
         message.channel.send("", {files: ['./images/4head.jpg']});
 
-    if(msg.includes("feelsgood"))
+    if(msg.includes("feels") && msg.includes("good"))
         message.channel.send("", {files: ['./images/feelsgood.png']});
 
     // Tell Alex to fuck off if he says anything about JerryBot
