@@ -1,4 +1,4 @@
-const joke = require("one-liner-joke");
+const joke = require("random-jokes-gen");
 
 // Joke command
 module.exports = {
@@ -8,8 +8,11 @@ module.exports = {
     {
         try
         {
-            var randomjoke = joke.getRandomJoke();
-            message.channel.send(randomjoke);
+            joke.getRandomJoke(function(randomjoke)
+            {
+                message.channel.send(randomjoke);
+            });
+            
         }
         catch(error)
         {
