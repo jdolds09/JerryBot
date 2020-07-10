@@ -1,7 +1,7 @@
 const ytdl = require("ytdl-core"); // For youtube functions
 const YouTube = require("simple-youtube-api"); // For youtube playlist
 
-const youtube = new YouTube("Youtube API key");
+const youtube = new YouTube("AIzaSyCkMLHynwJgJYQoGaIResXZxKUbC2euFfw");
 
 // Play command
 module.exports = {
