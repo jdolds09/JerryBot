@@ -1,4 +1,7 @@
 const ytdl = require("ytdl-core"); // For youtube functions
+const YouTube = require("simple-youtube-api"); // For youtube playlist
+
+const youtube = new YouTube("Youtube API key");
 
 // Play command
 module.exports = {
@@ -27,13 +30,6 @@ module.exports = {
         );
       }
 
-      // Get the title of the song and the url
-      const songInfo = await ytdl.getInfo(args[1]);
-      const song = {
-        title: songInfo.title,
-        url: songInfo.video_url
-      };
-
       // If queue hasnt been created yet
       if (!serverQueue) {
         const queueContruct = {
@@ -47,28 +43,88 @@ module.exports = {
 
         queue.set(message.guild.id, queueContruct);
 
-        // Push the song onto the queue
-        queueContruct.songs.push(song);
+        if(args[1].match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/))
+        {
+          const playlist = await youtube.getPlaylist(args[1]);
+          const videos = await playlist.getVideos();
+          for (const video of Object.values(videos))
+          {
+            const video2 = await youtube.getVideoByID(video.id);
+            
+            const song = {
+            title: video2.title,
+            url: `https://www.youtube.com/watch?v=${video2.id}`
+            };
 
-        // If no song is currently playing, then play the song given in the command
-        try {
-          var connection = await voiceChannel.join();
-          queueContruct.connection = connection;
-          this.play(message, queueContruct.songs[0]);
-        } catch (err) {
-          console.log(err);
-          queue.delete(message.guild.id);
-          return message.channel.send(err);
+            queueContruct.songs.push(song);
+          }
+
+          try {
+            var connection = await voiceChannel.join();
+            queueContruct.connection = connection;
+            this.play(message, queueContruct.songs[0]);
+          } catch (err) {
+            console.log(err);
+            queue.delete(message.guild.id);
+            return message.channel.send(err);
+          }
+        }
+
+        else
+        {
+          const songInfo = await ytdl.getInfo(args[1])
+          const song = 
+          {
+            title: songInfo.title,
+            url: songInfo.video_url
+          };
+
+          // Push the song onto the queue
+          queueContruct.songs.push(song);
+
+          // If no song is currently playing, then play the song given in the command
+          try {
+            var connection = await voiceChannel.join();
+            queueContruct.connection = connection;
+            this.play(message, queueContruct.songs[0]);
+          } catch (err) {
+            console.log(err);
+            queue.delete(message.guild.id);
+            return message.channel.send(err);
+          }
         }
       }
 
       // Add song to queue if a song is currently playing
-      else {
-        serverQueue.songs.push(song);
-        return message.channel.send(
-          `${song.title} has been added to the queue!`
-        );
+      else 
+      {
+        if(args[1].match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/))
+        {
+          const playlist = await youtube.getPlaylist(args[1]);
+          const videos = await playlist.getVideos();
+          for (const video of Object.values(videos))
+          {
+            const video2 = await youtube.getVideoByID(video.id);
+            
+            const song = {
+            title: video2.title,
+            url: `https://www.youtube.com/watch?v=${video2.id}`
+            };
+
+            queueContruct.songs.push(song);
+          }
+          return message.channel.send(`**${playlist.title}** has been added to the queue.`);
+        }
+
+        else
+        {
+          serverQueue.songs.push(song);
+          return message.channel.send(
+            `**${song.title}** has been added to the queue!`
+          );
+        }
       }
+      
     } catch (error) {
       console.log(error);
       message.channel.send(error.message);
