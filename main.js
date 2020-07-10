@@ -61,6 +61,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
 
+    // Twitch emote reactions
     if(msg.includes("monka"))
         message.channel.send("", {files: ['./images/Monkaw.jpg']});
 

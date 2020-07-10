@@ -1,6 +1,6 @@
 {
   "name": "jerrybot",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Discord bot to play music and display NSFW images",
   "main": "main.js",
   "scripts": {
@@ -15,6 +15,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.3",
     "node-fetch": "^2.6.0",
+    "one-liner-joke": "^1.2.0",
     "opusscript": "0.0.7",
     "pornsearch": "^2.4.3",
     "random-puppy": "^1.1.0",
