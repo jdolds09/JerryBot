@@ -6,7 +6,15 @@ module.exports = {
 	description: 'Tells a joke.',
     execute(message) 
     {
-        var randomjoke = joke.getRandomJoke();
-        message.channel.send(randomjoke);
+        try
+        {
+            var randomjoke = joke.getRandomJoke();
+            message.channel.send(randomjoke);
+        }
+        catch(error)
+        {
+            console.log(error);
+            message.channel.send(error);
+        }
     },
 };
