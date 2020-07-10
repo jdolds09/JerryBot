@@ -9,11 +9,13 @@ module.exports = {
       const queue = message.client.queue;
       const serverQueue = message.client.queue.get(message.guild.id);
 
+      // Check to see if user is in voice channel
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
         return message.channel.send(
           "You need to be in a voice channel to play music!"
         );
+      // Check to see if JerryBot has necessary permissions to play song in Discord server
       const permissions = voiceChannel.permissionsFor(message.client.user);
       if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
         return message.channel.send(
@@ -21,12 +23,14 @@ module.exports = {
         );
       }
 
+      // Get song info
       const songInfo = await ytdl.getInfo(args[1]);
       const song = {
         title: songInfo.title,
         url: songInfo.video_url
       };
 
+      // If no song is currently playing, create queue
       if (!serverQueue) {
         const queueContruct = {
           textChannel: message.channel,
@@ -41,6 +45,7 @@ module.exports = {
 
         queueContruct.songs.push(song);
 
+        // Join voice channel and play song
         try {
           var connection = await voiceChannel.join();
           queueContruct.connection = connection;
@@ -50,29 +55,37 @@ module.exports = {
           queue.delete(message.guild.id);
           return message.channel.send(err);
         }
-      } else {
+      }
+      
+      // If song is currently playing, add song given in command to queue
+      else {
         serverQueue.songs.push(song);
         return message.channel.send(
           `${song.title} has been added to the queue!`
         );
       }
-    } catch (error) {
+    }
+
+    catch (error) {
       console.log(error);
       message.channel.send(error.message);
     }
   },
 
+  // Play song function
   play(message, song) {
     const queue = message.client.queue;
     const guild = message.guild;
     const serverQueue = queue.get(message.guild.id);
 
+    // Invalid song
     if (!song) {
       serverQueue.voiceChannel.leave();
       queue.delete(guild.id);
       return;
     }
 
+    // Start playing son
     const dispatcher = serverQueue.connection
       .play(ytdl(song.url))
       .on("finish", () => {
