@@ -118,6 +118,12 @@ module.exports = {
 
         else
         {
+          const songInfo = await ytdl.getInfo(args[1])
+          const song = 
+          {
+            title: songInfo.title,
+            url: songInfo.video_url
+          };
           serverQueue.songs.push(song);
           return message.channel.send(
             `**${song.title}** has been added to the queue!`
