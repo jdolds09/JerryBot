@@ -97,6 +97,9 @@ client.on('message', async message => {
 
     if(msg.includes("feels") && msg.includes("good"))
         message.channel.send("", {files: ['./images/feelsgood.png']});
+    
+    if(msg.includes("ez") && msg.includes("clap"))
+        message.channel.send("", {files: ['./images/ez.gif']});
 
     // Tell Alex to fuck off if he says anything about JerryBot
     if(message.author.username == "ThatSaltySnipezGuy")
