@@ -43,10 +43,14 @@ module.exports = {
 
         queue.set(message.guild.id, queueContruct);
 
+        // If bot is not currently playing a song and user wants to play a playlist
         if(args[1].match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/))
         {
+          // Get playlist info
           const playlist = await youtube.getPlaylist(args[1]);
           const videos = await playlist.getVideos();
+          
+          // Add all videos in playlist to queue 
           for (const video of Object.values(videos))
           {
             const video2 = await youtube.getVideoByID(video.id);
@@ -59,6 +63,7 @@ module.exports = {
             queueContruct.songs.push(song);
           }
 
+          // Start playing first song in playlist
           try {
             var connection = await voiceChannel.join();
             queueContruct.connection = connection;
@@ -70,8 +75,10 @@ module.exports = {
           }
         }
 
+        // Bot is not currently playing a song and user wants to play a single song
         else
         {
+          // Get song info
           const songInfo = await ytdl.getInfo(args[1])
           const song = 
           {
@@ -82,7 +89,7 @@ module.exports = {
           // Push the song onto the queue
           queueContruct.songs.push(song);
 
-          // If no song is currently playing, then play the song given in the command
+          // Play the song given in the command
           try {
             var connection = await voiceChannel.join();
             queueContruct.connection = connection;
@@ -95,13 +102,16 @@ module.exports = {
         }
       }
 
-      // Add song to queue if a song is currently playing
+      // Song is currently playing and user wants to queue up a playlist
       else 
       {
         if(args[1].match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/))
         {
+          // Get playlist info
           const playlist = await youtube.getPlaylist(args[1]);
           const videos = await playlist.getVideos();
+
+          // Add videos in playlist to queue
           for (const video of Object.values(videos))
           {
             const video2 = await youtube.getVideoByID(video.id);
@@ -116,14 +126,18 @@ module.exports = {
           return message.channel.send(`**${playlist.title}** has been added to the queue.`);
         }
 
+        // Song is currently playing and user wants to add another song to queue
         else
         {
+          // Get song info
           const songInfo = await ytdl.getInfo(args[1])
           const song = 
           {
             title: songInfo.title,
             url: songInfo.video_url
           };
+
+          // Add song to queue
           serverQueue.songs.push(song);
           return message.channel.send(
             `**${song.title}** has been added to the queue!`
