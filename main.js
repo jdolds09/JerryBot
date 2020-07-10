@@ -63,44 +63,113 @@ client.on('message', async message => {
 
     // Twitch emote reactions
     if(msg.includes("monka"))
-        message.channel.send("", {files: ['./images/Monkaw.jpg']});
+    {
+        if(msg.includes("monkaw"))
+            message.channel.send("", {files: ['./images/Monkaw.jpg']});
 
-    if(msg.includes("corona"))
+        else
+            message.channel.send("", {files: ['./images/monkashake.jpg']});
+    }
+
+    else if(msg.includes("corona"))
         message.channel.send("", {files: ['./images/coronas.png']});
 
-    if(msg.includes("gachi"))
+    else if(msg.includes("gachi"))
         message.channel.send("", {files: ['./images/gachi.gif']});
 
-    if(msg.includes("gasm"))
+    else if(msg.includes("gasm") && !msg.includes("gachi"))
         message.channel.send("", {files: ['./images/gasm.png']});
         
-    if(msg.includes("kek"))
+    else if(msg.includes("kek"))
         message.channel.send("", {files: ['./images/kek.gif']});
 
-    if(msg.includes("lul"))
-        message.channel.send("", {files: ['./images/lul.png']});
+    else if(msg.includes("lul"))
+    {
+        if(msg.includes("omega"))
+            message.channel.send("", {files: ['./images/omegalul.jpg']});
 
-    if(msg.includes("pepega"))
+        else
+            message.channel.send("", {files: ['./images/lul.png']});
+    }
+
+    else if(msg.includes("pepega"))
         message.channel.send("", {files: ['./images/pepega.png']});
 
-    if(msg.includes("pepehands"))
+    else if(msg.includes("pepehands"))
         message.channel.send("", {files: ['./images/pepehands.jpg']});
 
-    if(msg.includes("pog"))
-        message.channel.send("", {files: ['./images/pog.jpg']});
+    else if(msg.includes("jebait"))
+        message.channel.send("", {files: ['./images/jebait.png']});
 
-    if(msg.includes("kapp"))
-        message.channel.send("", {files: ['./images/kapp.png']});
+    else if(msg.includes("pog"))
+    {
+        if(msg.includes("pogu"))
+            message.channel.send("", {files: ['./images/pogu.jpg']});
 
-    if(msg.includes("4head"))
+        else if(msg.includes("champ"))
+            message.channel.send("", {files: ['./images/pogchamp.gif']});
+
+        else if(msg.includes("poggers"))
+            message.channel.send("", {files: ['./images/poggers.png']});
+
+        else
+            message.channel.send("", {files: ['./images/pog.gif']});
+    }
+
+    else if(msg.includes("kapp"))
+    {
+        if(msg.includes("pride"))
+            message.channel.send("", {files: ['./images/kappapride.png']});
+
+        else if(msg.includes("ross"))
+            message.channel.send("", {files: ['./images/kappaross.png']});
+
+        else
+            message.channel.send("", {files: ['./images/kapp.png']});
+    }
+
+    else if(msg.includes("4") && msg.includes("head"))
         message.channel.send("", {files: ['./images/4head.jpg']});
+    
+    else if(msg.includes("5") && msg.includes("head"))
+        message.channel.send("", {files: ['./images/5head.jpg']});
 
-    if(msg.includes("feels") && msg.includes("good"))
+    else if(msg.includes("feels") && msg.includes("good"))
         message.channel.send("", {files: ['./images/feelsgood.png']});
     
-    if(msg.includes("ez") && msg.includes("clap"))
+    else if(msg.includes("ez") && msg.includes("clap"))
         message.channel.send("", {files: ['./images/ez.gif']});
 
+    else if(msg.includes("weird") && msg.includes("champ"))
+        message.channel.send("", {files: ['./images/weirdchamp.gif']});
+
+    else if(msg.includes("angel") && msg.includes("thump"))
+        message.channel.send("", {files: ['./images/angelthump.gif']});
+
+    else if(msg.includes("bible") && msg.includes("thump"))
+        message.channel.send("", {files: ['./images/biblethump.png']});
+
+    else if(msg.includes("wut"))
+        message.channel.send("", {files: ['./images/wutface.jpg']});
+
+    else if(msg.includes("kkona"))
+        message.channel.send("", {files: ['./images/kkona.jpg']});
+
+    else if(msg.includes("fail") && msg.includes("fish"))
+        message.channel.send("", {files: ['./images/failfish.jpg']});
+
+    else if(msg.includes("baby") && msg.includes("rage"))
+        message.channel.send("", {files: ['./images/babyrage.png']});
+
+    else if(msg.includes("cmon") && msg.includes("bruh"))
+        message.channel.send("", {files: ['./images/cmonbruh.jpg']});
+
+    else if((msg.includes("tri") && msg.includes("hard")) || (msg.includes("try") && msg.includes("hard")))
+        message.channel.send("", {files: ['./images/trihard.gif']});
+
+    else
+    {}
+    
     // Tell Alex to fuck off if he says anything about JerryBot
     if(message.author.username == "ThatSaltySnipezGuy")
     {
