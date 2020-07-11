@@ -155,6 +155,9 @@ client.on('message', async message => {
     else if(msg.includes("kkona"))
         message.channel.send("", {files: ['./images/kkona.jpg']});
 
+    else if(msg.includes("ayaya"))
+        message.channel.send("", {files: ['./images/ayaya.gif']});
+
     else if(msg.includes("fail") && msg.includes("fish"))
         message.channel.send("", {files: ['./images/failfish.jpg']});
 
