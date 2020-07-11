@@ -11,7 +11,7 @@ module.exports = {
         if(args.length > 1)
         {
             // Generate and output random number
-            const result = Math.ciel(Math.random() * (args[1] + 1));
+            const result = Math.ceil(Math.random() * (args[1] + 1));
             message.channel.send(`${message.author.username} rolls ${result} (1-${args[1]})`);
         }
 
