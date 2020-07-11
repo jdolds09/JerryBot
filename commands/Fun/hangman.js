@@ -23,6 +23,7 @@ module.exports = {
         // Get letter guessed
         const arguments = message.content.split(" ");
         const letter = arguments[1].charAt(0);
+        const letter = letter.toLowerCase();
 
         // If letter guessed is in word
         if(servers[message.guild.id].word.includes(letter))
