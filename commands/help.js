@@ -9,16 +9,9 @@ module.exports = {
 		let str = '';
 		
 		// Get all commands
-		const misc_commandFiles = fs.readdirSync('./commands/Misc').filter(file => file.endsWith('.js'));
 		const music_commandFiles = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
 		const nsfw_commandFiles = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
 		const fun_commandFiles = fs.readdirSync('./commands/Fun').filter(file => file.endsWith('.js'));
-
-		// Add all miscellaneous commands to output string
-		for (const file of misc_commandFiles) {
-			const command = require(`./Misc/${file}`);
-			str += `__**!${command.name}**__: ${command.description} \n`;
-		}
 
 		// Add all music commands to output string
 		for (const file of music_commandFiles) {

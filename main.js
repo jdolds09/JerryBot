@@ -14,7 +14,6 @@ client.commands = new Discord.Collection();
 
 // Get all commands
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
-const misc_command_files = fs.readdirSync('./commands/Misc').filter(file => file.endsWith('.js'));
 const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
 const fun_command_files = fs.readdirSync('./commands/Fun').filter(file => file.endsWith('.js'));
 
@@ -22,13 +21,6 @@ const fun_command_files = fs.readdirSync('./commands/Fun').filter(file => file.e
 for (const file of music_command_files)
 {
     const command = require(`./commands/Music/${file}`);
-    client.commands.set(command.name, command);
-}
-
-// Set all miscellaneous commands
-for (const file of misc_command_files)
-{
-    const command = require(`./commands/Misc/${file}`);
     client.commands.set(command.name, command);
 }
 
