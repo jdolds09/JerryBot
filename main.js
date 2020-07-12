@@ -96,7 +96,7 @@ client.on('message', async message => {
         message.channel.send("", {files: ['./images/pepega.png']});
 
     else if(msg.includes("pepehands"))
-        message.channel.send("", {files: ['./images/pepehands.jpg']});
+        message.channel.send("", {files: ['./images/pepehands.gif']});
 
     else if(msg.includes("jebait"))
         message.channel.send("", {files: ['./images/jebait.png']});
@@ -136,6 +136,9 @@ client.on('message', async message => {
 
     else if(msg.includes("feels") && msg.includes("good"))
         message.channel.send("", {files: ['./images/feelsgood.png']});
+
+    else if(msg.includes("feels") && msg.includes("bad"))
+        message.channel.send("", {files: ['./images/feelsbadman.png']});
     
     else if(msg.includes("ez") && msg.includes("clap"))
         message.channel.send("", {files: ['./images/ez.gif']});
@@ -163,6 +166,9 @@ client.on('message', async message => {
 
     else if(msg.includes("baby") && msg.includes("rage"))
         message.channel.send("", {files: ['./images/babyrage.png']});
+
+    else if(msg.includes("dans") && msg.includes("game"))
+        message.channel.send("", {files: ['./images/dansgame.png']});
 
     else if(msg.includes("cmon") && msg.includes("bruh"))
         message.channel.send("", {files: ['./images/cmonbruh.jpg']});
