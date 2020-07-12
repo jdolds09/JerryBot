@@ -1,5 +1,4 @@
 var fs = require("fs");
-var dfas = require("./")
 
 // Joke command
 module.exports = {
