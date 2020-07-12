@@ -7,9 +7,17 @@ module.exports = {
 	description: 'Make JerryBot tell a joke.',
     execute(message) 
     {
-        var jokes = fs.readFileSync('joke.txt').toString().split("-----------------------------------------------------------------------------");
-        var num_jokes = jokes.length;
-        var result = Math.floor((Math.random() * num_jokes) + 1);
-        message.channel.send(jokes[result]);
+        fs.readFile('joke.txt', 'utf8', function(err, data) {
+            if(err)
+            {
+                console.log(err);
+                return message.channel.send(err);
+            }
+            
+            var jokes = data.split("-----------------------------------------------------------------------------");
+            var num_jokes = jokes.length;
+            var result = Math.floor((Math.random() * num_jokes) + 1);
+            message.channel.send(jokes[result]);
+        });
     },
 };
