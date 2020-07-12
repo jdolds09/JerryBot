@@ -6,6 +6,7 @@ module.exports = {
     {
         try
         {
+            // Tried to make this a txt file but reading from local text file in js is so weird
             var jokebook = `Did you hear about the cannibal who passed his brother in the jungle?
 
             -----------------------------------------------------------------------------
@@ -8377,6 +8378,7 @@ module.exports = {
             
             Reply: Good!`;
 
+            // Get joke and send it to channel
             var jokes = jokebook.split("-----------------------------------------------------------------------------");
             var num_jokes = jokes.length;
             const result = Math.floor((Math.random() * num_jokes) + 1);
