@@ -70,7 +70,13 @@ client.on('message', async message => {
         message.channel.send("", {files: ['./images/coronas.png']});
 
     else if(msg.includes("gachi"))
-        message.channel.send("", {files: ['./images/gachi.gif']});
+    {
+        if(msg.includes("gasm"))
+            message.channel.send("", {files: ['./images/gachigasm.gif']});
+
+        else
+            message.channel.send("", {files: ['./images/gachi.gif']});
+    }
 
     else if(msg.includes("gasm") && !msg.includes("gachi"))
         message.channel.send("", {files: ['./images/gasm.png']});
