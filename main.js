@@ -58,6 +58,9 @@ client.on('message', async message => {
     {
         if(msg.includes("monkaw"))
             message.channel.send("", {files: ['./images/Monkaw.jpg']});
+        
+        else if(msg.includes("giga"))
+            message.channel.send("", {files: ['./images/monkagiga.png']});
 
         else
             message.channel.send("", {files: ['./images/monkashake.jpg']});
