@@ -69,6 +69,9 @@ client.on('message', async message => {
     else if(msg.includes("corona"))
         message.channel.send("", {files: ['./images/coronas.png']});
 
+    else if(msg.includes("hmm"))
+        message.channel.send("", {files: ['./images/pepehmm.gif']});
+
     else if(msg.includes("gachi"))
     {
         if(msg.includes("gasm"))
