@@ -37,7 +37,7 @@ module.exports = {
           voiceChannel: voiceChannel,
           connection: null,
           songs: [],
-          volume: 5,
+          volume: 2,
           playing: true
         };
 
@@ -93,7 +93,7 @@ module.exports = {
         this.play(message, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+    dispatcher.setVolumeLogarithmic(serverQueue.volume / 2);
     serverQueue.textChannel.send(`Start playing: **${song.title}**`);
   }
 };
