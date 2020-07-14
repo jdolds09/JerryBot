@@ -27,44 +27,51 @@ module.exports = {
         // If letter guessed is in word
         if(servers[message.guild.id].word.includes(letter))
         {
-            // If no dashes are output, this stays false and player wins
-            servers[message.guild.id].dashes = false;
-            // Add letters guessed correctly to array 
-            servers[message.guild.id].letters.push(letter);
-
-            // Output picture of current state of hangman game
-            message.channel.send("", {files: [`./images/hangman_${servers[message.guild.id].strikes}.png`]});
-
-            // Output current state of game
-            var i = 0;
-            var str = "";
-            for(i = 0; i < servers[message.guild.id].word.length; i++)
+            // Sometimes two users enter letter at same time and it will display correctly guessed letter twice, this handles that
+            if(servers[message.guild.id].letters.includes(letter))
+                return message.channel.send("YOU ALREADY GUESSED THAT LETTER CORRECTLY DUMBASS");
+            
+            else
             {
-                servers[message.guild.id].hit = false;
-                for(j = 0; j < servers[message.guild.id].letters.length; j++)
+                // If no dashes are output, this stays false and player wins
+                servers[message.guild.id].dashes = false;
+                // Add letters guessed correctly to array 
+                servers[message.guild.id].letters.push(letter);
+
+                // Output picture of current state of hangman game
+                message.channel.send("", {files: [`./images/hangman_${servers[message.guild.id].strikes}.png`]});
+
+                // Output current state of game
+                var i = 0;
+                var str = "";
+                for(i = 0; i < servers[message.guild.id].word.length; i++)
                 {
-                    if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
+                    servers[message.guild.id].hit = false;
+                    for(j = 0; j < servers[message.guild.id].letters.length; j++)
                     {
-                        str += `${servers[message.guild.id].letters[j]} `;
-                        servers[message.guild.id].hit = true;
+                        if(servers[message.guild.id].letters[j] == servers[message.guild.id].word.charAt(i))
+                        {
+                            str += `${servers[message.guild.id].letters[j]} `;
+                            servers[message.guild.id].hit = true;
+                        }
+                    }
+                    if(!servers[message.guild.id].hit)
+                    {
+                        str += '- ';
+                        servers[message.guild.id].dashes = true;
                     }
                 }
-                if(!servers[message.guild.id].hit)
+
+                message.channel.send(str);
+
+                // Check to see if player won
+                if(!servers[message.guild.id].dashes)
                 {
-                    str += '- ';
-                    servers[message.guild.id].dashes = true;
+                    message.channel.send("**YOU WIN!**");
+                    servers[message.guild.id].word = random_word();
+                    servers[message.guild.id].letters = [];
+                    servers[message.guild.id].strikes = 0;
                 }
-            }
-
-            message.channel.send(str);
-
-            // Check to see if player won
-            if(!servers[message.guild.id].dashes)
-            {
-                message.channel.send("**YOU WIN!**");
-                servers[message.guild.id].word = random_word();
-                servers[message.guild.id].letters = [];
-                servers[message.guild.id].strikes = 0;
             }
         }
 

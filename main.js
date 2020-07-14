@@ -59,7 +59,7 @@ client.on('message', async message => {
         if(msg.includes("monkaw"))
             message.channel.send("", {files: ['./images/Monkaw.jpg']});
         
-        else if(msg.includes("giga"))
+        else if(msg.includes("monkagiga"))
             message.channel.send("", {files: ['./images/monkagiga.png']});
 
         else
@@ -132,28 +132,28 @@ client.on('message', async message => {
             message.channel.send("", {files: ['./images/kapp.png']});
     }
 
-    else if(msg.includes("4") && msg.includes("head"))
+    else if(msg.includes("4head"))
         message.channel.send("", {files: ['./images/4head.jpg']});
     
-    else if(msg.includes("5") && msg.includes("head"))
+    else if(msg.includes("5head"))
         message.channel.send("", {files: ['./images/5head.jpg']});
 
-    else if(msg.includes("feels") && msg.includes("good"))
+    else if(msg.includes("feelsgood"))
         message.channel.send("", {files: ['./images/feelsgood.png']});
 
-    else if(msg.includes("feels") && msg.includes("bad"))
+    else if(msg.includes("feelsbad"))
         message.channel.send("", {files: ['./images/feelsbadman.png']});
     
     else if(msg.includes("ez") && msg.includes("clap"))
         message.channel.send("", {files: ['./images/ez.gif']});
 
-    else if(msg.includes("weird") && msg.includes("champ"))
+    else if(msg.includes("weirdchamp"))
         message.channel.send("", {files: ['./images/weirdchamp.gif']});
 
-    else if(msg.includes("angel") && msg.includes("thump"))
+    else if(msg.includes("angelthump"))
         message.channel.send("", {files: ['./images/angelthump.gif']});
 
-    else if(msg.includes("bible") && msg.includes("thump"))
+    else if(msg.includes("biblethump"))
         message.channel.send("", {files: ['./images/biblethump.png']});
 
     else if(msg.includes("wut"))
@@ -165,13 +165,13 @@ client.on('message', async message => {
     else if(msg.includes("ayaya"))
         message.channel.send("", {files: ['./images/ayaya.gif']});
 
-    else if(msg.includes("fail") && msg.includes("fish"))
+    else if(msg.includes("failfish"))
         message.channel.send("", {files: ['./images/failfish.jpg']});
 
-    else if(msg.includes("baby") && msg.includes("rage"))
+    else if(msg.includes("babyrage"))
         message.channel.send("", {files: ['./images/babyrage.png']});
 
-    else if(msg.includes("dans") && msg.includes("game"))
+    else if(msg.includes("dansgame"))
         message.channel.send("", {files: ['./images/dansgame.png']});
 
     else if(msg.includes("cmon") && msg.includes("bruh"))
