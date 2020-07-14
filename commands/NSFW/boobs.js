@@ -17,6 +17,7 @@ module.exports = {
                 // Post image in channel
                 return message.channel.send(json.url);
                 }).catch(error => {
+                    message.channel.send("Unable to fetch image. Please try again.");
                     console.log(error);
                 });
         }

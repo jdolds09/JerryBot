@@ -12,6 +12,7 @@ module.exports = {
             // Post pokemon card(s)
             return message.channel.send(json.url);
             }).catch(error => {
+                message.channel.send("Unable to fetch image. Please try again.");
                 console.log(error);
             });
     },
