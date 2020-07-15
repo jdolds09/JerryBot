@@ -19,7 +19,7 @@ module.exports = {
         else
         {
             // Generate and output random number
-            const result = Math.floor(Math.random() * 100);
+            const result = Math.floor((Math.random() * 100) + 1);
             message.channel.send(`${message.author.username} rolls ${result} (1-100)`);
         }
     },
