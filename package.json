@@ -1,6 +1,6 @@
 {
   "name": "jerrybot",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Discord bot to play music and display NSFW images",
   "main": "main.js",
   "scripts": {
