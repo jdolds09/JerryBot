@@ -51,7 +51,7 @@ module.exports = {
           const playlist = await youtube.getPlaylist(args[1]);
           const videos = await playlist.getVideos();
 
-          // Add all videos in playlist to queue 
+          // Get first song in playlist
           const video2 = await youtube.getVideoByID(videos[0].id);
           
           const song = {
@@ -86,7 +86,6 @@ module.exports = {
           queueContruct.songs.push(song);
 
           // If no song is currently playing, then play the song given in the command
-          // Play the song given in the command
           try {
             var videos;
             var connection = await voiceChannel.join();
@@ -100,8 +99,7 @@ module.exports = {
         }
       }
 
-      // Add song to queue if a song is currently playing
-      // Song is currently playing and user wants to queue up a playlist
+      // Tell user that queue must be empty if he/she wants to play songs from a YouTube playlist
       else 
       {
         if(args[1].match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/))
@@ -136,38 +134,39 @@ module.exports = {
 
 // Play song function
   play(message, song, is_playlist, videos, i) {
-    // Get queue
     try
     {
+      // Get queue
       const queue = message.client.queue;
       const guild = message.guild;
       const serverQueue = queue.get(message.guild.id);
+
       // Invalid song link
+      // This also disconnects JerryBot from VC when there are no songs in queue
       if (!song) {
         serverQueue.voiceChannel.leave();
         queue.delete(guild.id);
         return;
       }
 
-      if(is_playlist)
-      {
-        i = i + 1;
-        if(i < videos.length)
-        {
-          
-          const song = {
-          title: videos[i].title,
-          url: videos[i].url
-          };
-          console.log(song.title);
-          serverQueue.songs.push(song);
-        }
-      }
-
       // Play song
       const dispatcher = serverQueue.connection
         .play(ytdl(song.url))
         .on("finish", () => {
+          if(is_playlist)
+          {
+            i = i + 1;
+            if(i < videos.length)
+            {
+              
+              const song = {
+              title: videos[i].title,
+              url: videos[i].url
+              };
+              console.log(song.title);
+              serverQueue.songs.push(song);
+            }
+          }
           serverQueue.songs.shift();
           this.play(message, serverQueue.songs[0]);
         })
