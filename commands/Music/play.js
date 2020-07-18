@@ -154,7 +154,8 @@ module.exports = {
         console.log("FUCK");
         i = i + 1;
         console.log(i);
-        if(i < Object.values(videos))
+        console.log(Object.length(videos));
+        if(i < Object.length(videos))
         {
           console.log("FUCK");
           const video2 = this.get_video(videos, i);
