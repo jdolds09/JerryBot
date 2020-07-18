@@ -152,11 +152,11 @@ module.exports = {
       if(is_playlist)
       {
         console.log("FUCK");
-        console.log(Object.values(videos));
         i = i + 1;
         console.log(i);
         if(i < Object.values(videos))
         {
+          console.log("FUCK");
           const video2 = this.get_video(videos, i);
           
           const song = {
