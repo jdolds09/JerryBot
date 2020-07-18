@@ -133,8 +133,9 @@ module.exports = {
       message.channel.send(error.message);
     }
   },
+
 // Play song function
-  async play(message, song, is_playlist, videos, i) {
+  play(message, song, is_playlist, videos, i) {
     // Get queue
     try
     {
@@ -156,7 +157,7 @@ module.exports = {
             i = i + 1;
             if(i < Object.values(videos))
             {
-              const video2 = await youtube.getVideoByID(videos[i].id);
+              const video2 = youtube.getVideoByID(videos[i].id);
               
               const song = {
               title: video2.title,
