@@ -148,11 +148,8 @@ module.exports = {
         queue.delete(guild.id);
         return;
       }
-      // Play song
-      const dispatcher = serverQueue.connection
-        .play(ytdl(song.url))
-        .on("finish", () => {
-          if(is_playlist)
+
+      if(is_playlist)
           {
             i = i + 1;
             if(i < Object.values(videos))
@@ -166,6 +163,11 @@ module.exports = {
               queueContruct.songs.push(song);
             }
           }
+
+      // Play song
+      const dispatcher = serverQueue.connection
+        .play(ytdl(song.url))
+        .on("finish", () => {
           serverQueue.songs.shift();
           this.play(message, serverQueue.songs[0]);
         })
