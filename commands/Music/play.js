@@ -157,7 +157,7 @@ module.exports = {
             i = i + 1;
             if(i < Object.values(videos))
             {
-              const video2 = youtube.getVideoByID(videos[i].id);
+              const video2 = this.get_video(videos, i);
               
               const song = {
               title: video2.title,
@@ -177,6 +177,18 @@ module.exports = {
     {
       console.log(error);
       return serverQueue.textChannel.send(error);
+    }
+  },
+
+  async get_video(videos, i)
+  {
+    try
+    {
+      return await youtube.getVideoByID(videos[i].id);
+    }
+    catch(error)
+    {
+      return console.log(error);
     }
   }
 };
