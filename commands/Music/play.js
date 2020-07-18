@@ -164,7 +164,6 @@ module.exports = {
               title: videos[i].title,
               url: videos[i].url
               };
-              console.log(song.title);
               serverQueue.songs.push(song);
             }
             serverQueue.songs.shift();
