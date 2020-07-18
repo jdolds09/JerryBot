@@ -153,7 +153,7 @@ module.exports = {
       const dispatcher = serverQueue.connection
         .play(ytdl(song.url))
         .on("finish", () => {
-          console.log(is_playlist);
+          // Play next song in playlist
           if(is_playlist)
           {
             i = i + 1;
@@ -167,9 +167,17 @@ module.exports = {
               console.log(song.title);
               serverQueue.songs.push(song);
             }
+            serverQueue.songs.shift();
+            this.play(message, serverQueue.songs[0], true, videos, i);
           }
-          serverQueue.songs.shift();
-          this.play(message, serverQueue.songs[0]);
+
+          // Play next song in queue
+          else
+          {
+            serverQueue.songs.shift();
+            this.play(message, serverQueue.songs[0], false, videos, i);
+          }
+
         })
         .on("error", error => console.error(error));
       dispatcher.setVolumeLogarithmic(serverQueue.volume / 9);
