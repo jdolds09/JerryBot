@@ -88,7 +88,7 @@ module.exports = {
           // If no song is currently playing, then play the song given in the command
           // Play the song given in the command
           try {
-            const videos;
+            var videos;
             var connection = await voiceChannel.join();
             queueContruct.connection = connection;
             this.play(message, queueContruct.songs[0], false, videos, i);
