@@ -134,40 +134,48 @@ module.exports = {
     }
   },
 // Play song function
-  play(message, song, is_playlist, videos, i) {
+  async play(message, song, is_playlist, videos, i) {
     // Get queue
-    const queue = message.client.queue;
-    const guild = message.guild;
-    const serverQueue = queue.get(message.guild.id);
-    // Invalid song link
-    if (!song) {
-      serverQueue.voiceChannel.leave();
-      queue.delete(guild.id);
-      return;
-    }
-    // Play song
-    const dispatcher = serverQueue.connection
-      .play(ytdl(song.url))
-      .on("finish", () => {
-        if(is_playlist)
-        {
-          i = i + 1;
-          if(i < Object.values(videos))
+    try
+    {
+      const queue = message.client.queue;
+      const guild = message.guild;
+      const serverQueue = queue.get(message.guild.id);
+      // Invalid song link
+      if (!song) {
+        serverQueue.voiceChannel.leave();
+        queue.delete(guild.id);
+        return;
+      }
+      // Play song
+      const dispatcher = serverQueue.connection
+        .play(ytdl(song.url))
+        .on("finish", () => {
+          if(is_playlist)
           {
-            const video2 = await youtube.getVideoByID(videos[i].id);
-            
-            const song = {
-            title: video2.title,
-            url: `https://www.youtube.com/watch?v=${video2.id}`
-            };
-            queueContruct.songs.push(song);
+            i = i + 1;
+            if(i < Object.values(videos))
+            {
+              const video2 = await youtube.getVideoByID(videos[i].id);
+              
+              const song = {
+              title: video2.title,
+              url: `https://www.youtube.com/watch?v=${video2.id}`
+              };
+              queueContruct.songs.push(song);
+            }
           }
-        }
-        serverQueue.songs.shift();
-        this.play(message, serverQueue.songs[0]);
-      })
-      .on("error", error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 9);
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+          serverQueue.songs.shift();
+          this.play(message, serverQueue.songs[0]);
+        })
+        .on("error", error => console.error(error));
+      dispatcher.setVolumeLogarithmic(serverQueue.volume / 9);
+      serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    }
+    catch(error)
+    {
+      console.log(error);
+      return serverQueue.textChannel.send(error);
+    }
   }
 };
