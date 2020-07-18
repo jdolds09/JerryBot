@@ -160,6 +160,7 @@ module.exports = {
               title: video2.title,
               url: `https://www.youtube.com/watch?v=${video2.id}`
               };
+              console.log(song.title);
               queueContruct.songs.push(song);
             }
           }
