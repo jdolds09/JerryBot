@@ -150,20 +150,23 @@ module.exports = {
       }
 
       if(is_playlist)
-          {
-            i = i + 1;
-            if(i < Object.values(videos))
-            {
-              const video2 = this.get_video(videos, i);
-              
-              const song = {
-              title: video2.title,
-              url: `https://www.youtube.com/watch?v=${video2.id}`
-              };
-              console.log(song.title);
-              queueContruct.songs.push(song);
-            }
-          }
+      {
+        console.log("FUCK");
+        console.log(Object.values(videos));
+        i = i + 1;
+        console.log(i);
+        if(i < Object.values(videos))
+        {
+          const video2 = this.get_video(videos, i);
+          
+          const song = {
+          title: video2.title,
+          url: `https://www.youtube.com/watch?v=${video2.id}`
+          };
+          console.log(song.title);
+          queueContruct.songs.push(song);
+        }
+      }
 
       // Play song
       const dispatcher = serverQueue.connection
