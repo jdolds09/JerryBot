@@ -154,11 +154,10 @@ module.exports = {
         i = i + 1;
         if(i < videos.length)
         {
-          const video2 = this.get_video(videos, i);
           
           const song = {
-          title: video2.title,
-          url: `https://www.youtube.com/watch?v=${video2.id}`
+          title: videos[i].title,
+          url: videos[i].url
           };
           console.log(song.title);
           serverQueue.songs.push(song);
@@ -175,18 +174,6 @@ module.exports = {
         .on("error", error => console.error(error));
       dispatcher.setVolumeLogarithmic(serverQueue.volume / 9);
       serverQueue.textChannel.send(`Start playing: **${song.title}**`);
-    }
-    catch(error)
-    {
-      return console.log(error);
-    }
-  },
-
-  async get_video(videos, i)
-  {
-    try
-    {
-      return await youtube.getVideoByID(videos[i].id);
     }
     catch(error)
     {
