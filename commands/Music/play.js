@@ -153,6 +153,7 @@ module.exports = {
       const dispatcher = serverQueue.connection
         .play(ytdl(song.url))
         .on("finish", () => {
+          console.log(is_playlist);
           if(is_playlist)
           {
             i = i + 1;
