@@ -151,13 +151,9 @@ module.exports = {
 
       if(is_playlist)
       {
-        console.log("FUCK");
         i = i + 1;
-        console.log(i);
-        console.log(videos.length);
         if(i < videos.length)
         {
-          console.log("FUCK");
           const video2 = this.get_video(videos, i);
           
           const song = {
@@ -165,7 +161,7 @@ module.exports = {
           url: `https://www.youtube.com/watch?v=${video2.id}`
           };
           console.log(song.title);
-          queueContruct.songs.push(song);
+          serverQueue.songs.push(song);
         }
       }
 
@@ -182,8 +178,7 @@ module.exports = {
     }
     catch(error)
     {
-      console.log(error);
-      return serverQueue.textChannel.send(error);
+      return console.log(error);
     }
   },
 
