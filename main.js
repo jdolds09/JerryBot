@@ -183,10 +183,10 @@ client.on('message', async message => {
     else
     {}
     
-    // Tell Alex to fuck off if he says anything about JerryBot
+    // User JerryBot reactions
     if(message.author.username == "ThatSaltySnipezGuy")
     {
-        if((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@jerrybot"))
+        if((msg.includes("jerry") && msg.includes("bot")))
         {
             message.channel.send("Fuck you Alex :)");
         }
@@ -194,9 +194,59 @@ client.on('message', async message => {
 
     if(message.author.username == "jdolds09")
     {
-        if(((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@jerrybot")) && msg.includes("thanks"))
+        if(((msg.includes("jerry") && msg.includes("bot"))) && msg.includes("thanks"))
         {
             message.channel.send("No problem my very intelligent and handsome creator. You are the best.");
+        }
+    }
+
+    if(message.author.username == "tguy")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")))
+        {
+            message.channel.send("A wild Tguy has appeared!");
+            message.channel.send("Tguy uses Teleport!");
+            message.channel.send("Tguy got away!");
+        }
+    }
+
+    if(message.author.username == "Blueslyfox")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")))
+        {
+            message.channel.send("Don't you have some hentai to watch you weeb?");
+        }
+    }
+
+    if(message.author.username == "a159159")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")))
+        {
+            message.channel.send("Fun fact: Max has already drank 3 bottles of whiskey today :)");
+        }
+    }
+
+    if(message.author.username == "coyote")
+    {
+        if(msg.includes("jerry"))
+        {
+            message.channel.send("Think about this, Jacob actually had to stop smoking weed for like 10 seconds to type this message :o");
+        }
+    }
+
+    if(message.author.username == "KingKazma8292")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")))
+        {
+            message.channel.send("", {files: ['./images/pride.gif']});
+        }
+    }
+
+    if(message.author.username == "Jab7red")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")))
+        {
+            message.channel.send("Uh oh I must've pissed Jared off...");
         }
     }
 
