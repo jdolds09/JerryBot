@@ -250,6 +250,14 @@ client.on('message', async message => {
         }
     }
 
+    if(message.author.username == "DrukenMaster89")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        {
+            message.channel.send("Because Aaron took the time to write this message instead of working. The entire Chili's franchise has gone bankrupt and will cease to exist. Nice going Aaron, no nobody will ever enjoy chicken crispers again.");
+        }
+    }
+
     // Kindly tell Alex to fuck off if requested
     if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
     {
