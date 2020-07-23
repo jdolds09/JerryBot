@@ -186,7 +186,7 @@ client.on('message', async message => {
     // User JerryBot reactions
     if(message.author.username == "ThatSaltySnipezGuy")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("Fuck you Alex :)");
         }
@@ -202,7 +202,7 @@ client.on('message', async message => {
 
     if(message.author.username == "tguy")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("A wild Tguy has appeared!");
             message.channel.send("Tguy uses Teleport!");
@@ -212,7 +212,7 @@ client.on('message', async message => {
 
     if(message.author.username == "Blueslyfox")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("Don't you have some hentai to watch you weeb?");
         }
@@ -220,7 +220,7 @@ client.on('message', async message => {
 
     if(message.author.username == "a159159")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("Fun fact: Max has already drank 3 bottles of whiskey today :)");
         }
@@ -236,7 +236,7 @@ client.on('message', async message => {
 
     if(message.author.username == "KingKazma8292")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("", {files: ['./images/pride.gif']});
         }
@@ -244,7 +244,7 @@ client.on('message', async message => {
 
     if(message.author.username == "Jab7red")
     {
-        if((msg.includes("jerry") && msg.includes("bot")))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
             message.channel.send("Uh oh I must've pissed Jared off...");
         }
