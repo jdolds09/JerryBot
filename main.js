@@ -192,6 +192,14 @@ client.on('message', async message => {
         }
     }
 
+    if(message.author.username == "jdolds09")
+    {
+        if(((msg.includes("jerry") && msg.includes("bot")) || msg.includes("@jerrybot")) && msg.includes("thanks"))
+        {
+            message.channel.send("No problem my very intelligent and handsome creator. You are the best.");
+        }
+    }
+
     // Kindly tell Alex to fuck off if requested
     if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
     {
