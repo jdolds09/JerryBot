@@ -250,7 +250,7 @@ client.on('message', async message => {
         }
     }
 
-    if(message.author.username == "DrukenMaster89")
+    if(message.author.username == "DrunkenMaster89")
     {
         if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
