@@ -6,7 +6,8 @@ const Client = require('./classes/Client'); // To save commands
 prefix = '!';
 
 // Servers variable so all servers aint playing same hangman game screwing it up
-var servers = {};
+var servers = {}
+var users = {}
 
 // Declare command variale
 const client = new Client();
@@ -182,8 +183,7 @@ client.on('message', async message => {
 
     else
     {}
-    
-    // User JerryBot reactions
+
     if(message.author.username == "ThatSaltySnipezGuy")
     {
         if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
@@ -228,9 +228,9 @@ client.on('message', async message => {
 
     if(message.author.username == "coyote")
     {
-        if(msg.includes("jerry"))
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
-            message.channel.send("Think about this, Jacob actually had to stop smoking weed for like 10 seconds to type this message :o");
+            message.channel.send("Jake according to my calculations, America is better than Canada.");
         }
     }
 
@@ -271,7 +271,7 @@ client.on('message', async message => {
     const command = client.commands.get(commandName);
 
     // Not a command so do nothing
-	if (message.author.bot) return;
+	if (message.author.bot && !(msg.includes("!roll"))) return;
     if (!message.content.startsWith(prefix)) return;
        
     // Execute hangman command

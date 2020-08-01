@@ -15,7 +15,7 @@ module.exports = {
             try
             {
                 // Get gif
-                const Searcher = new Pornsearch("butt");
+                const Searcher = new Pornsearch("perfect teen ass");
                 const gifs = await Searcher.gifs();
                 const result = Math.floor(Math.random() * gifs.length);
                 const { url } = gifs[result - 1];

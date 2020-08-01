@@ -159,7 +159,7 @@ module.exports = {
             i = i + 1;
             if(i < videos.length)
             {
-              while(videos[i].title == "Private video")
+              while(videos[i].title == "Private video" || videos[i].title == "Deleted video")
                 i = i + 1;
               const song = {
               title: videos[i].title,
