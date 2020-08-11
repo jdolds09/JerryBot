@@ -1,40 +1,25 @@
-const Pornsearch = require("pornsearch");
-const Discord = require('discord.js');
+const Images = require("dabi-images");
+const Client = new Images.Client();
 
 // Buttsgif command
 module.exports = {
 	name: 'buttsgif',
 	description: 'Post a butt gif (Must be in NSFW channel).',
-    async execute(message) 
+    execute(message) 
     {
         // Check to see if command was sent in NSFW channel
         if(!message.channel.nsfw)
             message.channel.send("Must be in a NSFW channel.");
         else
         {
-            try
-            {
-                // Get gif
-                const Searcher = new Pornsearch("perfect teen ass");
-                const gifs = await Searcher.gifs();
-                const result = Math.floor(Math.random() * gifs.length);
-                const { url } = gifs[result - 1];
-
-                // Embed gif
-                const embed = new Discord.MessageEmbed()
-                    .setImage(url)
-                    .setColor("RANDOM")
-                    .setURL(url)
-                    .setAuthor(url);
-
-                // Send gif
-                return message.channel.send({embed});
-            }
-            catch(error)
-            {
-                console.log(error);
-                return;
-            }
+            // Get butt image
+            Client.nsfw.real.buttsgif().then(json => {
+                // Send image
+                return message.channel.send(json.url);
+                }).catch(error => {
+                    message.channel.send("Unable to fetch image. Please try again.");
+                    console.log(error);
+                });
         }
     },
 };
