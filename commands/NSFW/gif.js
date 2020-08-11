@@ -29,6 +29,7 @@ module.exports = {
                     return message.channel.send({embed});
                 }
 
+                console.log(json.url);
                 return message.channel.send(json.url);
                 }).catch(error => {
                     message.channel.send("Unable to fetch image. Please try again.");
