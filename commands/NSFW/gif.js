@@ -15,6 +15,7 @@ module.exports = {
             // Get butt image
             Client.nsfw.real.gif().then(json => {
                 // Send image
+                console.log(json.url);
                 if(json.url.includes("redgif"))
                 {
                     console.log("redgif");
