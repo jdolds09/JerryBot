@@ -13,7 +13,7 @@ module.exports = {
         else
         {
             // Get butt image
-            Client.nsfw.real.buttsgif().then(json => {
+            Client.nsfw.real.buttsgifs().then(json => {
                 // Send image
                 return message.channel.send(json.url);
                 }).catch(error => {
