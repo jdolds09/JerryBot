@@ -1,15 +1,15 @@
 const Images = require("dabi-images"); // Fetches images from Reddit
 const Client = new Images.Client(); // Helps get message from Reddit to discord channel
 
-// Meme command
+// Funny command
 module.exports = {
-	name: 'meme',
-	description: 'Post a meme.',
+	name: 'funny',
+	description: 'Post a funny image or gif.',
     execute(message) 
     {
-        // Get meme image
-        Client.nsfw.real.meme().then(json => {
-            // Post meme
+        // Get image
+        Client.nsfw.real.funny().then(json => {
+            // Post image
             return message.channel.send(json.url);
             }).catch(error => {
                 message.channel.send("Unable to fetch image. Please try again.");
