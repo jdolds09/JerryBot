@@ -15,6 +15,19 @@ module.exports = {
             // Get butt image
             Client.nsfw.real.gif().then(json => {
                 // Send image
+                if(json.url.includes("redgif"))
+                {
+                    // Embed gif
+                    const embed = new Discord.MessageEmbed()
+                        .setImage(url)
+                        .setColor("RANDOM")
+                        .setURL(url)
+                        .setAuthor(url);
+                    
+                    // Send gif
+                    return message.channel.send({embed});
+                }
+                
                 return message.channel.send(json.url);
                 }).catch(error => {
                     message.channel.send("Unable to fetch image. Please try again.");
