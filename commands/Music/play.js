@@ -5,7 +5,7 @@ const youtube = new YouTube("AIzaSyCkMLHynwJgJYQoGaIResXZxKUbC2euFfw"); // youtu
 // Play command
 module.exports = {
   name: "play",
-  description: "Play a song in your channel!",
+  description: "Play a song or playlist from YouTube (for playlist, make sure the word playlist is in YouTube url link).",
   async execute(message) {
     try {
       // Get youtube link after !play command
