@@ -17,6 +17,7 @@ module.exports = {
                 // Send image
                 if(json.url.includes("redgif"))
                 {
+                    console.log("redgif");
                     // Embed gif
                     const embed = new Discord.MessageEmbed()
                         .setImage(url)
@@ -27,7 +28,7 @@ module.exports = {
                     // Send gif
                     return message.channel.send({embed});
                 }
-                
+
                 return message.channel.send(json.url);
                 }).catch(error => {
                     message.channel.send("Unable to fetch image. Please try again.");
