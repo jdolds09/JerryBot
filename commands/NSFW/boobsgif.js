@@ -1,5 +1,6 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
+const Discord = require("discord.js");
 
 // Boobsgif command
 module.exports = {
@@ -15,6 +16,16 @@ module.exports = {
             // Get butt image
             Client.nsfw.real.boobsgifs().then(json => {
                 // Send image
+                if(json.is_video)
+                {
+                    const embed = new Discord.MessageEmbed()
+                        .setImage(url)
+                        .setColor("RANDOM")
+                        .setURL(url)
+                        .setAuthor(url);
+                        
+                    return message.channel.send({embed});
+                }
                 return message.channel.send(json.url);
                 }).catch(error => {
                     message.channel.send("Unable to fetch image. Please try again.");

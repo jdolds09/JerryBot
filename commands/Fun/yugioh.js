@@ -10,6 +10,16 @@ module.exports = {
         // Get yugioh card(s) image
         Client.nsfw.real.yugioh().then(json => {
             // Post yugioh card(s)
+            if(json.is_video)
+                {
+                    const embed = new Discord.MessageEmbed()
+                        .setImage(url)
+                        .setColor("RANDOM")
+                        .setURL(url)
+                        .setAuthor(url);
+                        
+                    return message.channel.send({embed});
+                }
             return message.channel.send(json.url);
             }).catch(error => {
                 message.channel.send("Unable to fetch image. Please try again.");
