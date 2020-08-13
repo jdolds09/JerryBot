@@ -11,16 +11,6 @@ module.exports = {
         // Get pokemon card(s) image
         Client.nsfw.real.pokemon().then(json => {
             // Post pokemon card(s)
-            if(json.is_video)
-                {
-                    const embed = new Discord.MessageEmbed()
-                        .setImage(json.url)
-                        .setColor("RANDOM")
-                        .setURL(json.url)
-                        .setAuthor(json.url);
-                        
-                    return message.channel.send({embed});
-                }
             return message.channel.send(json.url);
             }).catch(error => {
                 message.channel.send("Unable to fetch image. Please try again.");
