@@ -14,10 +14,10 @@ module.exports = {
             if(json.is_video)
                 {
                     const embed = new Discord.MessageEmbed()
-                        .setImage(url)
+                        .setImage(json.url)
                         .setColor("RANDOM")
-                        .setURL(url)
-                        .setAuthor(url);
+                        .setURL(json.url)
+                        .setAuthor(json.url);
                         
                     return message.channel.send({embed});
                 }
