@@ -1,5 +1,6 @@
 const Images = require("dabi-images"); // Fetches images from Reddit
 const Client = new Images.Client(); // Helps get message from Reddit to discord channel
+const Discord = require("discord.js");
 
 // Funny command
 module.exports = {

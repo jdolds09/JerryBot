@@ -1,5 +1,6 @@
 const Images = require("dabi-images");
 const Client = new Images.Client();
+const Discord = require("discord.js");
 
 // Cosplay command
 module.exports = {
