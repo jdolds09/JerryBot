@@ -39,7 +39,8 @@ module.exports = {
           connection: null,
           songs: [],
           volume: 2,
-          playing: true
+          playing: true,
+          song_num: 0
         };
 
         queue.set(message.guild.id, queueContruct);
@@ -156,14 +157,14 @@ module.exports = {
           // Play next song in playlist
           if(is_playlist)
           {
-            i = i + 1;
+            serverQueue.song_num = serverQueue.song_num + 1;
             if(i < videos.length)
             {
-              while(videos[i].title == "Private video" || videos[i].title == "Deleted video")
-                i = i + 1;
+              while(videos[serverQueue.song_num].title == "Private video" || videos[serverQueue.song_num].title == "Deleted video")
+                serverQueue.song_num = serverQueue.song_num + 1;
               const song = {
-              title: videos[i].title,
-              url: videos[i].url
+              title: videos[serverQueue.song_num].title,
+              url: videos[serverQueue.song_num].url
               };
               serverQueue.songs.push(song);
             }

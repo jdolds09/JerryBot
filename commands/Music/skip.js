@@ -15,9 +15,8 @@ module.exports = {
 		// If number after !roll exists
         if(args.length > 1)
         {
-			var i = 0;
-			for(i = 0; i < args[1]; i++)
-				serverQueue.connection.dispatcher.end();
+			serverQueue.song_num = serverQueue.song_num + (args[1] - 1);
+			serverQueue.connection.dispatcher.end();
 		}
 		
 		else
