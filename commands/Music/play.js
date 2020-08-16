@@ -181,7 +181,7 @@ module.exports = {
 
         })
         .on("error", error => console.error(error));
-      dispatcher.setVolumeLogarithmic(serverQueue.volume / 8);
+      dispatcher.setVolumeLogarithmic(serverQueue.volume / 7);
       serverQueue.textChannel.send(`Start playing: **${song.title}**`);
     }
     catch(error)
