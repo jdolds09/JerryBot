@@ -12,7 +12,7 @@ module.exports = {
 		// Unable to skip song
 		if (!serverQueue) return message.channel.send('There is no song that I could skip!');
 
-		// If number after !roll exists
+		// If number after !skip exists
         if(args.length > 1)
         {
 			serverQueue.song_num = serverQueue.song_num + (args[1] - 1);
