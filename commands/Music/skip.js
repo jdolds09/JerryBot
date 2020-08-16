@@ -1,7 +1,7 @@
 // Skip command
 module.exports = {
 	name: 'skip',
-	description: 'Skip a song!',
+	description: 'Skip a song! If a playlist is currently playing, you can provide a number after the skip command to skip that many songs.',
 	execute(message) {
 		// Get number after !skip command if it exists
 		const args = message.content.split(" ");

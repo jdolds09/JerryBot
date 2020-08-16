@@ -18,6 +18,8 @@ module.exports = {
 			const command = require(`./Music/${file}`);
 			if(command.name === "play")
 				str += `__**!${command.name} [youtube link]**__: ${command.description} \n`;
+			else if(command.name === "skip")
+			str += `__**!${command.name} [number of songs to skip]**__: ${command.description} \n`;
 			else
 				str += `__**!${command.name}**__: ${command.description} \n`;
 		}
