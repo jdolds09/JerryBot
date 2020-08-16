@@ -180,7 +180,33 @@ module.exports = {
           }
 
         })
-        .on("error", error => console.error(error));
+        .on("error", error =>{
+          console.error(error);
+
+          if(is_playlist)
+          {
+            serverQueue.song_num = serverQueue.song_num + 1;
+            if(i < videos.length)
+            {
+              while(videos[serverQueue.song_num].title == "Private video" || videos[serverQueue.song_num].title == "Deleted video")
+                serverQueue.song_num = serverQueue.song_num + 1;
+              const song = {
+              title: videos[serverQueue.song_num].title,
+              url: videos[serverQueue.song_num].url
+              };
+              serverQueue.songs.push(song);
+            }
+            serverQueue.songs.shift();
+            this.play(message, serverQueue.songs[0], true, videos, i);
+          }
+
+          // Play next song in queue
+          else
+          {
+            serverQueue.songs.shift();
+            this.play(message, serverQueue.songs[0], false, videos, i);
+          }
+        });
       dispatcher.setVolumeLogarithmic(serverQueue.volume / 7);
       serverQueue.textChannel.send(`Start playing: **${song.title}**`);
     }
