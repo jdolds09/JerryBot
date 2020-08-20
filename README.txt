@@ -1,0 +1,1 @@
+Discord bot that plays music, displays images, and has other fun miscellaneous commands. Use the !help command to see a list of all the commands and their descriptions.
