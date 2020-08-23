@@ -17,8 +17,8 @@ module.exports = {
             while (0 !== current_index)
             {
                 // Pick an element that has not been shuffled
-                random_index = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
+                random_index = Math.floor(Math.random() * current_index);
+                current_index -= 1;
 
                 // Swap with current element
                 temp_value = serverQueue.videos[current_index];
