@@ -40,7 +40,9 @@ module.exports = {
           songs: [],
           volume: 2,
           playing: true,
-          song_num: 0
+          song_num: 0,
+          videos: [],
+          playlist: false
         };
 
         queue.set(message.guild.id, queueContruct);
@@ -51,6 +53,8 @@ module.exports = {
           // Get playlist info
           const playlist = await youtube.getPlaylist(args[1]);
           const videos = await playlist.getVideos();
+          queueContruct.playlist = true;
+          queueContruct.videos = videos;
 
           // Get first song in playlist
           const video2 = await youtube.getVideoByID(videos[0].id);
@@ -65,7 +69,7 @@ module.exports = {
           try {
             var connection = await voiceChannel.join();
             queueContruct.connection = connection;
-            this.play(message, queueContruct.songs[0], true, videos, i);
+            this.play(message, queueContruct.songs[0], true, queueContruct.videos, i);
           } catch (err) {
             console.log(err);
             queue.delete(message.guild.id);
@@ -88,10 +92,9 @@ module.exports = {
 
           // If no song is currently playing, then play the song given in the command
           try {
-            var videos;
             var connection = await voiceChannel.join();
             queueContruct.connection = connection;
-            this.play(message, queueContruct.songs[0], false, videos, i);
+            this.play(message, queueContruct.songs[0], false, queueContruct.videos, i);
           } catch (err) {
             console.log(err);
             queue.delete(message.guild.id);
