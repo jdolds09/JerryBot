@@ -155,7 +155,7 @@ module.exports = {
 
       // Play song
       const dispatcher = serverQueue.connection
-        .play(ytdl(song.url))
+        .play(ytdl(song.url), {bitrate: 96000})
         .on("finish", () => {
           // Play next song in playlist
           if(is_playlist)
