@@ -111,14 +111,11 @@ client.on('message', async message => {
         if(msg.includes("pogu"))
             message.channel.send("", {files: ['./images/pogu.jpg']});
 
-        else if(msg.includes("champ"))
-            message.channel.send("", {files: ['./images/pogchamp.gif']});
-
         else if(msg.includes("poggers"))
             message.channel.send("", {files: ['./images/poggers.png']});
 
         else
-            message.channel.send("", {files: ['./images/pog.gif']});
+            message.channel.send("", {files: ['./images/pogchamp.gif']});
     }
 
     else if(msg.includes("kapp"))
