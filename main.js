@@ -300,4 +300,4 @@ client.on('message', async message => {
     }
 });
 
-client.login("NzIzODkzMzE2NTkyMDc0Nzgy.Xu4QLw.CUeG0_ks2wsdAp6wiWNvFRhq6Vg");
+client.login(process.env.token);
