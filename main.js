@@ -178,6 +178,9 @@ client.on('message', async message => {
     else if((msg.includes("tri") && msg.includes("hard")) || (msg.includes("try") && msg.includes("hard")))
         message.channel.send("", {files: ['./images/trihard.gif']});
 
+    else if(msg.includes("blessrng"))
+        message.channel.send("", {files: ['./images/blessrng.jpg']});
+
     else
     {}
 
