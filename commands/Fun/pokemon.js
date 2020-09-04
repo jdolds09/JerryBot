@@ -22,6 +22,10 @@ module.exports = {
                     return message.channel.send({embed});
                 }
             */
+
+            if(json.url.includes("gfycat"))
+                json.url.replace("gfycat", "gifdeliverynetwork.com");
+                
             return message.channel.send(json.url);
             }).catch(error => {
                 message.channel.send("Unable to fetch image. Please try again.");
