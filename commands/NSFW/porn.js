@@ -29,8 +29,7 @@ module.exports = {
                 */
                 if(json.url.includes("gfycat"))
                 {
-                   link = json.url.replace("gfycat", "gifdeliverynetwork.com");
-                   message.channel.send("Fuck");
+                   var link = json.url.replace("gfycat", "gifdeliverynetwork");
                    return message.channel.send(link);
                 }
                 return message.channel.send(json.url);

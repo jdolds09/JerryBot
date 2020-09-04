@@ -27,8 +27,11 @@ module.exports = {
                     return message.channel.send({embed});
                 }
                 */
-                if(json.url.includes("gfycat"))
-                    json.url.replace("gfycat", "gifdeliverynetwork.com");
+               if(json.url.includes("gfycat"))
+               {
+                  var link = json.url.replace("gfycat", "gifdeliverynetwork");
+                  return message.channel.send(link);
+               }
 
                 return message.channel.send(json.url);
                 }).catch(error => {
