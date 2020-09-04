@@ -28,8 +28,11 @@ module.exports = {
                 }
                 */
                 if(json.url.includes("gfycat"))
-                    json.url.replace("gfycat", "gifdeliverynetwork.com");
-
+                {
+                   link = json.url.replace("gfycat", "gifdeliverynetwork.com");
+                   message.channel.send("Fuck");
+                   return message.channel.send(link);
+                }
                 return message.channel.send(json.url);
                 }).catch(error => {
                     message.channel.send("Unable to fetch image. Please try again.");
