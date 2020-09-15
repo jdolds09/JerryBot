@@ -10,9 +10,12 @@ module.exports = {
         // If number after !roll exists
         if(args.length > 1)
         {
+            // Check to see if argument supplied is a number
+            if(!(Number.isInteger(args[1])))
+                return message.channel.send(`${args[1]} is not an integer dumbass`);
             // Generate and output random number
             const result = Math.floor((Math.random() * args[1]) + 1); 
-            message.channel.send(`${message.author.username} rolls ${result} (1-${args[1]})`);
+            return message.channel.send(`${message.author.username} rolls ${result} (1-${args[1]})`);
         }
 
         // Number after roll doesn't exist, do default roll from 1-100
@@ -20,7 +23,7 @@ module.exports = {
         {
             // Generate and output random number
             const result = Math.floor((Math.random() * 100) + 1);
-            message.channel.send(`${message.author.username} rolls ${result} (1-100)`);
+            return message.channel.send(`${message.author.username} rolls ${result} (1-100)`);
         }
     },
 };
