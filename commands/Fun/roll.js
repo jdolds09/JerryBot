@@ -11,7 +11,7 @@ module.exports = {
         if(args.length > 1)
         {
             // Check to see if argument supplied is a number
-            if(!(Number.isInteger(args[1])))
+            if(!(Number.isInteger(Number(args[1]))))
                 return message.channel.send(`${args[1]} is not an integer dumbass`);
             // Generate and output random number
             const result = Math.floor((Math.random() * args[1]) + 1); 
