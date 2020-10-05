@@ -192,6 +192,14 @@ client.on('message', async message => {
         }
     }
 
+    if(message.author.username == "Machen Gaming")
+    {
+        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        {
+            message.channel.send("", {files: ['./images/taylor.gif']});
+        }
+    }
+
     if(message.author.username == "jdolds09")
     {
         if(((msg.includes("jerry") && msg.includes("bot"))) && msg.includes("thanks"))
