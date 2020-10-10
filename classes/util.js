@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 const {
     chat
-} = require('./misc/config.json');
+} = require('./config.json');
 
 const handleStatus = (client, status) => {
     client.user.setStatus(status.state);
