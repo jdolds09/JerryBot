@@ -234,14 +234,6 @@ client.on('message', async message => {
         }
     }
 
-    if(message.author.username == "coyote")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
-        {
-            message.channel.send("Jake according to my calculations, America is better than Canada.");
-        }
-    }
-
     if(message.author.username == "KingKazma8292")
     {
         if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
