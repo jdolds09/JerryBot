@@ -7,11 +7,15 @@ prefix = '!';
 
 // Servers variable so all servers aint playing same hangman game screwing it up
 var servers = {}
-var users = {}
 
 // Declare command variale
 const client = new Client();
 client.commands = new Discord.Collection();
+const convo = new Discord.Client({
+    disableEveryone: true,
+    disabledEvents: ['CHANNEL_PINS_UPDATE', 'GUILD_BAN_ADD', 'GUILD_BAN_REMOVE', 'RELATIONSHIP_ADD', 'RELATIONSHIP_REMOVE']
+});
+convo.util = require('./classes/util');
 
 // Get all commands
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
@@ -53,6 +57,10 @@ client.once('ready', () => {
 client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
+
+    // Conversation bot
+    if(msg.content.startsWith(`<@${msg.client.user.id}>`) || msg.content.startsWith(`<@!${msg.client.user.id}>`))
+        convo.util.handleTalk(msg);
 
     // Twitch emote reactions
     if(msg.includes("monka"))
