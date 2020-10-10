@@ -59,8 +59,10 @@ client.on('message', async message => {
     var msg = message.content.toLowerCase();
 
     // Conversation bot
-    if(msg.content.startsWith(`<@${msg.client.user.id}>`) || msg.content.startsWith(`<@!${msg.client.user.id}>`))
+    if(msg.content.startsWith(`<@${msg.Client.user.id}>`) || msg.content.startsWith(`<@!${msg.Client.user.id}>`))
+    {
         convo.util.handleTalk(msg);
+    }
 
     // Twitch emote reactions
     if(msg.includes("monka"))
