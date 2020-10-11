@@ -1,6 +1,8 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
+const Client2 = Discord.Client();
+const apiaiApp = require('apiai')(process.env.API_AI);
 
 // This is what must be put immediately before commands
 prefix = '!';
@@ -40,6 +42,7 @@ for (const file of fun_command_files)
 
 // Set help command
 const command = require(`./commands/help`);
+const { Response } = require('node-fetch');
 client.commands.set(command.name, command);
 
 // Announce that the bot is online
@@ -52,6 +55,26 @@ client.once('ready', () => {
 client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
+
+    if(message.content.startsWith(`<@723893316592074782>`) || message.content.startsWith(`<@!723893316592074782>`))
+    {
+        var text = message.content.substring(1);
+
+        var request = apiaiApp.textRequest(text, {
+            sessionId: 'JerryBotConvo'
+        });
+
+        request.on('response', (response) => {
+            message.reply(response.result.fulfillment.speech);
+        });
+
+        request.on('error', (error) => {
+            message.reply("Something fucked up");
+            console.log(error);
+        });
+
+        request.end();
+    }
 
     // Twitch emote reactions
     if(msg.includes("monka"))
