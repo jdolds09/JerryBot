@@ -1,7 +1,6 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Client2 = Discord.Client();
 const apiaiApp = require('apiai')(process.env.API_AI);
 
 // This is what must be put immediately before commands
