@@ -55,26 +55,6 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
 
-    if(message.content.startsWith(!jerrybot))
-    {
-        var text = message.content.substring(1);
-
-        var request = apiaiApp.textRequest(text, {
-            sessionId: 'JerryBotConvo'
-        });
-
-        request.on('response', (response) => {
-            message.reply(response.result.fulfillment.speech);
-        });
-
-        request.on('error', (error) => {
-            message.reply("Something fucked up");
-            console.log(error);
-        });
-
-        request.end();
-    }
-
     // Twitch emote reactions
     if(msg.includes("monka"))
     {
