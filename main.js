@@ -62,8 +62,6 @@ client.once('ready', () => {
 client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
-
-    message.channel.send(`${message.content}`);
     
     if(message.content.startsWith('balls') || message.content.startsWith(`<@${client2.user}>`))
         message.reply(`${client2.user}`);
