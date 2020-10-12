@@ -63,7 +63,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(message.startsWith('balls') || message.startsWith('<@723893316592074782>') || message.startsWith('<@!723893316592074782>'))
+    if(message.content.startsWith('balls') || message.content.startsWith('<@723893316592074782>') || message.content.startsWith('<@!723893316592074782>'))
         message.reply("fuck");
 
     // Twitch emote reactions
