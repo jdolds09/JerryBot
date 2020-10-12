@@ -8,7 +8,7 @@ const dialogflow = require('dialogflow');
 const dialogflowClient = new dialogflow.SessionsClient();
 
 // Session path
-const sessionPath = dialogflowClient.sessionPath(process.env.Project_ID, 'JerryBot');
+const sessionPath = dialogflowClient.sessionPath(process.env.PROJECT_ID, 'JerryBot');
 
 // This is what must be put immediately before commands
 prefix = '!';
