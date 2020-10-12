@@ -1,6 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
+const client2 = new Discord.Client();
 
 // Create dialogflow client
 const dialogflow = require('dialogflow');
@@ -62,7 +63,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(msg.startsWith('<@723893316592074782>') || msg.startsWith('<@!723893316592074782>'))
+    if(msg.startsWith('balls') || msg.startsWith(client2.user.id))
         msg.reply("fuck");
 
     // Twitch emote reactions
