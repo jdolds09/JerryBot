@@ -61,10 +61,13 @@ client.once('ready', () => {
 // Listen to discord messages
 client.on('message', async message => {
 
+    if(message.author.bot)
+        return;
+
     var msg = message.content.toLowerCase();
     
     if(message.content.startsWith('balls') || message.content.startsWith(`<@${client2.user}>`))
-        message.reply(`${client2.user}`);
+        message.reply(`${client2.user.id}`);
 
     // Twitch emote reactions
     if(msg.includes("monka"))
