@@ -1,7 +1,14 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const apiaiApp = require('apiai')(process.env.API_AI);
+
+// Create dialogflow client
+const dialogflow = require('dialogflow');
+
+const dialogflowClient = new dialogflow.SessionsClient();
+
+// Session path
+const sessionPath = dialogflowClient.sessionPath(process.env.Project_ID, 'JerryBot');
 
 // This is what must be put immediately before commands
 prefix = '!';
@@ -54,6 +61,9 @@ client.once('ready', () => {
 client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
+    
+    if(msg.content.startsWith(`<@723893316592074782>`) || msg.content.startsWith(`<!@723893316592074782>`))
+        msg.reply("fuck");
 
     // Twitch emote reactions
     if(msg.includes("monka"))
