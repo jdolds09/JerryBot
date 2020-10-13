@@ -65,7 +65,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(message.content.startsWith('balls') || message.content.startsWith('<@' + client.user.id + '>'))
+    if(message.content.includes('<@723893316592074782>'))
         message.reply('<@723893316592074782>');
 
     // Twitch emote reactions
