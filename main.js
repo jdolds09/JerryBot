@@ -333,4 +333,8 @@ client.on('message', async message => {
     }
 });
 
+function remove(username, text) {
+    return text.replace('@' + username + ' ', '').replace(process.env.DISCORD_PREFIX + ' ', '');
+}
+
 client.login(process.env.token);
