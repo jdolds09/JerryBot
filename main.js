@@ -5,7 +5,13 @@ const Client = require('./classes/Client'); // To save commands
 // Create dialogflow client
 const dialogflow = require('dialogflow');
 
-const dialogflowClient = new dialogflow.SessionsClient();
+const login_info = {
+    credentials: {
+        private_key: process.env.PRIVATE_KEY,
+        email: process.env.email
+    }
+}
+const dialogflowClient = new dialogflow.SessionsClient(login_info);
 
 // Session path
 const sessionPath = dialogflowClient.sessionPath(process.env.PROJECT_ID, 'JerryBot');
