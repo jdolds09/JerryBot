@@ -73,12 +73,18 @@ client.on('message', async message => {
         message.content = message.content.replace(">", "");
         message.reply(message.content);
         message.reply(client.user.id);
-        if(message.content.includes("&726494201474318498"))
+        if(message.content.includes("&723896471149084712") || message.content.includes("!723893316592074782") || message.content.includes("723893316592074782"))
         {
             // Remove the @JerryBot at beginning of message
             message.content = message.content.replace("<@", "");
             message.content = message.content.replace(">", "");
-            message.content = message.content.replace("&726494201474318498", "");
+            if(message.content.includes("&723896471149084712"))
+                message.content = message.content.replace("&723896471149084712", "");
+            else if(message.content.includes("!723893316592074782"))
+                message.content = message.content.replace("!723893316592074782");
+            else
+                message.content = message.content.replace("!723893316592074782");
+                
             while(message.content.startsWith(" "))
                 message.content.replace(" ", "");
 
