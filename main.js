@@ -69,6 +69,7 @@ client.on('message', async message => {
     
     if(message.content.includes("<@"))
     {
+        message.reply("fuck");
         message.content = message.content.replace("<@", "");
         message.content = message.content.replace(">", "");
         message.reply(message.content);
