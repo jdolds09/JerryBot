@@ -67,7 +67,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(message.content.includes("@"))
+    if(message.content.startsWith("<@"))
     {
         message.content = message.content.replace("<@", "");
         message.content = message.content.replace(">", "");
