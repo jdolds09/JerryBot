@@ -72,7 +72,6 @@ client.on('message', async message => {
         message.content = message.content.replace("<@", "");
         message.content = message.content.replace(">", "");
         message.reply(message.content);
-        message.reply(client.user.id);
         if(message.content.includes("&723896471149084712") || message.content.includes("!723893316592074782") || message.content.includes("723893316592074782"))
         {
             // Remove the @JerryBot at beginning of message
