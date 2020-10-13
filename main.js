@@ -69,8 +69,12 @@ client.on('message', async message => {
     
     if(message.content.includes("<@") && message.content.includes(">"))
     {
+        message.reply("fuck");
+        message.content = message.content.replace("<@");
+        message.content = message.content.replace(">");
         if(message.content.includes("&726494201474318498"))
         {
+            message.reply("fuck");
             // Remove the @JerryBot at beginning of message
             message.content = message.content.replace("<@", "");
             message.content = message.content.replace(">", "");
