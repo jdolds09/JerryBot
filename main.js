@@ -76,6 +76,7 @@ client.on('message', async message => {
             message.content.replace("<@", "");
             message.content.replace(">", "");
             message.content.replace("723893316592074782", "");
+            message.reply(message.content);
             while(message.content.startsWith(" "))
                 message.content.replace(" ", "");
 
