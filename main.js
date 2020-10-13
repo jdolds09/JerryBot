@@ -69,7 +69,13 @@ client.on('message', async message => {
     {
         if(message.content.includes("723893316592074782"))
         {
-            const message = remove(client.user.username, msg.cleanContent);
+            // Remove the @JerryBot at beginning of message
+            message.content.replace("<@", "");
+            message.content.replace(">", "");
+            message.content.replace("723893316592074782", "");
+            while(message.content.startsWith(" "))
+                message.content.replace(" ", "");
+
             const dialogflowRequest = {
                 session: sessionPath,
                 queryInput: {
@@ -334,9 +340,5 @@ client.on('message', async message => {
         }
     }
 });
-
-function remove(username, text) {
-    return text.replace('@' + username + ' ', '').replace(process.env.DISCORD_PREFIX + ' ', '');
-}
 
 client.login(process.env.token);
