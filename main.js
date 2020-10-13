@@ -66,6 +66,7 @@ client.on('message', async message => {
     var msg = message.content.toLowerCase();
     
     if(message.content.includes("<@") && message.content.includes(">"))
+    {
         if(message.content.includes("723893316592074782"))
         {
             const message = remove(client.user.username, msg.cleanContent);
@@ -83,6 +84,7 @@ client.on('message', async message => {
                 message.channel.send(responses[0].queryResult.fulfillmentText);
             });
         }
+    }
 
     // Twitch emote reactions
     if(msg.includes("monka"))
