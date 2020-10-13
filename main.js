@@ -5,7 +5,12 @@ const Client = require('./classes/Client'); // To save commands
 // Create dialogflow client
 const dialogflow = require('@danclay/discord-dialogflow')
 
-dialogflow.init(`${process.env.PROJECT_ID}`, `${process.env.path}`);
+dialogflow.init({
+    projectID: process.env.PROJECT_ID,
+    keyPath: process.env.path,
+    easyMode: true,
+    debug: true
+});
 
 // This is what must be put immediately before commands
 prefix = '!';
