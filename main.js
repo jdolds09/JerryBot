@@ -1,7 +1,6 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const client2 = new Discord.Client();
 
 // Create dialogflow client
 const dialogflow = require('dialogflow');
@@ -66,8 +65,8 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(message.content.startsWith('balls') || message.content.startsWith('<@723893316592074782>') || message.content.startsWith('<@!723893316592074782>') || message.content.startsWith('@' + client.user.username))
-        message.reply(client.user.id);
+    if(message.content.startsWith('balls') || message.content.startsWith('<@' + client.user.id + '>'))
+        message.reply('<@723893316592074782>');
 
     // Twitch emote reactions
     if(msg.includes("monka"))
