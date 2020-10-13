@@ -65,7 +65,7 @@ client.on('message', async message => {
 
     var msg = message.content.toLowerCase();
     
-    if(message.content.includes('<@723893316592074782>') || message.content.includes('<@' + client.user.id + '>') || message.content.includes('<@' + client.user.username + '>') || message.content.includes('<@' + client.user.id + '>') || message.content.includes(`@${client.user.id}`) || message.content.includes(`@${client.user.username}`))
+    if(message.content.includes("<@") && message.content.includes(">"))
         message.reply('<@723893316592074782>');
 
     // Twitch emote reactions
