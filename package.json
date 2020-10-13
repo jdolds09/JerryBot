@@ -9,6 +9,7 @@
   "author": "Jerry Olds",
   "license": "ISC",
   "dependencies": {
+    "@danclay/discord-dialogflow": "^1.0.2",
     "apiai": "^4.0.3",
     "axios": "^0.19.2",
     "dabi-images": "^2.7.5",

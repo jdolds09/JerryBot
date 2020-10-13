@@ -3,12 +3,9 @@ const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
 
 // Create dialogflow client
-const dialogflow = require('dialogflow');
+const dialogflow = require('@danclay/discord-dialogflow')
 
-const dialogflowClient = new dialogflow.SessionsClient();
-
-// Session path
-const sessionPath = dialogflowClient.sessionPath(process.env.PROJECT_ID, process.env.path);
+dialogflow.init(process.env.PROJECT_ID, process.env.path);
 
 // This is what must be put immediately before commands
 prefix = '!';
@@ -69,6 +66,7 @@ client.on('message', async message => {
     {
         if(message.content.includes("723893316592074782"))
         {
+            message.reply("fuck");
             // Remove the @JerryBot at beginning of message
             message.content.replace("<@", "");
             message.content.replace(">", "");
@@ -76,19 +74,9 @@ client.on('message', async message => {
             while(message.content.startsWith(" "))
                 message.content.replace(" ", "");
 
-            const dialogflowRequest = {
-                session: sessionPath,
-                queryInput: {
-                    text: {
-                        text: message,
-                        languageCode: 'en-US'
-                    }
-                }
-            };
-
-            dialogflowClient.detectIntent(dialogflowRequest).then(responses => {
-                message.channel.send(responses[0].queryResult.fulfillmentText);
-            });
+            dialogflow.getIntent(message, (r) => {
+                message.reply(r);
+            })
         }
     }
 
