@@ -67,7 +67,22 @@ client.on('message', async message => {
     
     if(message.content.includes("<@") && message.content.includes(">"))
         if(message.content.includes("723893316592074782"))
-            message.reply('<@723893316592074782>');
+        {
+            const message = remove(client.user.username, msg.cleanContent);
+            const dialogflowRequest = {
+                session: sessionPath,
+                queryInput: {
+                    text: {
+                        text: message,
+                        languageCode: 'en-US'
+                    }
+                }
+            };
+
+            dialogflowClient.detectIntent(dialogflowRequest).then(responses => {
+                message.channel.send(responses[0].queryResult.fulfillmentText);
+            });
+        }
 
     // Twitch emote reactions
     if(msg.includes("monka"))
