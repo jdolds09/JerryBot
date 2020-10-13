@@ -69,27 +69,9 @@ client.on('message', async message => {
     
     if(message.content.includes("@"))
     {
-        message.reply("fuck");
-        message.content = message.content.replace("<@", "");
-        message.content = message.content.replace(">", "");
-        message.reply(message.content);
-        if(message.content.includes("&723896471149084712") || message.content.includes("!723893316592074782") || message.content.includes("723893316592074782"))
-        {
-            // Remove the @JerryBot at beginning of message
-            if(message.content.includes("&723896471149084712"))
-                message.content = message.content.replace("&723896471149084712", "");
-            else if(message.content.includes("!723893316592074782"))
-                message.content = message.content.replace("!723893316592074782", "");
-            else
-                message.content = message.content.replace("723893316592074782", "");
-
-            while(message.content.startsWith(" "))
-                message.content.replace(" ", "");
-
-            dialogflow.getIntent(message, (r) => {
-                message.reply(r);
-            });
-        }
+        dialogflow.getIntent(message, (r) => {
+            message.reply(r);
+        });
     }
 
     // Twitch emote reactions
