@@ -14,7 +14,7 @@ const login_info = {
 const dialogflowClient = new dialogflow.SessionsClient(login_info);
 
 // Session path
-const sessionPath = dialogflowClient.sessionPath(process.env.PROJECT_ID, 'JerryBot');
+const sessionPath = dialogflowClient.sessionPath(process.env.PROJECT_ID, process.env.path);
 
 // This is what must be put immediately before commands
 prefix = '!';

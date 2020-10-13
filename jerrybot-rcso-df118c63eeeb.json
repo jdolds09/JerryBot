@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jerrybot-rcso",
+  "private_key_id": "df118c63eeebf4ad3fd81dca6352bf15f42bd3e6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDa1PSHz7ksixhN\najG/8JzB1ag1bpO1B6WTdu1e/ambVzjFbE8kThAtxG5/CwQp22SrO7tnlTsQrZF5\nCsji8+V/QmKf+NGZ/SyB8awT6n0zipt3KhlCwxiaXAJgap6wQRVHVuDOSUvMscFh\nn5acPuGhbYXJXqGKvj7ObEFzoREW0HxsczZyoa+nqVtUh7lKnNjFeBm8fdOahyZN\n6WeoVXjxY5TYpWddgwbmrKHn+iWyozQS2qz48VgmxJ7snWrjoL9be9ms7UDmj2TT\n0tS8vLMEswlQpmEt8Q/OS/pgB/leuNYEq37JQ1t9Uohnadm6OzfMUA/xS1KdRC30\nYEZ1q51vAgMBAAECggEAXd/Q7pnro/IfgMY3hVFgzb4sJI/FCXm4S+ROu9sxcRQf\npIFsCfT698c2Z4WASbx2GQbMxAi+h88NgtFfkAx0vPzrdhi1Qcvb1fqoiPqkrwGc\n46fJolwzJ7SkyFu0q4Of7zSTx6qlu6/dd1WQtII9JJTpOZNA1VX7d231Pfcwb4pB\nYUPI5EkUaxXzV6bkcnat5SdFO0LvItBHwoWb4tPCqxtTlM3I2r3R0NYSNmdiOxh/\n6CMJjT8S+jABGEEyNGYhMXKQf5blif7R787H9oXZUSzw2ey191ONaoAkpXRBA4wY\nuzd45AmP8qvv0GvxRCaqguh04Zw75GDyNZszkwFvkQKBgQDvCeWEbGOJoFPPX+T+\nWsuxSy/EgM8uUVhiuFvp51NKFN0RC6CrWYl+PNw03MR9KfI8/oWhfDoyitUa9OCV\nn6QNfe6D4DSoQQ6aHyMI+4yyewa+/m1UDsxEr8diZhciC7XGEMzLMV9txG4QB6Sg\nKkFpBuTiBOACIvmFxMt7rQ0zhQKBgQDqXAFDvAfoeNfwCCNbjOr+P4olYvHhDvvb\ngcMxhC9jhXllcORW08fiUBriLR+LMNT/KNkZiz4Xs8P/E1f9zubhjBNkGCitnjvA\nnGLMq+sJTnJXQwCBXaHKdo6CLkXLNyNd+itVt5ex8yJUmnNGkIp+GQmROwdDuVnE\naKS3bEI9YwKBgFLPauPlaNZU5LQC1KIJcmeJVJMOzLePFr+cfrsZmJEhiTROgurZ\nqfhBvUfS838o+PKIemLnVoIL9qfQDb3IAF1sMyUclyFy6EwcXVbPTn7GgB/KpLVq\nKvngq4I7O+hfhimHyGrcP+MXGcoT28Rg3ygzazeh2LjkxOzCsHu4B8rBAoGAFdEs\n2PZnMhAV4iWPzRUIR1T48lQMumvfrGafGjv5AWXKkFP7Hc4nXH0ik42p0xZfrcVK\nuKMKy8ATbeqKFXmuaq7Um0vYdZk2bM7iL7WNctdXs6HsKR7jUerJh3rxSmK+qx//\n6sHloE5HEuMx+g64pdaE2n1JRte5cJxhQSYV4IsCgYAzJc1KoK35EWrU33veJpDP\nHMzQUtlXvvlnBDLS9ofQKnENno4uoFgnoTfY/Lx3g9roCVkairxQ5UmHx2PneecH\ng9l7Jw/+vL7nQN1vOkhN4UhLj8S8YRXsUBhHxjwXo7Ojhj/Xj/0gVT+O1BK9aT1a\nAXmxEDoKErD7uQhNu+935g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "jerrybot@jerrybot-rcso.iam.gserviceaccount.com",
+  "client_id": "114011036532209969992",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jerrybot%40jerrybot-rcso.iam.gserviceaccount.com"
+}
