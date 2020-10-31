@@ -31,6 +31,6 @@
     "request-promise-native": "^1.0.9",
     "simple-youtube-api": "^5.2.1",
     "snekfetch": "^4.0.4",
-    "ytdl-core": "^2.1.7"
+    "ytdl-core": "^3.4.2"
   }
 }
