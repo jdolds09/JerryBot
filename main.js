@@ -135,7 +135,8 @@ client.commands = new Discord.Collection();
     }
 
     function parseToArgs(msg) {
-        let args = msg.content.slice(1)
+        const poll_prefix = "!poll";
+        let args = msg.content.slice(msg)
             .trim()
             .split("\"")
             .filter((phrase) => phrase.trim() !== "");
@@ -211,22 +212,22 @@ client.on('message', async message => {
 
     if(msg.includes("!poll"))
     {
-        let args = parseToArgs(msg);
+        let args = parseToArgs(message);
         if (args.length > 0) {
             switch (args[0]) {
                 case "end":
                     if (!isDM) {
-                        end(msg, args);
+                        end(message, args);
                     }
                     break;
                 default:
                     if (!isDM) {
-                        poll(msg, args);
+                        poll(message, args);
                     }
                     break;
             }
         } else {
-            msg.reply("Sorry, give me more at least a question");
+            message.reply("Sorry, give me more at least a question");
         }
     }
 
