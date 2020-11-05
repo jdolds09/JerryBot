@@ -210,23 +210,6 @@ client.on('message', async message => {
         });
     }
 
-    if(msg.includes("!poll"))
-    {
-        let args = parseToArgs(message);
-        if (args.length > 0) {
-            switch (args[0]) {
-                case "end":
-                    end(message, args);
-                    break;
-                default:
-                    poll(message, args);
-                    break;
-            }
-        } else {
-            message.reply("Sorry, give me more at least a question");
-        }
-    }
-
     // Twitch emote reactions
     if(msg.includes("monka"))
     {
@@ -458,6 +441,23 @@ client.on('message', async message => {
         {
             console.error(error);
             message.reply('That command doesn\'t exist dumbass.');
+        }
+    }
+    
+    else if(msg.includes("!poll"))
+    {
+        let args = parseToArgs(message);
+        if (args.length > 0) {
+            switch (args[0]) {
+                case "end":
+                    end(message, args);
+                    break;
+                default:
+                    poll(message, args);
+                    break;
+            }
+        } else {
+            message.reply("Sorry, give me more at least a question");
         }
     }
 
