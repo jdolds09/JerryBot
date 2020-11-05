@@ -135,7 +135,7 @@ client.commands = new Discord.Collection();
     }
 
     function parseToArgs(msg) {
-        let args = msg.content.slice(prefix.length)
+        let args = msg.content.slice(1)
             .trim()
             .split("\"")
             .filter((phrase) => phrase.trim() !== "");
