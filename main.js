@@ -135,7 +135,7 @@ client.commands = new Discord.Collection();
     }
 
     function parseToArgs(msg) {
-        let args = msg.content.slice(config.prefix.length)
+        let args = msg.content.slice(prefix.length)
             .trim()
             .split("\"")
             .filter((phrase) => phrase.trim() !== "");
@@ -214,15 +214,6 @@ client.on('message', async message => {
         let args = parseToArgs(msg);
         if (args.length > 0) {
             switch (args[0]) {
-                case "help":
-                    dmChannel = await msg.author.createDM();
-                    await dmChannel.send({ embed: helpEmbed });
-                    dmChannel.send(helpMessage);
-                    break;
-                case "examples":
-                    dmChannel = await msg.author.createDM();
-                    dmChannel.send({ embed: examplesEmbed });
-                    break;
                 case "end":
                     if (!isDM) {
                         end(msg, args);
