@@ -1,7 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Poll = require("./classes/poll");
+import Poll from './classes/poll';
 const Datastore = require('nedb');
 
 // Create dialogflow client
