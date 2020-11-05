@@ -216,14 +216,10 @@ client.on('message', async message => {
         if (args.length > 0) {
             switch (args[0]) {
                 case "end":
-                    if (!isDM) {
-                        end(message, args);
-                    }
+                    end(message, args);
                     break;
                 default:
-                    if (!isDM) {
-                        poll(message, args);
-                    }
+                    poll(message, args);
                     break;
             }
         } else {
