@@ -23,159 +23,137 @@ var servers = {}
 // Declare command variale
 const client = new Client();
 client.commands = new Discord.Collection();
-
-const helpEmbed = new Discord.RichEmbed()
-	        .setAuthor("VotaBot's Commands")
-            .addField("Create Y/N poll", `\`${config.prefix} "Question"\``)
-            .addField("Create complex poll [2-10 answers]", `\`${config.prefix} "Question" "Option 1" "Option 2" ["Option 3" ...]\` (quotes are necessary)`)
-            .addField("Timed polls that close automatically", `\`${config.prefix} time=X{s|m|h|d} ...\`, where "X" is the time to finish the
-                poll followed by it's unit.`)
-            .addField("See results of a poll and close the voting", `\`${config.prefix} end ID\`, where ID is the poll id wich
-                appears at the end of the poll`)
-            .addField("See examples", `\`${config.prefix} examples\``)
-            .addBlankField()
-            .addField("About", "The bot has been created by Zheoni. Find the source code [here](http://github.com/Zheoni/VotaBot). Feel free to report bugs.")
-            .setColor("#DDA0DD");
     
-        const examplesEmbed = new Discord.RichEmbed()
-            .setAuthor("Examples of VotaBot's commands")
-            .addField("Y/N Poll", `\`${config.prefix} "Do you like this?"\``)
-            .addField("Complex poll", `\`${config.prefix} "What do you wanna play?" "Overwatch" "CS:GO" "Quake" "WoW"\``)
-            .addField("Timed poll", `\`${config.prefix} time=6h "Chat tonight?"\``)
-            .addField("See the results of a poll", `\`${config.prefix} end 61342378\``)
-            .setColor("#DDA0DD");
+    let database = new Datastore('database.db');
+    database.loadDatabase();
+    database.persistence.setAutocompactionInterval(3600000);
+
+    async function finishTimedPolls() {
+        const now = Date.now()
+        database.find({ isTimed: true, finishTime: { $lte: now } }, (err, dbps) => {
+            if (err) console.error(err);
     
+            dbps.forEach((dbp) => {
+                const p = Poll.copyConstructor(dbp);
     
-        let database = new Datastore('database.db');
-        database.loadDatabase();
-        database.persistence.setAutocompactionInterval(3600000);
-
-        async function finishTimedPolls() {
-            const now = Date.now()
-            database.find({ isTimed: true, finishTime: { $lte: now } }, (err, dbps) => {
-                if (err) console.error(err);
-        
-                dbps.forEach((dbp) => {
-                    const p = Poll.copyConstructor(dbp);
-        
-                    if (p instanceof Poll && p.isTimed && p.finishTime <= now) {
-                        p.finish(client);
-                        database.remove({ id: p.id });
-                    }
-                });
-            });
-        }
-
-        async function poll(msg, args) {
-            const timeToVote = await parseTime(msg, args);
-        
-            const question = args.shift();
-            let answers = [];
-            let type;
-        
-            switch (args.length) {
-                case 0:
-                    answers = ["", ""];
-                    type = "yn";
-                    break;
-                case 1:
-                    msg.reply("You cannot create a poll with only one answer");
-                    return;
-                default:
-                    answers = args;
-                    type = "default";
-                    break;
-            }
-        
-            const p = await new Poll(msg, question, answers, timeToVote, type);
-        
-            await p.start(msg);
-        
-            if (p.hasFinished == false) {
-                database.insert(p);
-                // maybe we can get a duplicated id...
-            }
-        }
-
-        async function end(msg, args) {
-            const inputid = Number(args[1]);
-        
-            database.findOne({ id: inputid }, (err, dbp) => {
-                if (err) { console.errror(err); }
-                if (dbp) {
-                    const p = Poll.copyConstructor(dbp);
-                    if (!p.hasFinished && p.guildId === msg.guild.id) {
-                        p.finish(client)
-                        database.remove({ id: p.id });
-                    }
-                } else {
-                    msg.reply("Cannot find the poll.");
+                if (p instanceof Poll && p.isTimed && p.finishTime <= now) {
+                    p.finish(client);
+                    database.remove({ id: p.id });
                 }
             });
-        }
+        });
+    }
 
-        function parseTime(msg, args) {
-            let time = 0;
-        
-            //parse the time limit if it exists
-            if (args[0].startsWith("time=")) {
-                const timeRegex = /\d+/;
-                const unitRegex = /s|m|h|d/i;
-                let timeString = args.shift();
-                let unit = "s";
-        
-                let match;
-        
-                // check if the time is correct
-                match = timeString.match(timeRegex);
-                if (match != null) {
-                    time = parseInt(match.shift());
-                } else {
-                    msg.reply("Wrong time syntax!");
-                    return;
+    async function poll(msg, args) {
+        const timeToVote = await parseTime(msg, args);
+    
+        const question = args.shift();
+        let answers = [];
+        let type;
+    
+        switch (args.length) {
+            case 0:
+                answers = ["", ""];
+                type = "yn";
+                break;
+            case 1:
+                msg.reply("You cannot create a poll with only one answer");
+                return;
+            default:
+                answers = args;
+                type = "default";
+                break;
+        }
+    
+        const p = await new Poll(msg, question, answers, timeToVote, type);
+    
+        await p.start(msg);
+    
+        if (p.hasFinished == false) {
+            database.insert(p);
+            // maybe we can get a duplicated id...
+        }
+    }
+
+    async function end(msg, args) {
+        const inputid = Number(args[1]);
+    
+        database.findOne({ id: inputid }, (err, dbp) => {
+            if (err) { console.errror(err); }
+            if (dbp) {
+                const p = Poll.copyConstructor(dbp);
+                if (!p.hasFinished && p.guildId === msg.guild.id) {
+                    p.finish(client)
+                    database.remove({ id: p.id });
                 }
-        
-                // check the units of the time
-                match = timeString.split("=").pop().match(unitRegex);
-                if (match != null) unit = match.shift();
-        
-                switch (unit) {
-                    case "s": time *= 1000;
-                        break;
-                    case "m": time *= 60000;
-                        break;
-                    case "h": time *= 3600000;
-                        break;
-                    case "d": time *= 86400000;
-                        break;
-                    default: time *= 60000;
-                }
+            } else {
+                msg.reply("Cannot find the poll.");
             }
-        
-            if (time > 604800000) return 604800000; // no more than a week.
-            else return time;
-        }
+        });
+    }
 
-        function parseToArgs(msg) {
-            let args = msg.content.slice(config.prefix.length)
-                .trim()
-                .split("\"")
-                .filter((phrase) => phrase.trim() !== "");
-            for (let i = 0; i < args.length; i++)
-                args[i] = args[i].trim();
-            if (args[0].startsWith("end")) {
-                let aux = args[0].split(" ");
-                args[0] = aux[0];
-                args.push(aux[1]);
+    function parseTime(msg, args) {
+        let time = 0;
+    
+        //parse the time limit if it exists
+        if (args[0].startsWith("time=")) {
+            const timeRegex = /\d+/;
+            const unitRegex = /s|m|h|d/i;
+            let timeString = args.shift();
+            let unit = "s";
+    
+            let match;
+    
+            // check if the time is correct
+            match = timeString.match(timeRegex);
+            if (match != null) {
+                time = parseInt(match.shift());
+            } else {
+                msg.reply("Wrong time syntax!");
+                return;
             }
-            return args;
+    
+            // check the units of the time
+            match = timeString.split("=").pop().match(unitRegex);
+            if (match != null) unit = match.shift();
+    
+            switch (unit) {
+                case "s": time *= 1000;
+                    break;
+                case "m": time *= 60000;
+                    break;
+                case "h": time *= 3600000;
+                    break;
+                case "d": time *= 86400000;
+                    break;
+                default: time *= 60000;
+            }
         }
+    
+        if (time > 604800000) return 604800000; // no more than a week.
+        else return time;
+    }
 
-        function cleanDatabase() {
-            console.log("Cleaning the database...");
-            const aWeekAgo = Date.now() - 604800000;
-            database.remove({ createdOn: { $lt: aWeekAgo } }, { multi: true }, (err, n) => console.log(n + " entries removed."));
+    function parseToArgs(msg) {
+        let args = msg.content.slice(config.prefix.length)
+            .trim()
+            .split("\"")
+            .filter((phrase) => phrase.trim() !== "");
+        for (let i = 0; i < args.length; i++)
+            args[i] = args[i].trim();
+        if (args[0].startsWith("end")) {
+            let aux = args[0].split(" ");
+            args[0] = aux[0];
+            args.push(aux[1]);
         }
+        return args;
+    }
+
+    function cleanDatabase() {
+        console.log("Cleaning the database...");
+        const aWeekAgo = Date.now() - 604800000;
+        database.remove({ createdOn: { $lt: aWeekAgo } }, { multi: true }, (err, n) => console.log(n + " entries removed."));
+    }
 
 // Get all commands
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
@@ -211,6 +189,8 @@ client.commands.set(command.name, command);
 // Announce that the bot is online
 client.once('ready', () => {
     console.log("JerryBot is online!");
+    setInterval(finishTimedPolls, 10000); // 10s
+	setInterval(cleanDatabase, 86400000); // 24h
     client.user.setActivity("Your every move", {type: "WATCHING"});
 });
 
