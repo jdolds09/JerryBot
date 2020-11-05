@@ -136,7 +136,7 @@ client.commands = new Discord.Collection();
 
     function parseToArgs(msg) {
         const poll_prefix = "!poll";
-        let args = msg.content.slice(msg)
+        let args = msg.content.slice(poll_prefix.length)
             .trim()
             .split("\"")
             .filter((phrase) => phrase.trim() !== "");
