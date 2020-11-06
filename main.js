@@ -410,7 +410,7 @@ client.on('message', async message => {
     {
         if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
         {
-            message.channel.send("Because Aaron took the time to write this message instead of working, the entire Chili's franchise has gone bankrupt and will cease to exist. Nice going Aaron, nobody will ever enjoy chicken crispers ever again.");
+            message.channel.send("Because Aaron took the time to write this message instead of working, he got fired.");
             message.channel.send("", {files: ['./images/aaron.gif']});
         }
     }
