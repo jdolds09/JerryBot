@@ -5,7 +5,7 @@ const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣
 const handEmojis = ["👍", "👎"];
 
 class Poll {
-	Poll(msg, question, answers, time, type) {
+	constructor(msg, question, answers, time, type) {
 		if (msg) { // if the constructor have parameters
 			this.guildId = msg.guild.id;
 			this.channelId = msg.channel.id;
