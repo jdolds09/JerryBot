@@ -65,7 +65,7 @@ client.commands = new Discord.Collection();
                 break;
         }
     
-        const p = new Poll(msg, question, answers, timeToVote, type);
+        const p = await new Poll(msg, question, answers, timeToVote, type);
     
         await p.start(msg);
     
