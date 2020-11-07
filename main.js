@@ -51,11 +51,9 @@ async function poll(msg, args) {
                 break;
         }
     
-        const p = await new Poll(msg, question, answers, timeToVote, type);
+        await Poll.start(msg, answers);
     
-        await p.start(msg);
-    
-        if (p.hasFinished == false) {
+        if (Poll.hasFinished == false) {
             database.insert(p);
             // maybe we can get a duplicated id...
         }

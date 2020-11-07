@@ -43,12 +43,12 @@ class Poll {
 		return p;
 	}
 
-	async start(msg) {
+	async start(msg, answers) {
 		const message = await msg.channel.send({ embed: this.generateEmbed() })
 		this.msgId = message.id;
-		for (let i = 0; i < this.answers.length && i < 10; ++i) {
+		for (let i = 0; i < answers.length && i < 10; ++i) {
 			try {
-				await message.react(this.emojis[i]);
+				await message.react(numEmojis[i]);
 			} catch (error) {
 				console.log(error);
 			}
