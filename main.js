@@ -29,6 +29,8 @@ client.commands = new Discord.Collection();
     database.persistence.setAutocompactionInterval(3600000);
 
 async function poll(msg, args) {
+    try
+    {
         const timeToVote = await parseTime(msg, args);
     
         const question = args.shift();
@@ -49,29 +51,20 @@ async function poll(msg, args) {
                 break;
         }
     
-        try
-        {
-            const p = await new Poll(msg, question, answers, timeToVote, type);
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
+        const p = await new Poll(msg, question, answers, timeToVote, type);
     
-        try
-        {
-            await p.start(msg);
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
+        await p.start(msg);
     
         if (p.hasFinished == false) {
             database.insert(p);
             // maybe we can get a duplicated id...
         }
     }
+    catch(error)
+    {
+        console.log(error);
+    }
+}
 
     async function finishTimedPolls() {
         const now = Date.now()
