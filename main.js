@@ -1,7 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Game_Poll = require('./classes/poll');
+const Poll = require('./classes/poll');
 const Datastore = require('nedb');
 
 // Create dialogflow client
@@ -28,7 +28,7 @@ client.commands = new Discord.Collection();
     database.loadDatabase();
     database.persistence.setAutocompactionInterval(3600000);
 
-    async function poll(msg, args) {
+async function poll(msg, args) {
         const timeToVote = await parseTime(msg, args);
     
         const question = args.shift();
@@ -49,9 +49,23 @@ client.commands = new Discord.Collection();
                 break;
         }
     
-        const p = await new Game_Poll(msg, question, answers, timeToVote, type);
+        try
+        {
+            const p = await new Poll(msg, question, answers, timeToVote, type);
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
     
-        await p.start(msg);
+        try
+        {
+            await p.start(msg);
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
     
         if (p.hasFinished == false) {
             database.insert(p);
@@ -65,9 +79,9 @@ client.commands = new Discord.Collection();
             if (err) console.error(err);
     
             dbps.forEach((dbp) => {
-                const p = Game_Poll.copyConstructor(dbp);
+                const p = Poll.copyConstructor(dbp);
     
-                if (p instanceof Game_Poll && p.isTimed && p.finishTime <= now) {
+                if (p instanceof Poll && p.isTimed && p.finishTime <= now) {
                     p.finish(client);
                     database.remove({ id: p.id });
                 }
