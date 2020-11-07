@@ -1,7 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Game_Poll = require('./classes/poll');
+const Poll = require('./classes/poll');
 const Datastore = require('nedb');
 
 // Create dialogflow client
@@ -28,22 +28,6 @@ client.commands = new Discord.Collection();
     database.loadDatabase();
     database.persistence.setAutocompactionInterval(3600000);
 
-    async function finishTimedPolls() {
-        const now = Date.now()
-        database.find({ isTimed: true, finishTime: { $lte: now } }, (err, dbps) => {
-            if (err) console.error(err);
-    
-            dbps.forEach((dbp) => {
-                const p = Poll.copyConstructor(dbp);
-    
-                if (p instanceof Poll && p.isTimed && p.finishTime <= now) {
-                    p.finish(client);
-                    database.remove({ id: p.id });
-                }
-            });
-        });
-    }
-
     async function poll(msg, args) {
         const timeToVote = await parseTime(msg, args);
     
@@ -65,7 +49,7 @@ client.commands = new Discord.Collection();
                 break;
         }
     
-        const p = await new Game_Poll(msg, question, answers, timeToVote, type);
+        const p = await new Poll(msg, question, answers, timeToVote, type);
     
         await p.start(msg);
     
@@ -73,6 +57,22 @@ client.commands = new Discord.Collection();
             database.insert(p);
             // maybe we can get a duplicated id...
         }
+    }
+
+    async function finishTimedPolls() {
+        const now = Date.now()
+        database.find({ isTimed: true, finishTime: { $lte: now } }, (err, dbps) => {
+            if (err) console.error(err);
+    
+            dbps.forEach((dbp) => {
+                const p = Poll.copyConstructor(dbp);
+    
+                if (p instanceof Poll && p.isTimed && p.finishTime <= now) {
+                    p.finish(client);
+                    database.remove({ id: p.id });
+                }
+            });
+        });
     }
 
     async function end(msg, args) {
