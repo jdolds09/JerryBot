@@ -1,7 +1,7 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Poll = require('./classes/poll');
+const Game_Poll = require('./classes/poll');
 const Datastore = require('nedb');
 
 // Create dialogflow client
@@ -65,7 +65,7 @@ client.commands = new Discord.Collection();
                 break;
         }
     
-        const p = await new Poll(msg, question, answers, timeToVote, type);
+        const p = await new Game_Poll(msg, question, answers, timeToVote, type);
     
         await p.start(msg);
     
