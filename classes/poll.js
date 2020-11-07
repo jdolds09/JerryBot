@@ -4,8 +4,7 @@ const hash = require("string-hash");
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
 const handEmojis = ["👍", "👎"];
 
-class Poll {
-	constructor(msg, question, answers, time, type) {
+function Poll(msg, question, answers, time, type) {
 		if (msg) { // if the constructor have parameters
 			this.guildId = msg.guild.id;
 			this.channelId = msg.channel.id;
@@ -23,7 +22,7 @@ class Poll {
 		}
 	}
 
-	static copyConstructor (other) {
+	Poll.prototype.copyConstructor = function(other) {
 		let p = new Poll();
 
 		p.guildId = other.guildId;
@@ -43,7 +42,7 @@ class Poll {
 		return p;
 	}
 
-	async start(msg) {
+	Poll.prototype.start = function(msg) {
 		const message = await msg.channel.send({ embed: this.generateEmbed() })
 		this.msgId = message.id;
 		for (let i = 0; i < this.answers.length && i < 10; ++i) {
@@ -56,7 +55,7 @@ class Poll {
 		return message.id;
 	}
 
-	async finish(client) {
+	Poll.prototype.finish = function(client) {
 		const now = new Date();
 		const message = await this.getPollMessage(client);
 		if (!message) {
@@ -84,7 +83,7 @@ class Poll {
 		}
 	}
 
-	async getVotes(message) {
+	Poll.prototype.getVotes = function(message) {
 		if (this.hasFinished) {
 			const reactionCollection = message.reactions;
 			for (let i = 0; i < this.answers.length; i++) {
@@ -95,7 +94,7 @@ class Poll {
 		}
 	}
 
-	async showResults(channel) {
+	Poll.prototype.showResults = function(channel) {
 		if (!this.hasFinished) {
 			throw new Error("The poll is not finished");
 		}
@@ -106,7 +105,7 @@ class Poll {
 		return await channel.send({ embed: this.generateResultsEmbed() });
 	}
 
-	generateEmbed() {
+	Poll.prototype.generateEmbed = function() {
 		let str = new String();
 
 		if (this.type !== "yn") {
@@ -127,7 +126,7 @@ class Poll {
 		return embed;
 	}
 
-	generateResultsEmbed() {
+	Poll.prototype.generateResultsEmbed = function() {
 		let description = new String();
 		let totalVotes = 0;
 
@@ -166,7 +165,7 @@ class Poll {
 		return resultsEmbed;
 	}
 
-	generateId() {
+	Poll.prototype.generateId = function() {
 		let id = new String("");
 		if (this.id) {
 			id += this.id + Date.now();
@@ -183,7 +182,7 @@ class Poll {
 		return this.id;
 	}
 
-	getEmojis(type) {
+	Poll.prototype.getEmojis = function(type) {
 		switch (type) {
 			case "yn":
 				return handEmojis;
@@ -194,7 +193,7 @@ class Poll {
 		}
 	}
 
-	async getPollMessage(client) {
+	Poll.prototype.getPollMessage = function(client) {
 		try {
 			return await client.guilds.get(this.guildId).channels.get(this.channelId).fetchMessage(this.msgId);
 		} catch (err) {
