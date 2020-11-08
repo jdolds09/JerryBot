@@ -124,7 +124,7 @@ class Poll {
 		let footer = `React with the emojis below | ID: ${this.id}`;
 		if (this.isTimed) footer += ` | This poll ends in ${new Date(this.finishTime).toUTCString()}`;
 
-		let embed = new Discord.RichEmbed()
+		let embed = new Discord.MessageEmbed()
 			.setColor("#50C878")
 			.setAuthor("📊" + this.question)
 			.setDescription(str)
@@ -255,7 +255,7 @@ async function poll(msg, args) {
     
         
         const p = await new Poll(msg, question, answers, timeToVote, type);
-    
+
         await p.start(msg);
     
         if (p.hasFinished == false) {
