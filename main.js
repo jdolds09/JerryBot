@@ -49,12 +49,15 @@ class Poll {
 		return p;
 	}
 
-	async start(msg) {
+	async start(msg, type) {
 		const message = await msg.channel.send({ embed: this.generateEmbed() })
 		this.msgId = message.id;
 		for (let i = 0; i < this.answers.length && i < 10; ++i) {
 			try {
-				await message.react(numEmojis[i]);
+                if(type == "yn")
+                    await message.react(handEmojis[i]);
+                else
+				    await message.react(numEmojis[i]);
 			} catch (error) {
 				console.log(error);
 			}
@@ -256,7 +259,7 @@ async function poll(msg, args) {
         
         const p = await new Poll(msg, question, answers, timeToVote, type);
 
-        await p.start(msg);
+        await p.start(msg, type);
     
         if (p.hasFinished == false) {
             database.insert(p);
