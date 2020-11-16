@@ -424,7 +424,7 @@ client.on('message', async message => {
     }
 
     // Delete message from vote channel
-    if((message.author.username != "ThatSaltySnipezGuy"  || message.author.username != "Jerryatric") && message.channel.id == 774857738039459850)
+    if((message.author.username != "ThatSaltySnipezGuy" && message.author.username != "Jerryatric") && message.channel.id == 774857738039459850)
     {
         message.delete();
     }
