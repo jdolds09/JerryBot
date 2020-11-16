@@ -423,6 +423,9 @@ client.on('message', async message => {
         });
     }
 
+    if(message = "fuck")
+        message.reply(message.channel.id);
+
     // Twitch emote reactions
     if(msg.includes("monka"))
     {
