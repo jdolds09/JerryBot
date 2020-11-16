@@ -423,7 +423,7 @@ client.on('message', async message => {
         });
     }
 
-    if(message = "fuck")
+    if(message.includes("fuck"))
         message.reply(message.channel.id);
 
     // Twitch emote reactions
