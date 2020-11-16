@@ -423,8 +423,11 @@ client.on('message', async message => {
         });
     }
 
-    if(message.content.includes("fuck"))
-        message.reply(message.channel.id);
+    // Delete message from vote channel
+    if((message.author.username != "ThatSaltySnipezGuy") && message.channel.id == 774857738039459850)
+    {
+        message.delete();
+    }
 
     // Twitch emote reactions
     if(msg.includes("monka"))
@@ -572,7 +575,7 @@ client.on('message', async message => {
         }
     }
 
-    if(message.author.username == "jdolds09")
+    if(message.author.username == "Jerryatric")
     {
         if(((msg.includes("jerry") && msg.includes("bot"))) && msg.includes("thanks"))
         {
