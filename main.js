@@ -429,215 +429,218 @@ client.on('message', async message => {
         message.delete();
     }
 
-    // Twitch emote reactions
-    if(msg.includes("monka"))
+    if(message.channel.id != 774857738039459850)
     {
-        if(msg.includes("monkaw"))
-            message.channel.send("", {files: ['./images/Monkaw.jpg']});
+        // Twitch emote reactions
+        if(msg.includes("monka"))
+        {
+            if(msg.includes("monkaw"))
+                message.channel.send("", {files: ['./images/Monkaw.jpg']});
+            
+            else if(msg.includes("monkagiga"))
+                message.channel.send("", {files: ['./images/monkagiga.png']});
+
+            else
+                message.channel.send("", {files: ['./images/monkashake.jpg']});
+        }
+
+        else if(msg.includes("corona"))
+            message.channel.send("", {files: ['./images/coronas.png']});
+
+        else if(msg.includes("hmm"))
+            message.channel.send("", {files: ['./images/pepehmm.gif']});
+
+        else if(msg.includes("gachi"))
+        {
+            if(msg.includes("gasm"))
+                message.channel.send("", {files: ['./images/gachigasm.gif']});
+
+            else
+                message.channel.send("", {files: ['./images/gachi.gif']});
+        }
+
+        else if(msg.includes("gasm") && !msg.includes("gachi"))
+            message.channel.send("", {files: ['./images/gasm.png']});
+            
+        else if(msg.includes("kek"))
+            message.channel.send("", {files: ['./images/kek.gif']});
+
+        else if(msg.includes("lul"))
+        {
+            if(msg.includes("omega"))
+                message.channel.send("", {files: ['./images/omegalul.jpg']});
+
+            else
+                message.channel.send("", {files: ['./images/lul.png']});
+        }
+
+        else if(msg.includes("pepega"))
+            message.channel.send("", {files: ['./images/pepega.png']});
+
+        else if(msg.includes("pepehands"))
+            message.channel.send("", {files: ['./images/pepehands.gif']});
+
+        else if(msg.includes("jebait"))
+            message.channel.send("", {files: ['./images/jebait.png']});
+
+        else if(msg.includes("pog"))
+        {
+            if(msg.includes("pogu"))
+                message.channel.send("", {files: ['./images/pogu.jpg']});
+
+            else if(msg.includes("poggers"))
+                message.channel.send("", {files: ['./images/poggers.png']});
+
+            else
+                message.channel.send("", {files: ['./images/pogchamp.gif']});
+        }
+
+        else if(msg.includes("kapp"))
+        {
+            if(msg.includes("pride"))
+                message.channel.send("", {files: ['./images/kappapride.png']});
+
+            else if(msg.includes("ross"))
+                message.channel.send("", {files: ['./images/kappaross.png']});
+
+            else
+                message.channel.send("", {files: ['./images/kapp.png']});
+        }
+
+        else if(msg.includes("4head"))
+            message.channel.send("", {files: ['./images/4head.jpg']});
         
-        else if(msg.includes("monkagiga"))
-            message.channel.send("", {files: ['./images/monkagiga.png']});
+        else if(msg.includes("5head"))
+            message.channel.send("", {files: ['./images/5head.jpg']});
 
-        else
-            message.channel.send("", {files: ['./images/monkashake.jpg']});
-    }
+        else if(msg.includes("feelsgood"))
+            message.channel.send("", {files: ['./images/feelsgood.png']});
 
-    else if(msg.includes("corona"))
-        message.channel.send("", {files: ['./images/coronas.png']});
-
-    else if(msg.includes("hmm"))
-        message.channel.send("", {files: ['./images/pepehmm.gif']});
-
-    else if(msg.includes("gachi"))
-    {
-        if(msg.includes("gasm"))
-            message.channel.send("", {files: ['./images/gachigasm.gif']});
-
-        else
-            message.channel.send("", {files: ['./images/gachi.gif']});
-    }
-
-    else if(msg.includes("gasm") && !msg.includes("gachi"))
-        message.channel.send("", {files: ['./images/gasm.png']});
+        else if(msg.includes("feelsbad"))
+            message.channel.send("", {files: ['./images/feelsbadman.png']});
         
-    else if(msg.includes("kek"))
-        message.channel.send("", {files: ['./images/kek.gif']});
+        else if(msg.includes("ez") && msg.includes("clap"))
+            message.channel.send("", {files: ['./images/ez.gif']});
 
-    else if(msg.includes("lul"))
-    {
-        if(msg.includes("omega"))
-            message.channel.send("", {files: ['./images/omegalul.jpg']});
+        else if(msg.includes("weirdchamp"))
+            message.channel.send("", {files: ['./images/weirdchamp.gif']});
 
-        else
-            message.channel.send("", {files: ['./images/lul.png']});
-    }
+        else if(msg.includes("angelthump"))
+            message.channel.send("", {files: ['./images/angelthump.gif']});
 
-    else if(msg.includes("pepega"))
-        message.channel.send("", {files: ['./images/pepega.png']});
+        else if(msg.includes("biblethump"))
+            message.channel.send("", {files: ['./images/biblethump.png']});
 
-    else if(msg.includes("pepehands"))
-        message.channel.send("", {files: ['./images/pepehands.gif']});
+        else if(msg.includes("wut"))
+            message.channel.send("", {files: ['./images/wutface.jpg']});
 
-    else if(msg.includes("jebait"))
-        message.channel.send("", {files: ['./images/jebait.png']});
+        else if(msg.includes("kkona"))
+            message.channel.send("", {files: ['./images/kkona.jpg']});
 
-    else if(msg.includes("pog"))
-    {
-        if(msg.includes("pogu"))
-            message.channel.send("", {files: ['./images/pogu.jpg']});
+        else if(msg.includes("ayaya"))
+            message.channel.send("", {files: ['./images/ayaya.gif']});
 
-        else if(msg.includes("poggers"))
-            message.channel.send("", {files: ['./images/poggers.png']});
+        else if(msg.includes("failfish"))
+            message.channel.send("", {files: ['./images/failfish.jpg']});
 
-        else
-            message.channel.send("", {files: ['./images/pogchamp.gif']});
-    }
+        else if(msg.includes("babyrage"))
+            message.channel.send("", {files: ['./images/babyrage.png']});
 
-    else if(msg.includes("kapp"))
-    {
-        if(msg.includes("pride"))
-            message.channel.send("", {files: ['./images/kappapride.png']});
+        else if(msg.includes("dansgame"))
+            message.channel.send("", {files: ['./images/dansgame.png']});
 
-        else if(msg.includes("ross"))
-            message.channel.send("", {files: ['./images/kappaross.png']});
+        else if(msg.includes("cmon") && msg.includes("bruh"))
+            message.channel.send("", {files: ['./images/cmonbruh.jpg']});
+
+        else if((msg.includes("tri") && msg.includes("hard")) || (msg.includes("try") && msg.includes("hard")))
+            message.channel.send("", {files: ['./images/trihard.gif']});
+
+        else if(msg.includes("blessrng"))
+            message.channel.send("", {files: ['./images/blessrng.jpg']});
 
         else
-            message.channel.send("", {files: ['./images/kapp.png']});
-    }
+        {}
 
-    else if(msg.includes("4head"))
-        message.channel.send("", {files: ['./images/4head.jpg']});
-    
-    else if(msg.includes("5head"))
-        message.channel.send("", {files: ['./images/5head.jpg']});
-
-    else if(msg.includes("feelsgood"))
-        message.channel.send("", {files: ['./images/feelsgood.png']});
-
-    else if(msg.includes("feelsbad"))
-        message.channel.send("", {files: ['./images/feelsbadman.png']});
-    
-    else if(msg.includes("ez") && msg.includes("clap"))
-        message.channel.send("", {files: ['./images/ez.gif']});
-
-    else if(msg.includes("weirdchamp"))
-        message.channel.send("", {files: ['./images/weirdchamp.gif']});
-
-    else if(msg.includes("angelthump"))
-        message.channel.send("", {files: ['./images/angelthump.gif']});
-
-    else if(msg.includes("biblethump"))
-        message.channel.send("", {files: ['./images/biblethump.png']});
-
-    else if(msg.includes("wut"))
-        message.channel.send("", {files: ['./images/wutface.jpg']});
-
-    else if(msg.includes("kkona"))
-        message.channel.send("", {files: ['./images/kkona.jpg']});
-
-    else if(msg.includes("ayaya"))
-        message.channel.send("", {files: ['./images/ayaya.gif']});
-
-    else if(msg.includes("failfish"))
-        message.channel.send("", {files: ['./images/failfish.jpg']});
-
-    else if(msg.includes("babyrage"))
-        message.channel.send("", {files: ['./images/babyrage.png']});
-
-    else if(msg.includes("dansgame"))
-        message.channel.send("", {files: ['./images/dansgame.png']});
-
-    else if(msg.includes("cmon") && msg.includes("bruh"))
-        message.channel.send("", {files: ['./images/cmonbruh.jpg']});
-
-    else if((msg.includes("tri") && msg.includes("hard")) || (msg.includes("try") && msg.includes("hard")))
-        message.channel.send("", {files: ['./images/trihard.gif']});
-
-    else if(msg.includes("blessrng"))
-        message.channel.send("", {files: ['./images/blessrng.jpg']});
-
-    else
-    {}
-
-    if(message.author.username == "ThatSaltySnipezGuy")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "ThatSaltySnipezGuy")
         {
-            message.channel.send("Fuck you Alex :)");
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("Fuck you Alex :)");
+            }
         }
-    }
 
-    if(message.author.username == "Machen Gaming")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "Machen Gaming")
         {
-            message.channel.send("", {files: ['./images/taylor.gif']});
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("", {files: ['./images/taylor.gif']});
+            }
         }
-    }
 
-    if(message.author.username == "Jerryatric")
-    {
-        if(((msg.includes("jerry") && msg.includes("bot"))) && msg.includes("thanks"))
+        if(message.author.username == "Jerryatric")
         {
-            message.channel.send("No problem my very intelligent and handsome creator. You are the best.");
+            if(((msg.includes("jerry") && msg.includes("bot"))) && msg.includes("thanks"))
+            {
+                message.channel.send("No problem my very intelligent and handsome creator. You are the best.");
+            }
         }
-    }
 
-    if(message.author.username == "tguy")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "tguy")
         {
-            message.channel.send("A wild Tguy has appeared!");
-            message.channel.send("Tguy uses Teleport!");
-            message.channel.send("Tguy got away!");
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("A wild Tguy has appeared!");
+                message.channel.send("Tguy uses Teleport!");
+                message.channel.send("Tguy got away!");
+            }
         }
-    }
 
-    if(message.author.username == "Blueslyfox")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "Blueslyfox")
         {
-            message.channel.send("Don't you have some hentai to watch you weeb?");
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("Don't you have some hentai to watch you weeb?");
+            }
         }
-    }
 
-    if(message.author.username == "a159159")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "a159159")
         {
-            message.channel.send("Fun fact: Max has already drank 3 bottles of whiskey today :)");
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("Fun fact: Max has already drank 3 bottles of whiskey today :)");
+            }
         }
-    }
 
-    if(message.author.username == "KingKazma8292")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "KingKazma8292")
         {
-            message.channel.send("", {files: ['./images/pride.gif']});
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("", {files: ['./images/pride.gif']});
+            }
         }
-    }
 
-    if(message.author.username == "Jab7red")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "Jab7red")
         {
-            message.channel.send("Uh oh I must've pissed Jared off...");
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("Uh oh I must've pissed Jared off...");
+            }
         }
-    }
 
-    if(message.author.username == "DrunkenMaster89")
-    {
-        if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+        if(message.author.username == "DrunkenMaster89")
         {
-            message.channel.send("Because Aaron took the time to write this message instead of working, he got fired.");
-            message.channel.send("", {files: ['./images/aaron.gif']});
+            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            {
+                message.channel.send("Because Aaron took the time to write this message instead of working, he got fired.");
+                message.channel.send("", {files: ['./images/aaron.gif']});
+            }
         }
-    }
 
-    // Kindly tell Alex to fuck off if requested
-    if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
-    {
-        message.channel.send("Fuck off Alex you doo doo head");
+        // Kindly tell Alex to fuck off if requested
+        if((msg.includes("alex") && msg.includes("fuck") && msg.includes("off")) && !(message.author.bot))
+        {
+            message.channel.send("Fuck off Alex you doo doo head");
+        }
     }
 
     // Check to see if discord message sent is a command
