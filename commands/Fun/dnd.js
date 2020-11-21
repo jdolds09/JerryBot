@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 // DND command
 module.exports = {
@@ -21,9 +20,13 @@ module.exports = {
             
             if(action == "campaigns")
             {
-                const filepath = path.resolve('dnd', 'titles.txt');
-                const list = fs.readFileSync(filepath);
-                message.channel.send(list);
+                fs.readFile(titles.txt, 'utf8', function (error, data) {
+                    if(error)
+                    {
+                        return console.log(error);
+                    }
+                    message.channel.send(data);
+                });
             }
         }
     },
