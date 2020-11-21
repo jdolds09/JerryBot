@@ -20,7 +20,7 @@ module.exports = {
             
             if(action == "campaigns")
             {
-                const list = fs.readFileSync('./dnd/titles.txt');
+                const list = fs.readFileSync('/dnd/titles.txt');
                 message.channel.send(list);
             }
         }
