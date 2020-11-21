@@ -59,7 +59,7 @@ module.exports = {
                 // Choose a random campaign
                 else
                 {
-                    const current_campaign = Math.floor((Math.random() * args[2]) + 1);
+                    const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
                     const intro = fs.readFileSync(`app/commands/Fun/dnd/Intros/${current_campaign}.txt`)
                     message.channel.send(intro); 
                 }
