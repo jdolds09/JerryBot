@@ -19,6 +19,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.3",
     "give-me-a-joke": "^0.3.2",
+    "line-reader": "^0.4.0",
     "nedb": "^1.8.0",
     "node-fetch": "^2.6.0",
     "one-liner-joke": "^1.2.0",
