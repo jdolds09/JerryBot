@@ -22,7 +22,7 @@ module.exports = {
             {
                 lineReader.eachLine('./dnd/titles.txt', function(line) {
                     message.channel.send(line);
-                })
+                });
             }
         }
     },
