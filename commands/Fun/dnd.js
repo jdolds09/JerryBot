@@ -1,4 +1,4 @@
-const fs = require('fs');
+const lineReader = require('line-reader');
 
 // DND command
 module.exports = {
@@ -20,12 +20,8 @@ module.exports = {
             
             if(action == "campaigns")
             {
-                fs.readFile(titles.txt, 'utf8', function (error, data) {
-                    if(error)
-                    {
-                        return console.log(error);
-                    }
-                    message.channel.send(data);
+                lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', function(line) {
+                    message.channel.send(line);
                 });
             }
         }
