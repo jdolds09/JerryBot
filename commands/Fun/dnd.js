@@ -50,7 +50,7 @@ module.exports = {
                         else
                         {
                             const current_campaign = args[2];
-                            const intro = fs.readFileSync(`app/commands/Fun/dnd/Intros/${current_campaign}.txt`)
+                            const intro = fs.readFileSync(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, 'utf8')
                             message.channel.send(intro);
                         }
                     }
