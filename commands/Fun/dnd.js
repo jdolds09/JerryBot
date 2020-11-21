@@ -50,8 +50,9 @@ module.exports = {
                         else
                         {
                             const current_campaign = args[2];
-                            const intro = fs.readFileSync(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, 'utf8')
-                            message.channel.send(intro);
+                            lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
+                                message.channel.send(line);
+                            });
                         }
                     }
                 }
@@ -60,8 +61,9 @@ module.exports = {
                 else
                 {
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
-                    const intro = fs.readFileSync(`app/commands/Fun/dnd/Intros/${current_campaign}.txt`)
-                    message.channel.send(intro); 
+                    lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
+                        message.channel.send(line);
+                    }); 
                 }
             }
         }
