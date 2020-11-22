@@ -31,11 +31,9 @@ module.exports = {
                 {
                     // Display campaings
                     message.channel.send("**CAMPAIGNS**");
-                    await message.channel.send("**-------------------------**");
                     lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', async function(line) {
                         await message.channel.send(line);
                     });
-                    await message.channel.send("**-------------------------**");
 
                     // Prompt user to select specific campaign or choose a random one
                     await message.channel.send("Please select a campaign by using the command __!dnd [number of campaign]__");
