@@ -67,6 +67,7 @@ module.exports = {
                         {
                             message.channel.send(`**${line}**`);
                             message.channel.send("**------------------------------------------------------**");
+                            i = i + 1;
                         }
                         else
                             message.channel.send(line);
