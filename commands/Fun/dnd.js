@@ -169,18 +169,35 @@ module.exports = {
                     if(args.length != 5)
                     {
                         message.channel.send("Invalid number of arguments provided with !dnd character command");
-                        return message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                        return message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
                     }
 
-                    // Store arguments given by user in variables and set letters to lowercase
-                    const name = args[2].toLowerCase();
+                    // Get player name
+                    if(!(args[2].starsWith("\"")))
+                        return message.channel.send("Please put your character name between quotation marks. \"character name\".");
+
+                    var name = args[2].substring(1);
+                    var i = 3;
+
+                    while(!(args[i].endsWith("\"")))
+                    {
+                        name = name.concat(` ${args[i]}`);
+                        i = i + 1;
+                    }
+
+                    var name = args[i].substring(0, args[i].length - 1);
+                    message.channel.send(name);
+
+                    /*
                     const char_class = args[3].toLowerCase();
                     const race = args[4].toLowerCase();
 
-                    if(char_class != "barbarian")
+                    
+                    if(classes.indexOf(char_class))
                     {
 
                     }
+                    */
                 }
 
                 // Invalid action provided
