@@ -30,7 +30,7 @@ module.exports = {
                 if(action == "start")
                 {
                     // Display campaings
-                    message.channel.send("**CAMPAIGNS**");
+                    await message.channel.send("**CAMPAIGNS**");
                     lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', async function(line) {
                         await message.channel.send(line);
                     });
