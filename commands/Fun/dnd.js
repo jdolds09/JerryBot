@@ -61,9 +61,11 @@ module.exports = {
                 else
                 {
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
+                    message.channel.send("**------------------------------------------------------**");
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
                         message.channel.send(line);
-                    }); 
+                        message.channel.send("**------------------------------------------------------**");
+                    });
                 }
             }
         }
