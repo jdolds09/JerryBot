@@ -79,6 +79,12 @@ module.exports = {
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
                             message.channel.send(line);
                     });
+
+                    // Sleep the system so output displays in correct order
+                    await new Promise(r => setTimeout(r, 1000));
+                    
+                    // Prompt users to create characters
+                    message.channel.send("Please create characters using __!dnd character [class] [race] [name]__");
                 }
 
                 // Invalid action provided
