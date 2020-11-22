@@ -36,8 +36,9 @@ module.exports = {
                     });
 
                     // Prompt user to select specific campaign or choose a random one
-                    await message.channel.send("Please select a campaign by using the command __!dnd [number of campaign]__");
-                    await message.channel.send("You can select a random DND campaign by using the __!dnd random__ command");
+                    lineReader.eachLine('/app/commands/Fun/dnd/Prompts/campaign_select.txt', async function(line) {
+                        await message.channel.send(line);
+                    });
                 }
 
                 // If the user selects a specific campaign
