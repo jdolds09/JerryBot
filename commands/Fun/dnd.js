@@ -7,9 +7,9 @@ module.exports = {
     description: 'Command use to play DND',
     execute(message) 
     {
-        // Get number after !roll command if it exists
+        // Get all arguments
         const args = message.content.split(" ");
-        // number of playable campaigns
+        // Number of playable campaigns
         const num_campaigns = 1;
 
         // User must supply an action along with the dnd command
@@ -23,58 +23,61 @@ module.exports = {
         {
             // Make all letters in supplied action to lower case
             const action = args[1].toLowerCase();
-            
-            // List all playable campaings
-            if(action == "campaigns")
+
+            // Start a campaign
+            if(action == "start")
             {
+                // Display campaings
+                message.channel.send("**CAMPAIGNS**");
+                message.channel.send("**-------------------------**");
                 lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', function(line) {
                     message.channel.send(line);
                 });
+                message.channel.send("**-------------------------**");
+
+                // Prompt user to select specific campaign or choose a random one
+                message.channel.send("Please select a campaign by using the command !dnd [number of campaign] or select a random campaign by using the command !dnd random");
             }
 
-            // Start a campaign
-            else if(action == "start")
+            // If the user selects a specific campaign
+            else if((Number.isInteger(Number(action))))
             {
-                // If the user selects a specific campaign
-                if(args.length > 2)
-                {
-                    if((Number.isInteger(Number(args[2]))))
-                    {
                         // Invalid campaign selection
-                        if(args[2] > num_campaigns || args[2] < 1)
-                        {
-                            return message.channel.send("Not a playable campaign");
-                        }
-                        
-                        // Set current campaign and output the Introduction
-                        else
-                        {
-                            const current_campaign = args[2];
-                            lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                                message.channel.send(line);
-                            });
-                        }
-                    }
+                if(action > num_campaigns || action < 1)
+                {
+                    return message.channel.send("Not a playable campaign");
                 }
                 
-                // Choose a random campaign
+                // Set current campaign and output the Introduction
                 else
                 {
-                    var i = 0;
-                    const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
+                    const current_campaign = action;
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                        if (i == 0)
-                        {
-                            message.channel.send(`**${line}**`);
-                            i = i + 69;
-                        }
-                        else if(line.startsWith('-'))
-                            message.channel.send(`**${line}**`);
-                        else
-                            message.channel.send(line);
+                        message.channel.send(line);
                     });
                 }
             }
+
+            // If user selects a random campaign
+            else if(action == "random")
+            {
+                var i = 0;
+                const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
+                lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
+                    if (i == 0)
+                    {
+                        message.channel.send(`**${line}**`);
+                        i = i + 69;
+                    }
+                    else if(line.startsWith('-'))
+                        message.channel.send(`**${line}**`);
+                    else
+                        message.channel.send(line);
+                });
+            }
+
+            else
+                return message.channel.send("That DND action does not exist.");
         }
     },
 };
