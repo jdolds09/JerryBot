@@ -185,7 +185,7 @@ module.exports = {
                         i = i + 1;
                     }
 
-                    var name = args[i].substring(0, args[i].length - 1);
+                    var name = name.concat(args[i].substring(0, args[i].length - 1));
                     message.channel.send(name);
 
                     /*
