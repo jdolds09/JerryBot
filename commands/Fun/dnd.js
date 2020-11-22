@@ -35,6 +35,9 @@ module.exports = {
                         await message.channel.send(line);
                     });
 
+
+                    await new Promise(r => setTimeout(r, 1000));
+
                     // Prompt user to select specific campaign or choose a random one
                     lineReader.eachLine('/app/commands/Fun/dnd/Prompts/campaign_select.txt', async function(line) {
                         await message.channel.send(line);
