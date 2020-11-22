@@ -35,7 +35,7 @@ module.exports = {
                         await message.channel.send(line);
                     });
 
-
+                    // Sleep the system so output displays in correct order
                     await new Promise(r => setTimeout(r, 1000));
 
                     // Prompt user to select specific campaign or choose a random one
@@ -47,7 +47,7 @@ module.exports = {
                 // If the user selects a specific campaign
                 else if((Number.isInteger(Number(action))))
                 {
-                            // Invalid campaign selection
+                    // Invalid campaign selection
                     if(action > num_campaigns || action < 1)
                     {
                         return message.channel.send("Not a playable campaign");
@@ -66,21 +66,16 @@ module.exports = {
                 // If user selects a random campaign
                 else if(action == "random")
                 {
-                    var i = 0;
+                    // Select random campaign
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
+
+                    // Output intro of campaign
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                        if (i == 0)
-                        {
-                            message.channel.send(`**${line}**`);
-                            i = i + 69;
-                        }
-                        else if(line.startsWith('-'))
-                            message.channel.send(`**${line}**`);
-                        else
                             message.channel.send(line);
                     });
                 }
 
+                // Invalid action provided
                 else
                     return message.channel.send("That DND action does not exist.");
             }
