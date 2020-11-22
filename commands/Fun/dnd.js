@@ -19,12 +19,13 @@ module.exports = {
                 };
             }
 
+            // Character structure
             character = 
             {
                 // Character attributes
                 user: "",
                 name: "",
-                class: "",
+                char_class: "",
                 race: "",
                 strength: 8,
                 dexterity: 8,
@@ -33,6 +34,9 @@ module.exports = {
                 wisdom: 8,
                 charisma: 8
             };
+
+            // Playable classes
+            const classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
 
             // Get all arguments
             const args = message.content.split(" ");
@@ -58,6 +62,7 @@ module.exports = {
                     {
                         await message.channel.send("Please start by creating your characters.");
                         await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
+                        await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
                         return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
                     }
 
@@ -79,6 +84,14 @@ module.exports = {
                 // If the user selects a specific campaign
                 else if((Number.isInteger(Number(action))))
                 {
+                    if(server[message.guild.id].characters.length == 0)
+                    {
+                        await message.channel.send("Please start by creating your characters.");
+                        await message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                        await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
+                        return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
+                    }
+
                     // Invalid campaign selection
                     if(action > num_campaigns || action < 1)
                     {
@@ -93,17 +106,19 @@ module.exports = {
                             message.channel.send(line);
                         });
                     }
-
-                    // Sleep the system so output displays in correct order
-                    await new Promise(r => setTimeout(r, 1000));
-                    
-                    // Prompt users to create characters
-                    message.channel.send("Please create characters using __!dnd character [class] [race] [name]__");
                 }
 
                 // If user selects a random campaign
                 else if(action == "random")
                 {
+                    if(server[message.guild.id].characters.length == 0)
+                    {
+                        await message.channel.send("Please start by creating your characters.");
+                        await message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                        await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
+                        return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
+                    }
+
                     // Select random campaign
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
 
@@ -111,12 +126,43 @@ module.exports = {
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
                             message.channel.send(line);
                     });
+                }
 
-                    // Sleep the system so output displays in correct order
+                else if(action == "classes")
+                {
+                    // Counter variable
+                    var i;
+
+                    // Output classes
+                    message.channel.send("**CLASSES**");
+                    message.channel.send("**--------------------**");
+                    for(i = 0; i < classes.length; i++)
+                        message.channel.send(classes[i]);
+
+                    // Sleep program so output displays correctly
                     await new Promise(r => setTimeout(r, 1000));
+                    return message.channel.send("**--------------------**");
                     
-                    // Prompt users to create characters
-                    message.channel.send("Please create characters using **!dnd character [class] [race] [name]**");
+                }
+
+                else if(action == "character")
+                {
+                    // User provided invalid number of arguments
+                    if(args.length != 5)
+                    {
+                        message.channel.send("Invalid number of arguments provided with !dnd character command");
+                        return message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                    }
+
+                    // Store arguments given by user in variables and set letters to lowercase
+                    const name = args[2].toLowerCase();
+                    const char_class = args[3].toLowerCase();
+                    const race = args[4].toLowerCase();
+
+                    if(char_class != "barbarian")
+                    {
+
+                    }
                 }
 
                 // Invalid action provided
