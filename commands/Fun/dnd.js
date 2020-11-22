@@ -166,7 +166,7 @@ module.exports = {
                 else if(action == "character")
                 {
                     // User provided invalid number of arguments
-                    if(args.length != 5)
+                    if(args.length < 5)
                     {
                         message.channel.send("Invalid number of arguments provided with !dnd character command");
                         return message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
