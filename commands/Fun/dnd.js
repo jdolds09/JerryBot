@@ -29,6 +29,12 @@ module.exports = {
                 // Start a campaign
                 if(action == "start")
                 {
+                    if(!fs.existsSync('/app/commands/Fun/dnd/Characters/characters.txt'))
+                    {
+                        await message.channel.send("Please start by creating your characters.");
+                        return await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
+                    }
+
                     // Display campaings
                     await message.channel.send("**CAMPAIGNS**");
                     lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', async function(line) {
@@ -84,7 +90,7 @@ module.exports = {
                     await new Promise(r => setTimeout(r, 1000));
                     
                     // Prompt users to create characters
-                    message.channel.send("Please create characters using __!dnd character [class] [race] [name]__");
+                    message.channel.send("Please create characters using **!dnd character [class] [race] [name]**");
                 }
 
                 // Invalid action provided
