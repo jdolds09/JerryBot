@@ -5,10 +5,35 @@ const fs = require('fs');
 module.exports = {
 	name: 'dnd',
     description: 'Command use to play DND',
-    async execute(message) 
+    async execute(message, server) 
     {
         try
         {
+            // Persistant variables
+            if(!server[message.guild.id])
+            {
+                server[message.guild.id] = 
+                {
+                    // Hangman variables
+                    characters: []
+                };
+            }
+
+            character = 
+            {
+                // Character attributes
+                user: "",
+                name: "",
+                class: "",
+                race: "",
+                strength: 8,
+                dexterity: 8,
+                constitution: 8,
+                intelligence: 8,
+                wisdom: 8,
+                charisma: 8
+            };
+
             // Get all arguments
             const args = message.content.split(" ");
             // Number of playable campaigns
@@ -29,7 +54,7 @@ module.exports = {
                 // Start a campaign
                 if(action == "start")
                 {
-                    if(!fs.existsSync('/app/commands/Fun/dnd/Characters/characters.txt'))
+                    if(server[message.guild.id].characters == null)
                     {
                         await message.channel.send("Please start by creating your characters.");
                         await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");

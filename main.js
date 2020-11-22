@@ -222,8 +222,9 @@ dialogflow.init({
 // This is what must be put immediately before commands
 prefix = '!';
 
-// Servers variable so all servers aint playing same hangman game screwing it up
+// Server variables so other servers aint screwing up other server's hangman and DND games
 var servers = {}
+var server = {}
 
 // Declare command variale
 const client = new Client();
@@ -661,6 +662,20 @@ client.on('message', async message => {
         try
         {
             command.execute(message, servers);
+        }
+        catch(error)
+        {
+            console.error(error);
+            message.reply('That command doesn\'t exist dumbass.');
+        }
+    }
+
+    // Execute DND command
+    else if(commandName == "dnd")
+    {
+        try
+        {
+            command.execute(message, server);
         }
         catch(error)
         {
