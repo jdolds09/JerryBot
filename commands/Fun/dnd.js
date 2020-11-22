@@ -32,7 +32,8 @@ module.exports = {
                     if(!fs.existsSync('/app/commands/Fun/dnd/Characters/characters.txt'))
                     {
                         await message.channel.send("Please start by creating your characters.");
-                        return await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
+                        await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
+                        return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
                     }
 
                     // Display campaings
