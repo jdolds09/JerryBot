@@ -64,11 +64,9 @@ module.exports = {
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
                         if(i == 0)
-                        {
+                            message.channel.send(`**${line}**`)
+                        else if(line.startsWith("-"))
                             message.channel.send(`**${line}**`);
-                            message.channel.send("**------------------------------------------------------**");
-                            i = i + 1;
-                        }
                         else
                             message.channel.send(line);
                     });

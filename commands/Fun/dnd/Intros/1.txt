@@ -1,4 +1,5 @@
-CURSE OF STRAHD
+                   CURSE OF STRAHD
+---------------------------------------------------
 Death House is the name given to an old row house in
 the village of Barovia. The
 house has been burned to the ground many times, only
@@ -29,3 +30,4 @@ cultists tried to impress Strahd. In response, he slaughtered them for slaying h
 the cultists’ spirits haunt the dungeons under the house.
 The building itself, it seems, is unwilling to let the cult
 be forgotten.
+---------------------------------------------------
