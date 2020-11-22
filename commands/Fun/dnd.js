@@ -35,8 +35,9 @@ module.exports = {
                 charisma: 8
             };
 
-            // Playable classes
+            // Playable classes and races
             const classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
+            const races = ["dwarf", "elf", "gnome", "halfling", "human", "orc"];
 
             // Get all arguments
             const args = message.content.split(" ");
@@ -138,6 +139,23 @@ module.exports = {
                     message.channel.send("**--------------------**");
                     for(i = 0; i < classes.length; i++)
                         message.channel.send(classes[i]);
+
+                    // Sleep program so output displays correctly
+                    await new Promise(r => setTimeout(r, 1000));
+                    return message.channel.send("**--------------------**");
+                    
+                }
+
+                else if(action == "races")
+                {
+                    // Counter variable
+                    var i;
+
+                    // Output classes
+                    message.channel.send("**RACES**");
+                    message.channel.send("**--------------------**");
+                    for(i = 0; i < races.length; i++)
+                        message.channel.send(races[i]);
 
                     // Sleep program so output displays correctly
                     await new Promise(r => setTimeout(r, 1000));
