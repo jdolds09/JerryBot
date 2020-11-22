@@ -54,7 +54,7 @@ module.exports = {
                 // Start a campaign
                 if(action == "start")
                 {
-                    if(server[message.guild.id].characters == null)
+                    if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
                         await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
