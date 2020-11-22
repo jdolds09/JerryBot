@@ -60,9 +60,18 @@ module.exports = {
                 // Choose a random campaign
                 else
                 {
+                    var i = 0;
                     const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                        message.channel.send(line);
+                        if (i == 0)
+                        {
+                            message.channel.send(`**${line}**`);
+                            i = i + 69;
+                        }
+                        else if(line.startsWith('-'))
+                            message.channel.send(`**${line}**`);
+                        else
+                            message.channel.send(line);
                     });
                 }
             }
