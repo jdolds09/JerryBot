@@ -31,20 +31,15 @@ module.exports = {
                 {
                     // Display campaings
                     message.channel.send("**CAMPAIGNS**");
-                    lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', function(line) {
-                        if(line.startsWith('-'))
-                            message.channel.send(`**${line}**`);
-                        else
-                            message.channel.send(line);
+                    await message.channel.send("**-------------------------**");
+                    lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', async function(line) {
+                        await message.channel.send(line);
                     });
+                    await message.channel.send("**-------------------------**");
 
                     // Prompt user to select specific campaign or choose a random one
-                    lineReader.eachLine('/app/commands/Fun/dnd/Prompts/campaign_select.txt', function(line) {
-                        if(line.startsWith('-'))
-                            message.channel.send(`**${line}**`);
-                        else
-                            message.channel.send(line);
-                    });
+                    await message.channel.send("Please select a campaign by using the command __!dnd [number of campaign]__");
+                    await message.channel.send("You can select a random DND campaign by using the __!dnd random__ command");
                 }
 
                 // If the user selects a specific campaign
