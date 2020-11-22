@@ -1,0 +1,2 @@
+Please select a campaign by using the command __!dnd [number of campaign]__
+You can select a random DND campaign by using the __!dnd random__ command
