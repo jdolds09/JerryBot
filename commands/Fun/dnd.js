@@ -173,13 +173,13 @@ module.exports = {
                     }
 
                     // Get player name
-                    if(!(args[2].starsWith("\"")))
+                    if(!(args[2].charAt(0) == "\""))
                         return message.channel.send("Please put your character name between quotation marks. \"character name\".");
 
                     var name = args[2].substring(1);
                     var i = 3;
 
-                    while(!(args[i].endsWith("\"")))
+                    while(!(args[2].charAt(args[2].length - 1) == "\""))
                     {
                         name = name.concat(` ${args[i]}`);
                         i = i + 1;
