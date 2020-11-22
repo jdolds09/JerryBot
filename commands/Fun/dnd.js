@@ -179,7 +179,7 @@ module.exports = {
                     var name = args[2].substring(1);
                     var i = 3;
 
-                    while(!(args[2].charAt(args[2].length - 1) == "\""))
+                    while(!(args[i].charAt(args[i].length - 1) == "\""))
                     {
                         name = name.concat(` ${args[i]}`);
                         i = i + 1;
