@@ -5,79 +5,87 @@ const fs = require('fs');
 module.exports = {
 	name: 'dnd',
     description: 'Command use to play DND',
-    execute(message) 
+    async execute(message) 
     {
-        // Get all arguments
-        const args = message.content.split(" ");
-        // Number of playable campaigns
-        const num_campaigns = 1;
-
-        // User must supply an action along with the dnd command
-        if(!(args.length > 1))
+        try
         {
-            return message.channel.send("You must supply an action along with the !dnd command.");
-        }
-        
-        // Execute dnd actions
-        else
-        {
-            // Make all letters in supplied action to lower case
-            const action = args[1].toLowerCase();
+            // Get all arguments
+            const args = message.content.split(" ");
+            // Number of playable campaigns
+            const num_campaigns = 1;
 
-            // Start a campaign
-            if(action == "start")
+            // User must supply an action along with the dnd command
+            if(!(args.length > 1))
             {
-                // Display campaings
-                message.channel.send("**CAMPAIGNS**");
-                message.channel.send("**-------------------------**");
-                lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', function(line) {
-                    message.channel.send(line);
-                });
-                message.channel.send("**-------------------------**");
-
-                // Prompt user to select specific campaign or choose a random one
-                message.channel.send("Please select a campaign by using the command !dnd [number of campaign] or select a random campaign by using the command !dnd random");
+                return message.channel.send("You must supply an action along with the !dnd command.");
             }
-
-            // If the user selects a specific campaign
-            else if((Number.isInteger(Number(action))))
+            
+            // Execute dnd actions
+            else
             {
-                        // Invalid campaign selection
-                if(action > num_campaigns || action < 1)
+                // Make all letters in supplied action to lower case
+                const action = args[1].toLowerCase();
+
+                // Start a campaign
+                if(action == "start")
                 {
-                    return message.channel.send("Not a playable campaign");
+                    // Display campaings
+                    message.channel.send("**CAMPAIGNS**");
+                    await message.channel.send("**-------------------------**");
+                    lineReader.eachLine('/app/commands/Fun/dnd/titles.txt', function(line) {
+                        await message.channel.send(line);
+                    });
+                    await message.channel.send("**-------------------------**");
+
+                    // Prompt user to select specific campaign or choose a random one
+                    await message.channel.send("Please select a campaign by using the command __!dnd [number of campaign]__");
+                    await message.channel.send("You can select a random DND campaign by using the __!dnd random__ command");
                 }
-                
-                // Set current campaign and output the Introduction
-                else
+
+                // If the user selects a specific campaign
+                else if((Number.isInteger(Number(action))))
                 {
-                    const current_campaign = action;
+                            // Invalid campaign selection
+                    if(action > num_campaigns || action < 1)
+                    {
+                        return message.channel.send("Not a playable campaign");
+                    }
+                    
+                    // Set current campaign and output the Introduction
+                    else
+                    {
+                        const current_campaign = action;
+                        lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
+                            message.channel.send(line);
+                        });
+                    }
+                }
+
+                // If user selects a random campaign
+                else if(action == "random")
+                {
+                    var i = 0;
+                    const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
                     lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                        message.channel.send(line);
+                        if (i == 0)
+                        {
+                            message.channel.send(`**${line}**`);
+                            i = i + 69;
+                        }
+                        else if(line.startsWith('-'))
+                            message.channel.send(`**${line}**`);
+                        else
+                            message.channel.send(line);
                     });
                 }
-            }
 
-            // If user selects a random campaign
-            else if(action == "random")
-            {
-                var i = 0;
-                const current_campaign = Math.floor((Math.random() * num_campaigns) + 1);
-                lineReader.eachLine(`/app/commands/Fun/dnd/Intros/${current_campaign}.txt`, function(line) {
-                    if (i == 0)
-                    {
-                        message.channel.send(`**${line}**`);
-                        i = i + 69;
-                    }
-                    else if(line.startsWith('-'))
-                        message.channel.send(`**${line}**`);
-                    else
-                        message.channel.send(line);
-                });
+                else
+                    return message.channel.send("That DND action does not exist.");
             }
-
-            else
-                return message.channel.send("That DND action does not exist.");
+        }
+        catch(error)
+        {
+            console.log(error);
         }
     },
 };
