@@ -246,17 +246,14 @@ module.exports = {
                 else if(action == "delete")
                 {
                     var i = 0;
-
-                    message.channel.send(server[message.guild.id].characters.length);
                     
                     // Find player character
                     for(i = 0; i < server[message.guild.id].characters.length; i++)
                     {
                         if(message.author.username == server[message.guild.id].characters[i].user)
                         {
-                            message.channel.send(server[message.guild.id].characters[i].user);
                             message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
-                            server[message.guild.id].characters.splice(i);
+                            server[message.guild.id].characters.splice(i, 1);
                             return;
                         }
                     }
