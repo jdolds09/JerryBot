@@ -441,8 +441,8 @@ module.exports = {
                         const char = server[message.guild.id].characters[i];
                         message.channel.send("**PLAYER INFO**");
                         message.channel.send(`Name: ${char.name}`);
-                        message.channel.send(`Class: ${char.char_class}`);
-                        message.channel.send(`Race: ${char.race}`);
+                        message.channel.send(`Class: ${char.char_class.charAt(0).toUpperCase() + char.char_class.slice(1)}`);
+                        message.channel.send(`Race: ${char.race.charAt(0).toUpperCase() + char.race.slice(1)}`);
                         message.channel.send("**------------------------**");
                         message.channel.send("**ATTRIBUTES**");
                         message.channel.send(`Strength: ${char.strength}`);
