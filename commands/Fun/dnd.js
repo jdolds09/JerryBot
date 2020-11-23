@@ -388,47 +388,47 @@ module.exports = {
 
                         // Set player's strength attribute
                         if(server[message.guild.id].characters[i].race == "orc")
-                            server[message.guild.id].characters[i].strength = args[2] + 2;
+                            server[message.guild.id].characters[i].strength = Number(args[2]) + 2;
                         else if(server[message.guild.id].characters[i].race == "human")
-                            server[message.guild.id].characters[i].strength = args[2] + 1;
+                            server[message.guild.id].characters[i].strength = Number(args[2]) + 1;
                         else
-                            server[message.guild.id].characters[i].strength = args[2];
+                            server[message.guild.id].characters[i].strength = Number(args[2]);
 
                         // Set player's dexterity attribute
                         if(server[message.guild.id].characters[i].race == "elf" || server[message.guild.id].characters[i].race == "halfling")
-                            server[message.guild.id].characters[i].dexterity = args[3] + 2;
+                            server[message.guild.id].characters[i].dexterity = Number(args[3]) + 2;
                         else if(server[message.guild.id].characters[i].race == "human")
-                            server[message.guild.id].characters[i].dexterity = args[3] + 1;
+                            server[message.guild.id].characters[i].dexterity = Number(args[3]) + 1;
                         else
-                            server[message.guild.id].characters[i].dexterity = args[3];
+                            server[message.guild.id].characters[i].dexterity = Number(args[3]);
 
                         // Set player's constitution attribute
                         if(server[message.guild.id].characters[i].race == "dwarf")
-                            server[message.guild.id].characters[i].constitution = args[4] + 2;
+                            server[message.guild.id].characters[i].constitution = Number(args[4]) + 2;
                         else if(server[message.guild.id].characters[i].race == "human" || server[message.guild.id].characters[i].race == "orc")
-                            server[message.guild.id].characters[i].constitution = args[4] + 1;
+                            server[message.guild.id].characters[i].constitution = Number(args[4]) + 1;
                         else
-                            server[message.guild.id].characters[i].constitution = args[4];
+                            server[message.guild.id].characters[i].constitution = Number(args[4]);
 
                         // Set player's intelligence attribute
                         if(server[message.guild.id].characters[i].race == "gnome")    
-                            server[message.guild.id].characters[i].intelligence = args[5] + 2;
+                            server[message.guild.id].characters[i].intelligence = Number(args[5]) + 2;
                         else if(server[message.guild.id].characters[i].race == "human")
-                            server[message.guild.id].characters[i].intelligence = args[5] + 1;
+                            server[message.guild.id].characters[i].intelligence = Number(args[5]) + 1;
                         else
-                            server[message.guild.id].characters[i].intelligence = args[5];
+                            server[message.guild.id].characters[i].intelligence = Number(args[5]);
 
                         // Set player's wisdom attribute
                         if(server[message.guild.id].characters[i].race == "human")
-                            server[message.guild.id].characters[i].wisdom = args[6] + 1;
+                            server[message.guild.id].characters[i].wisdom = Number(args[6]) + 1;
                         else
-                            server[message.guild.id].characters[i].wisdom = args[6];
+                            server[message.guild.id].characters[i].wisdom = Number(args[6]);
 
                         // Set player's charisma attribute
                         if(server[message.guild.id].characters[i].race == "human")
-                            server[message.guild.id].characters[i].charisma = args[7] + 1;
+                            server[message.guild.id].characters[i].charisma = Number(args[7]) + 1;
                         else
-                            server[message.guild.id].characters[i].charisma = args[7];
+                            server[message.guild.id].characters[i].charisma = Number(args[7]);
 
 
                         // Output player's character
