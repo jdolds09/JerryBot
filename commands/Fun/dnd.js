@@ -179,6 +179,8 @@ module.exports = {
 
                     // Get rid of first quotation mark
                     var name = args[2].substring(1);
+                    
+                    var i = 3;
 
                     // If name is only one word name or contains no spaces
                     if(args[2].charAt(args[2].length - 1) == "\"")
@@ -187,7 +189,6 @@ module.exports = {
                     // If name contains spaces
                     else
                     {
-                        var i = 3;
 
                         while(!(args[i].charAt(args[i].length - 1) == "\""))
                         {
