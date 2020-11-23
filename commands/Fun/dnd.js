@@ -256,6 +256,7 @@ module.exports = {
                     {
                         message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
                         server[message.guild.id].characters.splice(i, 1);
+                        server[message.guild.id].players.splice(i, 1);
                         return;
                     }
 
