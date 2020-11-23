@@ -273,6 +273,12 @@ module.exports = {
                         return message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
                     }
 
+                    if(server[message.guild.id].players.indexOf(message.author.username) == -1)
+                    {
+                        message.channel.send("You have not created a character yet.");
+                        return message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
+                    }
+
                     // Number of points to spend
                     var points = 27;
 
