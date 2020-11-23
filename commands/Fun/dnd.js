@@ -16,6 +16,7 @@ module.exports = {
                 {
                     // Hangman variables
                     characters: [],
+                    players: [],
                     i: 0
                 };
             }
@@ -229,6 +230,9 @@ module.exports = {
                     // Add character to array of characters
                     server[message.guild.id].characters.push(character);
 
+                    // Add player to array of players
+                    server[message.guild.id].players.push(message.author.username);
+
                     // Set attributes
                     message.channel.send("Character created!");
                     message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
@@ -245,17 +249,14 @@ module.exports = {
                 // ******************************** DELETE CHARACTER **********************************************
                 else if(action == "delete")
                 {
-                    var i = 0;
-                    
                     // Find player character
-                    for(i = 0; i < server[message.guild.id].characters.length; i++)
+                    var i = server[message.guild.id].players.indexOf(message.author.username);
+                    
+                    if(i > -1)
                     {
-                        if(message.author.username == server[message.guild.id].characters[i].user)
-                        {
-                            message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
-                            server[message.guild.id].characters.splice(i, 1);
-                            return;
-                        }
+                        message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
+                        server[message.guild.id].characters.splice(i, 1);
+                        return;
                     }
 
                     return message.channel.send("You have no characters to delete.");
@@ -375,13 +376,14 @@ module.exports = {
                     else if(points < 0)
                     {
                         message.channel.send("You have unspent points.");
-                        return message.channel.send("To spend all points, delete your character with **!dnd delete** command and create a new character.");
+                        return message.channel.send("You can redo your attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
                     }
 
                     // User spent all their points, output their character
                     else
                     {
                         
+                        message.channel.send()                        
                     }
 
                 }
