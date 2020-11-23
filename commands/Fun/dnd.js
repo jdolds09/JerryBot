@@ -57,7 +57,7 @@ module.exports = {
                 // Make all letters in supplied action to lower case
                 const action = args[1].toLowerCase();
 
-                // Start a campaign
+                // ******************************** START ACTION **********************************************
                 if(action == "start")
                 {
                     if(server[message.guild.id].characters.length == 0)
@@ -83,7 +83,7 @@ module.exports = {
                     });
                 }
 
-                // If the user selects a specific campaign
+                // ******************************** START SPECIFIC CAMPAIGN **********************************************
                 else if((Number.isInteger(Number(action))))
                 {
                     if(server[message.guild.id].characters.length == 0)
@@ -110,7 +110,7 @@ module.exports = {
                     }
                 }
 
-                // If user selects a random campaign
+                // ******************************** START RANDOM CAMPAIGN **********************************************
                 else if(action == "random")
                 {
                     if(server[message.guild.id].characters.length == 0)
@@ -130,6 +130,7 @@ module.exports = {
                     });
                 }
 
+                // ******************************** LIST CLASSES **********************************************
                 else if(action == "classes")
                 {
                     // Counter variable
@@ -147,6 +148,7 @@ module.exports = {
                     
                 }
 
+                // ******************************** LIST RACES **********************************************
                 else if(action == "races")
                 {
                     // Counter variable
@@ -164,6 +166,7 @@ module.exports = {
                     
                 }
 
+                // ******************************** CREATE CHARACTERS **********************************************
                 else if(action == "character")
                 {
                     // User provided invalid number of arguments
@@ -183,8 +186,8 @@ module.exports = {
                     var i = 2;
 
                     // If name is only one word name or contains no spaces
-                    if(args[2].charAt(args[2].length - 1) == "\"")
-                        name = args[2].substring(0, args[2].length - 1);
+                    if(name.charAt(name.length - 1) == "\"")
+                        name = name.substring(0, name.length - 1);
 
                     // If name contains spaces
                     else
@@ -239,6 +242,7 @@ module.exports = {
                         return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
                 }
 
+                // ******************************** DELETE CHARACTER **********************************************
                 else if(action == "delete")
                 {
                     var i = 0;
@@ -257,6 +261,7 @@ module.exports = {
                     return message.channel.send("You have no characters to delete.");
                 }
 
+                // ******************************** SET CHARACTER ATTRIBUTES **********************************************
                 else if(action == "attributes")
                 {
                     // User provided invalid 
@@ -381,7 +386,7 @@ module.exports = {
 
                 }
 
-                // Invalid action provided
+                // ******************************** INVALID ACTION PROVIDED **********************************************
                 else
                     return message.channel.send("That DND action does not exist.");
             }
