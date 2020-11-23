@@ -186,18 +186,39 @@ module.exports = {
                     }
 
                     var name = name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
-                    message.channel.send(name);
 
-                    /*
-                    const char_class = args[3].toLowerCase();
-                    const race = args[4].toLowerCase();
+                    // Get player class and race
+                    const char_class = args[i + 1].toLowerCase();
+                    const race = args[i + 2].toLowerCase();
 
-                    
-                    if(classes.indexOf(char_class))
+                    // User entered invalid class
+                    if(classes.indexOf(char_class) == -1)
                     {
-
+                        message.channel.send("Invalid class.");
+                        return message.channel.send("Use the **!dnd classes** command to see a list of playable classes.");
                     }
-                    */
+
+                    // User entered invalid race
+                    if(races.indexOf(race) == -1)
+                    {
+                        message.channel.send("Invalid race.");
+                        return message.channel.send("Use the **!dnd races** command to see a list of playable races.");
+                    }
+
+                    // Create character
+                    character.user = message.author.username;
+                    character.name = name;
+                    character.char_class = char_class;
+                    character.race = race;
+
+                    // Add character to array of characters
+                    server[message.guild.id].characters.push(character);
+
+                    // Set attributes
+                    message.channel.send("Character created!");
+                    message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
+                    message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                    return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
                 }
 
                 // Invalid action provided
