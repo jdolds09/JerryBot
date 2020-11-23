@@ -321,10 +321,10 @@ module.exports = {
                     else
                         points = points - (args[4] - 8);
 
-                    // Set intellect attribute 
+                    // Set intelligence attribute 
                     if(!(Number.isInteger(Number(args[5]))) || args[5] < 8 || args[5] > 15)
                     {
-                        message.channel.send("Invalid intellect attribute value.");
+                        message.channel.send("Invalid intelligence attribute value.");
                         return message.channel.send("Attribute values should be integers between 8-15.");
                     }
 
@@ -383,8 +383,70 @@ module.exports = {
                     // User spent all their points, output their character
                     else
                     {
-                        
-                        message.channel.send()                        
+                        // Find player character
+                        var i = server[message.guild.id].players.indexOf(message.author.username);
+
+                        // Set player's strength attribute
+                        if(server[message.guild.id].characters[i].race == "orc")
+                            server[message.guild.id].characters[i].strength = args[2] + 2;
+                        else if(server[message.guild.id].characters[i].race == "human")
+                            server[message.guild.id].characters[i].strength = args[2] + 1;
+                        else
+                            server[message.guild.id].characters[i].strength = args[2];
+
+                        // Set player's dexterity attribute
+                        if(server[message.guild.id].characters[i].race == "elf" || server[message.guild.id].characters[i].race == "halfling")
+                            server[message.guild.id].characters[i].dexterity = args[3] + 2;
+                        else if(server[message.guild.id].characters[i].race == "human")
+                            server[message.guild.id].characters[i].dexterity = args[3] + 1;
+                        else
+                            server[message.guild.id].characters[i].dexterity = args[3];
+
+                        // Set player's constitution attribute
+                        if(server[message.guild.id].characters[i].race == "dwarf")
+                            server[message.guild.id].characters[i].constitution = args[4] + 2;
+                        else if(server[message.guild.id].characters[i].race == "human" || server[message.guild.id].characters[i].race == "orc")
+                            server[message.guild.id].characters[i].constitution = args[4] + 1;
+                        else
+                            server[message.guild.id].characters[i].constitution = args[4];
+
+                        // Set player's intelligence attribute
+                        if(server[message.guild.id].characters[i].race == "gnome")    
+                            server[message.guild.id].characters[i].intelligence = args[5] + 2;
+                        else if(server[message.guild.id].characters[i].race == "human")
+                            server[message.guild.id].characters[i].intelligence = args[5] + 1;
+                        else
+                            server[message.guild.id].characters[i].intelligence = args[5];
+
+                        // Set player's wisdom attribute
+                        if(server[message.guild.id].characters[i].race == "human")
+                            server[message.guild.id].characters[i].wisdom = args[6] + 1;
+                        else
+                            server[message.guild.id].characters[i].wisdom = args[6];
+
+                        // Set player's charisma attribute
+                        if(server[message.guild.id].characters[i].race == "human")
+                            server[message.guild.id].characters[i].charisma = args[7] + 1;
+                        else
+                            server[message.guild.id].characters[i].charisma = args[7];
+
+
+                        // Output player's character
+                        const char = server[message.guild.id].characters[i];
+                        message.channel.send("**PLAYER INFO**");
+                        message.channel.send(`Name: ${char.name}`);
+                        message.channel.send(`Class: ${char.char_class}`);
+                        message.channel.send(`Race: ${char.race}`);
+                        message.channel.send("**------------------------**");
+                        message.channel.send("**ATTRIBUTES**");
+                        message.channel.send(`Strength: ${char.strength}`);
+                        message.channel.send(`Dexterity: ${char.dexterity}`);
+                        message.channel.send(`Constitution: ${char.constitution}`);
+                        message.channel.send(`Intelligence: ${char.intelligence}`);
+                        message.channel.send(`Wisdom: ${char.wisdom}`);
+                        message.channel.send(`Charisma: ${char.charisma}`);
+                        message.channel.send("**------------------------**");
+                        return message.channel.send(`Good luck ${char.name}! May you not die a horrible death :)`);
                     }
 
                 }
