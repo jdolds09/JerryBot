@@ -229,7 +229,7 @@ module.exports = {
                     // Set attributes
                     message.channel.send("Character created!");
                     message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
-                    if(i == 0)
+                    if(server[message.guild.id].i == 0)
                     {
                         message.channel.send("Replace attribute placeholders above with desired value of attribute.");
                         server[message.guild.id].i = server[message.guild.id].i + 1;
@@ -237,6 +237,148 @@ module.exports = {
                     }
                     else
                         return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                }
+
+                else if(action == "delete")
+                {
+                    var i = 0;
+                    
+                    // Find player character
+                    for(i = 0; i < server[message.guild.id].characters.length; i++)
+                    {
+                        if(message.author.username == server[message.guild.id].characters[i].user)
+                        {
+                            message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
+                            server[message.guild.id].characters.splice(i);
+                            return;
+                        }
+                    }
+
+                    return message.channel.send("You have no characters to delete.");
+                }
+
+                else if(action == "attributes")
+                {
+                    // User provided invalid 
+                    if(args.length != 8)
+                    {
+                        message.channel.send("Invalid number of argument supplied.");
+                        return message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
+                    }
+
+                    // Number of points to spend
+                    var points = 27;
+
+                    // Set strength attribute 
+                    if(!(Number.isInteger(Number(args[2]))) || args[2] < 8 || args[2] > 15)
+                    {
+                        message.channel.send("Invalid strength attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[2] == 14)
+                        points = points - 7;
+                    else if(args[2] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[2] - 8);
+
+                    // Set dexterity attribute 
+                    if(!(Number.isInteger(Number(args[3]))) || args[3] < 8 || args[3] > 15)
+                    {
+                        message.channel.send("Invalid dexterity attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[3] == 14)
+                        points = points - 7;
+                    else if(args[3] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[3] - 8);
+
+                    // Set constitution attribute 
+                    if(!(Number.isInteger(Number(args[4]))) || args[4] < 8 || args[4] > 15)
+                    {
+                        message.channel.send("Invalid constitution attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[4] == 14)
+                        points = points - 7;
+                    else if(args[4] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[4] - 8);
+
+                    // Set intellect attribute 
+                    if(!(Number.isInteger(Number(args[5]))) || args[5] < 8 || args[5] > 15)
+                    {
+                        message.channel.send("Invalid intellect attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[5] == 14)
+                        points = points - 7;
+                    else if(args[5] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[5] - 8);
+
+                    // Set wisdom attribute 
+                    if(!(Number.isInteger(Number(args[6]))) || args[6] < 8 || args[6] > 15)
+                    {
+                        message.channel.send("Invalid wisdom attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[6] == 14)
+                        points = points - 7;
+                    else if(args[6] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[6] - 8);
+
+                    // Set charisma attribute 
+                    if(!(Number.isInteger(Number(args[7]))) || args[7] < 8 || args[7] > 15)
+                    {
+                        message.channel.send("Invalid charisma attribute value.");
+                        return message.channel.send("Attribute values should be integers between 8-15.");
+                    }
+
+                    // Subtract points
+                    if(args[7] == 14)
+                        points = points - 7;
+                    else if(args[7] == 15)
+                        points = points - 9;
+                    else
+                        points = points - (args[7] - 8);
+
+                    // User spent too many points
+                    if(points < 0)
+                    {
+                        message.channel.send("Too many points spent. Don't include racial bonuses in attribute values.");
+                        return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                    }
+
+                    // User didn't spend all their points
+                    else if(points < 0)
+                    {
+                        message.channel.send("You have unspent points.");
+                        return message.channel.send("To spend all points, delete your character with **!dnd delete** command and create a new character.");
+                    }
+
+                    // User spent all their points, output their character
+                    else
+                    {
+                        
+                    }
+
                 }
 
                 // Invalid action provided
