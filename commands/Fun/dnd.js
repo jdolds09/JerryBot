@@ -182,7 +182,7 @@ module.exports = {
 
                     // If name is only one word name or contains no spaces
                     if(args[2].charAt(args[2].length - 1) == "\"")
-                        name = args[2].substring(0, args[2],length - 1);
+                        name = args[2].substring(0, args[2].length - 1);
 
                     // If name contains spaces
                     else
