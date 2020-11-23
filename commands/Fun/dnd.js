@@ -15,7 +15,8 @@ module.exports = {
                 server[message.guild.id] = 
                 {
                     // Hangman variables
-                    characters: []
+                    characters: [],
+                    i: 0
                 };
             }
 
@@ -62,7 +63,7 @@ module.exports = {
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
-                        await message.channel.send("Use the **!dnd character [class] [race] [name]** command to create character.");
+                        await message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
                         await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
                         return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
                     }
@@ -88,7 +89,7 @@ module.exports = {
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
-                        await message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                        await message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
                         await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
                         return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
                     }
@@ -115,7 +116,7 @@ module.exports = {
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
-                        await message.channel.send("Use the **!dnd character [name] [class] [race]** command to create character.");
+                        await message.channel.send("Use the **!dnd character \"[name]\" [class] [race]** command to create character.");
                         await message.channel.send("Use the **!dnd classes** and **!dnd races** commands to see playable classes and races.");
                         return await message.channel.send("Once characters are created, use the **!dnd start** command again.");
                     }
@@ -176,16 +177,26 @@ module.exports = {
                     if(!(args[2].charAt(0) == "\""))
                         return message.channel.send("Please put your character name between quotation marks. \"character name\".");
 
+                    // Get rid of first quotation mark
                     var name = args[2].substring(1);
-                    var i = 3;
 
-                    while(!(args[i].charAt(args[i].length - 1) == "\""))
+                    // If name is only one word name or contains no spaces
+                    if(args[2].charAt(args[2].length - 1) == "\"")
+                        name = args[2].substring(0, args[2],length - 1);
+
+                    // If name contains spaces
+                    else
                     {
-                        name = name.concat(` ${args[i]}`);
-                        i = i + 1;
-                    }
+                        var i = 3;
 
-                    var name = name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
+                        while(!(args[i].charAt(args[i].length - 1) == "\""))
+                        {
+                            name = name.concat(` ${args[i]}`);
+                            i = i + 1;
+                        }
+
+                        name = name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
+                    }
 
                     // Get player class and race
                     const char_class = args[i + 1].toLowerCase();
@@ -217,8 +228,14 @@ module.exports = {
                     // Set attributes
                     message.channel.send("Character created!");
                     message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
-                    message.channel.send("Replace attribute placeholders above with desired value of attribute.");
-                    return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                    if(i == 0)
+                    {
+                        message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                        server[message.guild.id].i = server[message.guild.id].i + 1;
+                        return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                    }
+                    else
+                        return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
                 }
 
                 // Invalid action provided
