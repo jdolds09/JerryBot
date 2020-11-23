@@ -246,6 +246,8 @@ module.exports = {
                 else if(action == "delete")
                 {
                     var i = 0;
+
+                    message.channel.send(server[message.guild.id].characters.length);
                     
                     // Find player character
                     for(i = 0; i < server[message.guild.id].characters.length; i++)
