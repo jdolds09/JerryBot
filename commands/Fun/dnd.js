@@ -9,12 +9,12 @@ module.exports = {
     {
         try
         {
-            // Persistant variables
+            // Persistant variables specific to a discord server
             if(!server[message.guild.id])
             {
                 server[message.guild.id] = 
                 {
-                    // Hangman variables
+                    // Persistant variables
                     characters: [],
                     players: [],
                     i: 0
@@ -34,8 +34,40 @@ module.exports = {
                 constitution: 8,
                 intelligence: 8,
                 wisdom: 8,
-                charisma: 8
+                charisma: 8,
+                hit_points: 8,
+                armor_proficiencies: [],
+                weapon_proficiencies: [],
+                tools: [],
+                saving_throws: [],
+                skills: [],
+                items: [],
+                weapons: [],
+                armor: [],
+                weapons_equipped: [],
+                armor_equipped: []
             };
+
+            // Item object
+            item =
+            {
+                // Item attributes
+                name: "",
+                amount: 0
+            };
+
+            // Weapon object
+            weapon =
+            {
+                // Weapon attributes
+                name: "",
+                hand: "",
+                damage: "",
+                damage_type: "",
+                weapon_type: "",
+                amount: 0,
+                thrown: false
+            }
 
             // Playable classes and races
             const classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
@@ -48,9 +80,7 @@ module.exports = {
 
             // User must supply an action along with the dnd command
             if(!(args.length > 1))
-            {
                 return message.channel.send("You must supply an action along with the !dnd command.");
-            }
             
             // Execute dnd actions
             else
@@ -233,17 +263,171 @@ module.exports = {
                     // Add player to array of players
                     server[message.guild.id].players.push(message.author.username);
 
-                    // Set attributes
+                    // Get player character
+                    const char = server[message.guild.id].characters[server[message.guild.id].players.length - 1];
+
+                    // Let player pick skills
                     message.channel.send("Character created!");
-                    message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
-                    if(server[message.guild.id].i == 0)
+                    
+                    // Barbarian skills
+                    if(char_class == "barbarian")
                     {
-                        message.channel.send("Replace attribute placeholders above with desired value of attribute.");
-                        server[message.guild.id].i = server[message.guild.id].i + 1;
-                        return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                        // Add saving throws
+                        char.saving_throws.push("strength, constitution");
+
+                        // Add proficiencies
+                        char.armor_proficiencies.push("light armor", "medium armor", "shields");
+                        char.weapon_proficiencies.push("simple weapons", "martial weapons");
+                        
+                        // Add starting items
+                        // Greataxe
+                        weapon.name = "greataxe";
+                        weapon.hand = "2h";
+                        weapon.damage = "1d12";
+                        weapon.damage_type = "slashing";
+                        weapon.weapon_type = "martial";
+                        weapon.thrown = false;
+                        weapon.amount = 1;
+                        char.weapons_equipped.push(weapon);
+                        // 2 handaxes
+                        weapon.name = "handaxe";
+                        weapon.hand = "1h";
+                        weapon.damage = "1d6";
+                        weapon.damage_type = "slashing";
+                        weapon.weapon_type = "simple";
+                        weapon.thrown = true;
+                        weapon.amount = 2;
+                        char.weapons.push(weapon);
+                        // 4 javelins
+                        weapon.name = "javelin";
+                        weapon.hand = "1h";
+                        weapon.damage = "1d6";
+                        weapon.damage_type = "piercing";
+                        weapon.weapon_type = "simple";
+                        weapon.thrown = true;
+                        weapon.amount = 4;
+                        char.weapons.push(weapon);
+                        // backpack
+                        item.name = "backpack";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // bedroll
+                        item.name = "bedroll";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // mess kit
+                        item.name = "mess kit";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // tinderbox
+                        item.name = "tinderbox";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // 10 torches
+                        item.name = "torch";
+                        item.amount = 10;
+                        char.items.push(item);
+                        // 10 days of rations
+                        item.name = "rations";
+                        item.amount = 10;
+                        char.items.push(item);
+                        // waterskin
+                        item.name = "waterskin";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // 50 feet of hempen rope
+                        item.name = "hempen rope";
+                        item.amount = 50;
+                        char.items.push(item);
+
+                        // Prompt user to set skills
+                        message.channel.send("Please choose 2 of the following skills: **Animal Handling**, **Athletics**, **Intimidation**, **Nature**, **Perception**, **Survival**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
+                    // Bard skills
+                    else if(char_class == "bard")
+                    {
+
+                        // Prompt user to set skills
+                        message.channel.send("Please choose any 3 skills.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3]** command.");
+                    }
+                    // Cleric skills
+                    else if(char_class == "cleric")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **History**, **Insight**, **Medicine**, **Persuasion**, **Religion**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Druid skills
+                    else if(char_class == "druid")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Arcana**, **Animal Handling**, **Insight**, **Medicine**, **Nature**, **Perception**, **Religion**, **Survival**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Fighter skills
+                    else if(char_class == "fighter")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Animal Handling**, **Athletics**, **History**, **Insight**, **Intimidation**, **Perception**, **Survival**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Monk skills
+                    else if(char_class == "monk")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Athletics**, **History**, **Insight**, **Religion**, **Stealth**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Paladin skills
+                    else if(char_class == "paladin")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Athletics**, **Insight**, **Intimidation**, **Medicine**, **Persuasion**, **Religion**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Ranger skills
+                    else if(char_class == "ranger")
+                    {
+                        message.channel.send("Please choose 3 of the following skills: **Animal Handling**, **Athletics**, **Insight**, **Investigation**, **Nature**, **Perception**, **Stealth**, **Survival**");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3]** command.");
+                    }
+                    // Rogue skills
+                    else if(char_class == "rogue")
+                    {
+                        message.channel.send("Please choose 4 of the following skills: **Acrobatics**, **Athletics**, **Deception**, **Insight**, **Intimidation**, **Investigation**, **Perception**, **Performance**, **Persuasion**, **Sleight of Hand**, **Stealth**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3] [skill 4]** command.");
+                    }
+                    // Sorcerer skills
+                    else if(char_class == "sorcerer")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **Insight**, **Intimidation**, **Persuasion**, **Religion**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Warlock skills
+                    else if(char_class == "warlock")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **History**, **Intimidation**, **Investigation**, **Nature**, **Religion**");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // Wizard skills
+                    else if(char_class == "wizard")
+                    {
+                        message.channel.send("Please choose 2 of the following skills: **Arcana**, **History**, **Insight**, **Investigation**, **Medicine**, **Religion**.");
+                        return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
+                    }
+                    // This else block should never be executed.
+                    // Used to have player set attributes after character creation.
+                    // Setting skills first then attributes is better.
                     else
-                        return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                    {
+                        message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
+                        if(server[message.guild.id].i == 0)
+                        {
+                            message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                            server[message.guild.id].i = server[message.guild.id].i + 1;
+                            return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                        }
+                        else
+                            return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                    
+                    }
                 }
 
                 // ******************************** DELETE CHARACTER **********************************************
@@ -263,16 +447,180 @@ module.exports = {
                     return message.channel.send("You have no characters to delete.");
                 }
 
+                // ******************************** SET PLAYER SKILLS **********************************************
+                else if(action == "skills")
+                {
+                    // Variables
+                    var i; // counter
+                    var skill; // Will hold skill name in all lowercase
+                    var j = server[message.guild.id].players.indexOf(message.author.username); // Find player index
+                    const char_class = server[message.guild.id].characters[j].char_class; // Player class
+
+                    // Add skills
+                    for (i = 2; i < args.length; i++)
+                    {
+                        // All letters of skill to lowercase
+                        skill = args[i].toLowerCase();
+
+                        // Add Barbarian skills
+                        if(char_class == "barbarian")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "animal handling" && skill != "athletics" && skill != "intimidation" && skill != "nature" && skill != "perception" && skill != "survival")
+                                return message.channel.send(`${args[i]} is an invalid Barbarian skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Bard skills
+                        else if(char_class == "bard")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 3)
+                                return message.channel.send("You already have 3 skills.");
+                                
+                            server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Cleric skills
+                        else if(char_class == "cleric")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "history" && skill != "insight" && skill != "medicine" && skill != "persuasion" && skill != "religion")
+                                return message.channel.send(`${args[i]} is an invalid Cleric skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Druid skills
+                        else if(char_class == "druid")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "arcana" && skill != "animal handling" && skill != "insight" && skill != "medicine" && skill != "nature" && skill != "perception" && skill != "religion" && skill != "survival")
+                                return message.channel.send(`${args[i]} is an invalid Druid skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Fighter skills
+                        else if(char_class == "fighter")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "acrobatics" && skill != "animal handling" && skill != "athletics" && skill != "history" && skill != "insight" && skill != "intimidation" && skill != "perception" && skill != "survival")
+                                return message.channel.send(`${args[i]} is an invalid Fighter skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Monk skills
+                        else if(char_class == "monk")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "acrobatics" && skill != "athletics" && skill != "history" && skill != "insight" && skill != "religion" && skill != "stealth")
+                                return message.channel.send(`${args[i]} is an invalid Monk skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Paladin skills
+                        else if(char_class == "paladin")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "athletics" && skill != "insight" && skill != "intimidation" && skill != "medicine" && skill != "persuasion" && skill != "religion")
+                                return message.channel.send(`${args[i]} is an invalid Paladin skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Ranger skills
+                        else if(char_class == "ranger")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 3)
+                                return message.channel.send("You already have 3 skills.");
+                            if(skill != "animal handling" && skill != "athletics" && skill != "insight" && skill != "investigation" && skill != "nature" && skill != "perception" && skill != "stealth" && skill != "survival")
+                                return message.channel.send(`${args[i]} is an invalid Ranger skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Rogue skills
+                        else if(char_class == "rogue")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 4)
+                                return message.channel.send("You already have 4 skills.");
+                            if(skill != "acrobatics" && skill != "athletics" && skill != "deception" && skill != "insight" && skill != "intimidation" && skill != "investigation" && skill != "perception" && skill != "performance" && skill != "persuasion" && skill != "sleight of hand" && skill != "stealth")
+                                return message.channel.send(`${args[i]} is an invalid Rogue skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Sorcerer skills
+                        else if(char_class == "sorcerer")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "arcana" && skill != "deception" && skill != "insight" && skill != "intimidation" && skill != "persuasion" && skill != "religion")
+                                return message.channel.send(`${args[i]} is an invalid Ranger skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Warlock skills
+                        else if(char_class == "warlock")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "arcana" && skill != "deception" && skill != "history" && skill != "intimidation" && skill != "investigation" && skill != "nature" && skill != "religion")
+                                return message.channel.send(`${args[i]} is an invalid Warlock skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // Add Wizard skills
+                        else if(char_class == "wizard")
+                        {
+                            if(server[message.guild.id].characters[j].skills.length == 2)
+                                return message.channel.send("You already have 2 skills.");
+                            if(skill != "arcana" && skill != "history" && skill != "insight" && skill != "investigation" && skill != "medicine" && skill != "religion")
+                                return message.channel.send(`${args[i]} is an invalid Wizard skill.`);
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
+                        }
+
+                        // This else block should never be executed
+                        else
+                            message.channel.send("I FUCKED UP!");
+
+                        // Prompt user to set attributes
+                        message.channel.send("Skills set!");
+                        message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
+                        if(server[message.guild.id].i == 0)
+                        {
+                            message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                            server[message.guild.id].i = server[message.guild.id].i + 1;
+                            return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
+                        }
+                        else
+                            return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
+                    }
+                }
+
                 // ******************************** SET CHARACTER ATTRIBUTES **********************************************
                 else if(action == "attributes")
                 {
-                    // User provided invalid 
+                    // User provided invalid number of arguments
                     if(args.length != 8)
                     {
                         message.channel.send("Invalid number of argument supplied.");
                         return message.channel.send("Set character attributes with the **!dnd attributes [STR] [DEX] [CON] [INT] [WIS] [CHR]** command.");
                     }
 
+                    // User tried to set attributes without creating a character first
                     if(server[message.guild.id].players.indexOf(message.author.username) == -1)
                     {
                         message.channel.send("You have not created a character yet.");
@@ -282,7 +630,7 @@ module.exports = {
                     // Number of points to spend
                     var points = 27;
 
-                    // Set strength attribute 
+                    // User provided invalid strength attribute
                     if(!(Number.isInteger(Number(args[2]))) || args[2] < 8 || args[2] > 15)
                     {
                         message.channel.send("Invalid strength attribute value.");
@@ -297,7 +645,7 @@ module.exports = {
                     else
                         points = points - (args[2] - 8);
 
-                    // Set dexterity attribute 
+                    // // User provided invalid dexterity attribute
                     if(!(Number.isInteger(Number(args[3]))) || args[3] < 8 || args[3] > 15)
                     {
                         message.channel.send("Invalid dexterity attribute value.");
@@ -312,7 +660,7 @@ module.exports = {
                     else
                         points = points - (args[3] - 8);
 
-                    // Set constitution attribute 
+                    // User provided invalid constitution attribute 
                     if(!(Number.isInteger(Number(args[4]))) || args[4] < 8 || args[4] > 15)
                     {
                         message.channel.send("Invalid constitution attribute value.");
@@ -327,7 +675,7 @@ module.exports = {
                     else
                         points = points - (args[4] - 8);
 
-                    // Set intelligence attribute 
+                    // User provided invalid intelligence attribute
                     if(!(Number.isInteger(Number(args[5]))) || args[5] < 8 || args[5] > 15)
                     {
                         message.channel.send("Invalid intelligence attribute value.");
@@ -342,7 +690,7 @@ module.exports = {
                     else
                         points = points - (args[5] - 8);
 
-                    // Set wisdom attribute 
+                    // User provided invalid wisdom attribute
                     if(!(Number.isInteger(Number(args[6]))) || args[6] < 8 || args[6] > 15)
                     {
                         message.channel.send("Invalid wisdom attribute value.");
@@ -357,7 +705,7 @@ module.exports = {
                     else
                         points = points - (args[6] - 8);
 
-                    // Set charisma attribute 
+                    // User provided invalid charisma attribute
                     if(!(Number.isInteger(Number(args[7]))) || args[7] < 8 || args[7] > 15)
                     {
                         message.channel.send("Invalid charisma attribute value.");
@@ -375,7 +723,7 @@ module.exports = {
                     // User spent too many points
                     if(points < 0)
                     {
-                        message.channel.send("Too many points spent. Don't include racial bonuses in attribute values.");
+                        message.channel.send("Too many points spent. You have 27 points to spend. Don't include racial bonuses in attribute values.");
                         return message.channel.send("Use https://chicken-dinner.com/5e/5e-point-buy.html#customrace&NA&8&8&8&8&8&8&0&0&27&15&8&19&15&12&9&7&5&4&3&2&1&0&1&2&4&6&9&4&4&4&4&4&4 for help with attributes.");
                     }
 
