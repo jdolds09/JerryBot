@@ -38,6 +38,7 @@ module.exports = {
                 hit_points: 8,
                 armor_proficiencies: [],
                 weapon_proficiencies: [],
+                tool_proficiencies: [],
                 tools: [],
                 saving_throws: [],
                 skills: [],
@@ -45,7 +46,8 @@ module.exports = {
                 weapons: [],
                 armor: [],
                 weapons_equipped: [],
-                armor_equipped: []
+                armor_equipped: [],
+                offhand_free: false
             };
 
             // Item object
@@ -66,8 +68,26 @@ module.exports = {
                 damage_type: "",
                 weapon_type: "",
                 amount: 0,
-                thrown: false
-            }
+                thrown: false,
+                finesse: false,
+                light: false
+            };
+
+            // Armor object
+            armor =
+            {
+                name: "",
+                type: "",
+                ac: 0,
+                amount: 0
+            };
+
+            tool =
+            {
+                name: "",
+                type: "",
+                amount: 0
+            };
 
             // Playable classes and races
             const classes = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard"];
@@ -197,6 +217,191 @@ module.exports = {
                     
                 }
 
+                // ******************************** DISPLAY CHARACTER'S WEAPONS **********************************************
+                else if(action == "weapons")
+                {
+                    // Find player
+                    var i;
+                    var j = server[message.guild.id].players.indexOf(message.author.username);
+                    var char = server[message.guild.id].characters[j];
+
+                    // Ouput weapons
+                    message.channel.send(`**${char.name}'s WEAPONS**`);
+                    message.channel.send("**---------------------------**");
+                    for(i = 0; i < char.weapons_equipped.length; i++)
+                        message.channel.send(`${char.weapons_equipped[i].charAt(0).toUpperCase() + char.weapons_equipped[i].slice(1)} (equipped)`);
+                    for(i = 0; i < char.weapons.length; i++)
+                    {
+                        if(char.weapons[i].amount > 1)
+                            message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)} x${char.weapons[i].amount}`);
+                        else
+                            message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)}`);
+                    }
+                    return message.channel.send("**---------------------------**");
+                }
+
+                // ******************************** DISPLAY CHARACTER'S ARMOR **********************************************
+                else if(action == "armor")
+                {
+                    // Find player
+                    var i;
+                    var j = server[message.guild.id].players.indexOf(message.author.username);
+                    var char = server[message.guild.id].characters[j];
+
+                    // Ouput armor
+                    message.channel.send(`**${char.name}'s ARMOR**`);
+                    message.channel.send("**---------------------------**");
+                    for(i = 0; i < char.armor_equipped.length; i++)
+                        message.channel.send(`${char.armor_equipped[i].charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
+                    for(i = 0; i < char.armor.length; i++)
+                    {
+                        if(char.armor[i].amount > 1)
+                            message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)} x${char.armor[i].amount}`);
+                        else
+                            message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)}`);
+                    }
+                    return message.channel.send("**---------------------------**");
+                }
+
+                // ******************************** DISPLAY CHARACTER'S ITEMS **********************************************
+                else if(action == "items")
+                {
+                    // Find player
+                    var i;
+                    var j = server[message.guild.id].players.indexOf(message.author.username);
+                    var char = server[message.guild.id].characters[j];
+
+                    // Ouput items
+                    message.channel.send(`**${char.name}'s ITEMS**`);
+                    message.channel.send("**---------------------------**");
+                    for(i = 0; i < char.items.length; i++)
+                    {
+                        if(char.items[i].amount > 1)
+                            message.channel.send(`${char.items[i].charAt(0).toUpperCase() + char.items[i].slice(1)} x${char.items[i].amount}`);
+                        else
+                            message.channel.send(`${char.items[i].charAt(0).toUpperCase() + char.items[i].slice(1)}`);
+                    }
+                    return message.channel.send("**---------------------------**");
+                }
+
+                // ******************************** DISPLAY CHARACTER'S TOOLS **********************************************
+                else if(action == "tools")
+                {
+                    // Find player
+                    var i;
+                    var j = server[message.guild.id].players.indexOf(message.author.username);
+                    var char = server[message.guild.id].characters[j];
+
+                    // Ouput tools
+                    message.channel.send(`**${char.name}'s TOOLS**`);
+                    message.channel.send("**---------------------------**");
+                    for(i = 0; i < char.tools.length; i++)
+                    {
+                        if(char.tools[i].amount > 1)
+                            message.channel.send(`${char.tools[i].charAt(0).toUpperCase() + char.tools[i].slice(1)} x${char.tools[i].amount}`);
+                        else
+                            message.channel.send(`${char.tools[i].charAt(0).toUpperCase() + char.tools[i].slice(1)}`);
+                    }
+                    return message.channel.send("**---------------------------**");
+                }
+
+                else if(action == "equip")
+                {
+                    // Counter to keep track of args
+                    var i = 3;
+                    // Find player
+                    var j = server[message.guild.id].players.indexOf(message.author.username);
+                    var char = server[message.guild.id].characters[j];
+
+                    // User didn't supply enough arguments 
+                    if(args.length < 4)
+                    {
+                        message.channel.send("Insufficient arguments supplied with **!dnd equip** command.");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon)**");
+                    }
+
+                    // Gear variable will be equal to "weapon" or "armor" specifing what is being equipped
+                    var gear_type = args[2].toLowerCase();
+                    // User didn't specify if armor or weapon is being equipped
+                    if(gear_type != "weapon" || gear_type != "armor")
+                    {
+                        message.channel.send("Please specify if a weapon or armor is being equipped.");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [mainhand/offhand] <--(optional argument, must be a light weapon to put in offhand)**");
+                    }
+
+                    // Get name of item being equipped
+                    if(!(args[3].charAt(0) == "\""))
+                        return message.channel.send("Please put the name of the armor or weapon between quotation marks. \"weapon/armor name\".");
+
+                    var gear_name = args[3].substring(1);
+
+                    // If name of weapon or armor is only one word or contains no spaces
+                    if(gear_name.charAt(gear_name.length - 1) == "\"")
+                        gear_name = gear_name.substring(0, gear_name.length - 1);
+                    
+                    // Name of weapon/armor has spaces
+                    else
+                    {
+                        i = 4;
+
+                        while(!(args[i].charAt(args[i].length - 1) == "\""))
+                        {
+                            gear_name = gear_name.concat(` ${args[i]}`);
+                            i = i + 1;
+                            if(i == args.length)
+                                return message.channel.send("Please put the name of the armor or weapon between quotation marks. \"weapon/armor name\".");
+                        }
+
+                        gear_name = gear_name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
+                    }
+
+                    // Set letters of item being equipped to lower case
+                    gear_name = gear_name.toLowerCase();
+
+                    // Player wants to equip weapon in offhand
+                    if(i + 1 == args.length - 1)
+                    {
+                        if(args[i + 1].toLowerCase() == "offhand")
+                        {
+                            // Player wants to equip weapon in offhand   
+                            if(char.weapons.indexOf(gear_name) != -1)
+                            {
+                                // Player tried to equip a weapon in the offhand with nothing in the mainhand
+                                if(char.weapons_equipped.length == 0)
+                                    return message.channel.send("Please equip a mainhand weapon first.");
+
+                                // Weapon in mainhand is not light
+                                if(char.weapons_equipped[0].light == false)
+                                    return message.channel.send("Weapon in mainhand must be light to dual wield.");
+
+                                // Equip weapon in the offhand
+                                else
+                                {
+                                    // Equip weapon in empty offhand
+                                    if(char.weapons_equipped.length == 1)
+                                    {
+                                        char.weapons_equipped.push(gear_name);
+                                        var x = char.weapons.indexOf(gear_name);
+                                        char.weapons.splice(x, 1);
+                                        return message.channel.send(`${gear_name} was equipped in the offhand.`);
+                                    }
+                                    // Replace weapon that's already in offhand
+                                    else
+                                    {
+                                        char.weapons_equipped[1] = gear_name;
+                                        var x = char.weapons.indexOf(x, 1);
+                                        char.weapons.splice(x, 1);
+                                        return message.channel.send(`${gear_name} was equipped in the offhand.`);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Equip weapon in the main hand
+
+                }
+
                 // ******************************** CREATE CHARACTERS **********************************************
                 else if(action == "character")
                 {
@@ -228,6 +433,8 @@ module.exports = {
                         {
                             name = name.concat(` ${args[i]}`);
                             i = i + 1;
+                            if(i == args.length)
+                                return message.channel.send("Please put your character name between quotation marks. \"character name\".");
                         }
 
                         name = name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
@@ -276,8 +483,8 @@ module.exports = {
                         char.saving_throws.push("strength, constitution");
 
                         // Add proficiencies
-                        char.armor_proficiencies.push("light armor", "medium armor", "shields");
-                        char.weapon_proficiencies.push("simple weapons", "martial weapons");
+                        char.armor_proficiencies.push("light", "medium", "shield");
+                        char.weapon_proficiencies.push("simple", "martial");
                         
                         // Add starting items
                         // Greataxe
@@ -287,8 +494,11 @@ module.exports = {
                         weapon.damage_type = "slashing";
                         weapon.weapon_type = "martial";
                         weapon.thrown = false;
+                        weapon.finesse = false;
+                        weapon.light = false;
                         weapon.amount = 1;
                         char.weapons_equipped.push(weapon);
+                        char.offhand_free = false;
                         // 2 handaxes
                         weapon.name = "handaxe";
                         weapon.hand = "1h";
@@ -296,6 +506,8 @@ module.exports = {
                         weapon.damage_type = "slashing";
                         weapon.weapon_type = "simple";
                         weapon.thrown = true;
+                        weapon.finesse = false;
+                        weapon.light = true;
                         weapon.amount = 2;
                         char.weapons.push(weapon);
                         // 4 javelins
@@ -305,6 +517,8 @@ module.exports = {
                         weapon.damage_type = "piercing";
                         weapon.weapon_type = "simple";
                         weapon.thrown = true;
+                        weapon.finesse = false;
+                        weapon.light = false;
                         weapon.amount = 4;
                         char.weapons.push(weapon);
                         // backpack
@@ -347,6 +561,77 @@ module.exports = {
                     // Bard skills
                     else if(char_class == "bard")
                     {
+                        // Add saving throws
+                        char.saving_throws.push("dexterity", "charisma");
+
+                        // Add proficiencies
+                        char.weapon_proficiencies.push("simple", "hand crossbow", "longsword", "rapier", "shortsword");
+                        char.armor_proficiencies.push("light");
+                        char.tool_proficiencies.push("musical instrument");
+
+                         // Add starting items
+                        // Rapier
+                        weapon.name = "rapier";
+                        weapon.hand = "1h";
+                        weapon.damage = "1d8";
+                        weapon.damage_type = "piercing";
+                        weapon.weapon_type = "martial";
+                        weapon.thrown = false;
+                        weapon.finesse = true;
+                        weapon.light = false;
+                        weapon.amount = 1;
+                        char.weapons_equipped.push(weapon);
+                        char.offhand_free = true;
+                        // Dagger
+                        weapon.name = "dagger";
+                        weapon.hand = "1h";
+                        weapon.damage = "1d4";
+                        weapon.damage_type = "piercing";
+                        weapon.weapon_type = "simple";
+                        weapon.thrown = true;
+                        weapon.finesse = true;
+                        weapon.light = true;
+                        weapon.amount = 1;
+                        char.weapons.push(weapon);
+                        // Leather armor
+                        armor.name = "leather armor";
+                        armor.type = "light";
+                        armor.ac = 11;
+                        armor.amount = 1;
+                        char.armor_equipped.push(armor);
+                        // lute
+                        tool.name = "lute";
+                        tool.type = "musical instrument";
+                        tool.amount = 1;
+                        char.tools.push(tool);
+                        // backpack
+                        item.name = "backpack";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // bedroll
+                        item.name = "bedroll";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // costume
+                        item.name = "costume";
+                        item.amount = 2;
+                        char.items.push(item);
+                        // 5 candles
+                        item.name = "candle";
+                        item.amount = 5;
+                        char.items.push(item);
+                        // 5 days of rations
+                        item.name = "rations";
+                        item.amount = 5;
+                        char.items.push(item);
+                        // waterskin
+                        item.name = "waterskin";
+                        item.amount = 1;
+                        char.items.push(item);
+                        // disguise kit
+                        item.name = "disguise kit";
+                        item.amount = 1;
+                        char.items.push(item);
 
                         // Prompt user to set skills
                         message.channel.send("Please choose any 3 skills.");
