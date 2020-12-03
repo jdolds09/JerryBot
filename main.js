@@ -4,9 +4,6 @@ const Client = require('./classes/Client'); // To save commands
 const Datastore = require('nedb');
 const hash = require("string-hash");
 
-// Create dialogflow client
-const dialogflow = require('@danclay/discord-dialogflow')
-
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
 const handEmojis = ["👍", "👎"];
 
@@ -212,13 +209,6 @@ class Poll {
 	}
 }
 
-dialogflow.init({
-    projectID: process.env.PROJECT_ID,
-    keyPath: process.env.path,
-    easyMode: true,
-    debug: true
-});
-
 // This is what must be put immediately before commands
 prefix = '!';
 
@@ -416,13 +406,6 @@ client.on('message', async message => {
         return;
 
     var msg = message.content.toLowerCase();
-    
-    if(message.content.includes("<@") && (message.content.includes("&723896471149084712") || message.content.includes("723893316592074782")))
-    {
-        dialogflow.getIntent(message, (r) => {
-            message.reply(r);
-        });
-    }
 
     // Delete message from vote channel
     if((message.author.username != "ThatSaltySnipezGuy" && message.author.username != "Jerryatric") && message.channel.id == 774857738039459850)

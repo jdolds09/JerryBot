@@ -71,6 +71,7 @@ module.exports = {
             queueContruct.connection = connection;
             this.play(message, queueContruct.songs[0], true, queueContruct.videos, i);
           } catch (err) {
+            console.log("1");
             console.log(err);
             queue.delete(message.guild.id);
             return message.channel.send(err);
@@ -96,6 +97,7 @@ module.exports = {
             queueContruct.connection = connection;
             this.play(message, queueContruct.songs[0], false, queueContruct.videos, i);
           } catch (err) {
+            console.log("2");
             console.log(err);
             queue.delete(message.guild.id);
             return message.channel.send(err);
@@ -131,6 +133,7 @@ module.exports = {
       }
       
     } catch (error) {
+      console.log("3");
       console.log(error);
       message.channel.send(error.message);
     }
@@ -184,6 +187,7 @@ module.exports = {
 
         })
         .on("error", error =>{
+          console.log("4");
           console.error(error);
 
           if(is_playlist)
@@ -215,6 +219,7 @@ module.exports = {
     }
     catch(error)
     {
+      console.log("5");
       return console.log(error);
     }
   }

@@ -82,6 +82,7 @@ module.exports = {
                 amount: 0
             };
 
+            // Tool object
             tool =
             {
                 name: "",
@@ -111,6 +112,7 @@ module.exports = {
                 // ******************************** START ACTION **********************************************
                 if(action == "start")
                 {
+                    // Prompt players to create their characters first before starting an adventure
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
@@ -137,6 +139,7 @@ module.exports = {
                 // ******************************** START SPECIFIC CAMPAIGN **********************************************
                 else if((Number.isInteger(Number(action))))
                 {
+                    // Prompt players to create their characters first before starting an adventure
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
@@ -164,6 +167,7 @@ module.exports = {
                 // ******************************** START RANDOM CAMPAIGN **********************************************
                 else if(action == "random")
                 {
+                    // Prompt players to create a character first before starting an adventure
                     if(server[message.guild.id].characters.length == 0)
                     {
                         await message.channel.send("Please start by creating your characters.");
@@ -228,6 +232,10 @@ module.exports = {
                     // Ouput weapons
                     message.channel.send(`**${char.name}'s WEAPONS**`);
                     message.channel.send("**---------------------------**");
+                    // Character has no weapons
+                    if(char.weapons.length == 0 && char.weapons.length == 0)
+                        message.channel.send("None");
+
                     for(i = 0; i < char.weapons_equipped.length; i++)
                         message.channel.send(`${char.weapons_equipped[i].charAt(0).toUpperCase() + char.weapons_equipped[i].slice(1)} (equipped)`);
                     for(i = 0; i < char.weapons.length; i++)
@@ -251,6 +259,10 @@ module.exports = {
                     // Ouput armor
                     message.channel.send(`**${char.name}'s ARMOR**`);
                     message.channel.send("**---------------------------**");
+                    // Character has no armor
+                    if(char.armor.length == 0 && char.armor.length == 0)
+                        message.channel.send("None");
+
                     for(i = 0; i < char.armor_equipped.length; i++)
                         message.channel.send(`${char.armor_equipped[i].charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
                     for(i = 0; i < char.armor.length; i++)
@@ -274,6 +286,10 @@ module.exports = {
                     // Ouput items
                     message.channel.send(`**${char.name}'s ITEMS**`);
                     message.channel.send("**---------------------------**");
+                    // Character has no items
+                    if(char.items.length == 0)
+                        message.channel.send("None");
+
                     for(i = 0; i < char.items.length; i++)
                     {
                         if(char.items[i].amount > 1)
@@ -295,6 +311,10 @@ module.exports = {
                     // Ouput tools
                     message.channel.send(`**${char.name}'s TOOLS**`);
                     message.channel.send("**---------------------------**");
+                    // Character has no tools
+                    if(char.tools.length == 0)
+                        message.channel.send("None");
+
                     for(i = 0; i < char.tools.length; i++)
                     {
                         if(char.tools[i].amount > 1)
@@ -305,6 +325,7 @@ module.exports = {
                     return message.channel.send("**---------------------------**");
                 }
 
+                // ******************************** EQUIP WEAPON/ARMOR **********************************************
                 else if(action == "equip")
                 {
                     // Counter to keep track of args
@@ -374,13 +395,17 @@ module.exports = {
                                 if(char.weapons_equipped[0].light == false)
                                     return message.channel.send("Weapon in mainhand must be light to dual wield.");
 
+                                // Weapon that the player wants to equip in the offhand is not light
+                                if(char.weapons[char.weapons.indexOf(gear_name)].light == false)
+                                    return message.channel.send("Weapon must be a light weapon to be equipped in the offhand.");
+
                                 // Equip weapon in the offhand
                                 else
                                 {
                                     // Equip weapon in empty offhand
                                     if(char.weapons_equipped.length == 1)
                                     {
-                                        char.weapons_equipped.push(gear_name);
+                                        char.weapons_equipped.push(char.weapons.indexOf(gear_name));
                                         var x = char.weapons.indexOf(gear_name);
                                         char.weapons.splice(x, 1);
                                         return message.channel.send(`${gear_name} was equipped in the offhand.`);
@@ -388,8 +413,11 @@ module.exports = {
                                     // Replace weapon that's already in offhand
                                     else
                                     {
-                                        char.weapons_equipped[1] = gear_name;
-                                        var x = char.weapons.indexOf(x, 1);
+                                        // TODO: if(char.armor_equipped.length == 2) replace shield with offhand weapon
+                                        message.channel.send(`${char.weapons_equipped[1].name} in the offhand was unequipped.`);
+                                        char.weapons.push(char.weapons_equipped[1]);
+                                        char.weapons_equipped[1] = char.weapons[char.weapons.indexOf(gear_name)];
+                                        var x = char.weapons.indexOf(gear_name);
                                         char.weapons.splice(x, 1);
                                         return message.channel.send(`${gear_name} was equipped in the offhand.`);
                                     }
@@ -399,7 +427,81 @@ module.exports = {
                     }
 
                     // Equip weapon in the main hand
+                    if(char.weapons.indexOf(gear_name) != -1)
+                    {
+                        // If weapon that player wants to equip is light
+                        if(char.weapons[char.weapons.indexOf(gear_name)].light == true)
+                        {
+                            // Replace the weapon that is already in the mainhand
+                            if(char.weapons_equipped.length > 0)
+                            {
+                                message.channel.send(`${char.weapons_equipped[0].name} was unequipped.`);
+                                char.weapons.push(char.weapons_equipped[0]);
+                                char.weapons_equipped[0] = char.weapons[char.weapons.indexOf(gear_name)];
+                                var x = char.weapons.indexOf(gear_name);
+                                char.weapons.splice(x, 1);
+                                return message.channel.send(`${gear_name} was equipped.`);
+                            }
+                            
+                            // No weapons are equipped
+                            else
+                            {
+                                char.weapons_equipped.push(char.weapons[char.weapons.indexOf(gear_name)]);
+                                var x = char.weapons.indexOf(gear_name);
+                                char.weapons.splice(x, 1);
+                                return message.channel.send(`${gear_name} was equipped.`);
+                            }
+                        }
 
+                        // Weapon that player wants to equip is not light
+                        else
+                        {
+                            // Player has weapon(s) equipped
+                            if(char.weapons_equipped.length > 0)
+                            {
+                                // Player is currently dual wielding
+                                if(char.weapons_equipped.length == 2)
+                                {
+                                    message.channel.send(`${char.weapons_equipped[1].name} was unequipped`);
+                                    char.weapons.push(char.weapons_equipped[1]);
+                                    char.weapons_equipped.pop();
+                                    message.channel.send(`${char.weapons_equipped[0].name} was unequipped`);
+                                    char.weapons.push(char.weapons_equipped[0]);
+                                    char.weapons_equipped[0] = char.weapons[char.weapons.indexOf(gear_name)];
+                                    var x = char.weapons.indexOf(gear_name);
+                                    char.weapons.splice(x, 1);
+                                    return message.channel.send(`${gear_name} was equipped.`);
+                                }
+                                // Player is not dual wielding
+                                else
+                                {
+                                    message.channel.send(`${char.weapons_equipped[0].name} was unequipped`);   
+                                    char.weapons.push(char.weapons_equipped[0]);
+                                    char.weapons_equipped[0] = char.weapons[char.weapons.indexOf(gear_name)];
+                                    var x = char.weapons.indexOf(gear_name);
+                                    char.weapons.splice(x, 1);
+                                    return message.channel.send(`${gear_name} was equipped.`);
+                                }
+                            }
+
+                            // Player does not have a weapon equipped
+                            else
+                            {
+                                char.weapons_equipped.push(char.weapons[char.weapons.indexOf(gear_name)]);
+                                var x = char.weapons.indexOf(gear_name);
+                                char.weapons.splice(x, 1);
+                                return message.channel.send(`${gear_name} was equipped.`);
+                            }
+                        }
+                    }
+
+                    // Equip armor
+                    if(char.armor.indexOf(gear_name) != -1)
+                    {
+                        // Player wants to equip shield without a weapon equipped
+                        if(char.weapons_equipped.length == 0 && char.armor[char.armor.indexOf(gear_name)])
+                            return message.channel.send("Please equip a 1h weapon before equipping a shield.");
+                    }
                 }
 
                 // ******************************** CREATE CHARACTERS **********************************************
@@ -476,7 +578,8 @@ module.exports = {
                     // Let player pick skills
                     message.channel.send("Character created!");
                     
-                    // Barbarian skills
+                    // Add Barbarian saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     if(char_class == "barbarian")
                     {
                         // Add saving throws
@@ -558,7 +661,9 @@ module.exports = {
                         message.channel.send("Please choose 2 of the following skills: **Animal Handling**, **Athletics**, **Intimidation**, **Nature**, **Perception**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Bard skills
+
+                    // Add Bard saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "bard")
                     {
                         // Add saving throws
@@ -637,66 +742,87 @@ module.exports = {
                         message.channel.send("Please choose any 3 skills.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3]** command.");
                     }
-                    // Cleric skills
+
+                    // Add Cleric saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "cleric")
                     {
                         message.channel.send("Please choose 2 of the following skills: **History**, **Insight**, **Medicine**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Druid skills
+
+                    // Add Druid saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "druid")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Animal Handling**, **Insight**, **Medicine**, **Nature**, **Perception**, **Religion**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Fighter skills
+
+                    // Add Fighter saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "fighter")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Animal Handling**, **Athletics**, **History**, **Insight**, **Intimidation**, **Perception**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Monk skills
+
+                    // Add Monk saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "monk")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Athletics**, **History**, **Insight**, **Religion**, **Stealth**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Paladin skills
+
+                    // Add Paladin saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "paladin")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Athletics**, **Insight**, **Intimidation**, **Medicine**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Ranger skills
+
+                    // Add Ranger saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "ranger")
                     {
                         message.channel.send("Please choose 3 of the following skills: **Animal Handling**, **Athletics**, **Insight**, **Investigation**, **Nature**, **Perception**, **Stealth**, **Survival**");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3]** command.");
                     }
-                    // Rogue skills
+
+                    // Add Rogue saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "rogue")
                     {
                         message.channel.send("Please choose 4 of the following skills: **Acrobatics**, **Athletics**, **Deception**, **Insight**, **Intimidation**, **Investigation**, **Perception**, **Performance**, **Persuasion**, **Sleight of Hand**, **Stealth**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3] [skill 4]** command.");
                     }
-                    // Sorcerer skills
+
+                    // Add Sorcerer saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "sorcerer")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **Insight**, **Intimidation**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Warlock skills
+
+                    // Add Warlock saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "warlock")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **History**, **Intimidation**, **Investigation**, **Nature**, **Religion**");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
-                    // Wizard skills
+
+                    // Add Wizard saving throws, proficiencies and starting items
+                    // Then prompt user to choose skills
                     else if(char_class == "wizard")
                     {
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **History**, **Insight**, **Investigation**, **Medicine**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
+
                     // This else block should never be executed.
                     // Used to have player set attributes after character creation.
                     // Setting skills first then attributes is better.
@@ -721,6 +847,7 @@ module.exports = {
                     // Find player character
                     var i = server[message.guild.id].players.indexOf(message.author.username);
                     
+                    // Delete character
                     if(i > -1)
                     {
                         message.channel.send(`${server[message.guild.id].characters[i].name} was deleted.`);
@@ -729,6 +856,7 @@ module.exports = {
                         return;
                     }
 
+                    // No character to delete
                     return message.channel.send("You have no characters to delete.");
                 }
 
@@ -1095,6 +1223,7 @@ module.exports = {
                     return message.channel.send("That DND action does not exist.");
             }
         }
+        // Log error
         catch(error)
         {
             console.log(error);
