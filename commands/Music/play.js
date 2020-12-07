@@ -42,8 +42,7 @@ module.exports = {
           playing: true,
           song_num: 0,
           videos: [],
-          playlist: false,
-          repeat: 0
+          playlist: false
         };
 
         queue.set(message.guild.id, queueContruct);
@@ -89,6 +88,8 @@ module.exports = {
             title: songInfo.title,
             url: songInfo.video_url
           };
+
+          message.channel.send(song.title);
           // Push the song onto the queue
           queueContruct.songs.push(song);
 
@@ -136,6 +137,8 @@ module.exports = {
     } catch (error) {
       console.log("3");
       console.log(error);
+      queue.delete(message.guild.id);
+      return message.channel.send(err);
     }
   },
 
@@ -210,14 +213,11 @@ module.exports = {
           // Play next song in queue
           else
           {
-            serverQueue.repeat = serverQueue.repeat + 1;
-            if(serverQueue.repeat == 5)
-              serverQueue.songs.shift();
+            serverQueue.songs.shift();
             this.play(message, serverQueue.songs[0], false, videos, i);
           }
         });
       dispatcher.setVolumeLogarithmic(serverQueue.volume / 7);
-      serverQueue.repeat = 0;
       serverQueue.textChannel.send(`Start playing: **${song.title}**`);
     }
     catch(error)
