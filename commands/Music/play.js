@@ -189,6 +189,7 @@ module.exports = {
         })
         .on("error", error =>{
           console.log("4");
+          queue.delete(message.guild.id);
           console.error(error);
 
           if(is_playlist)
