@@ -72,6 +72,8 @@ module.exports = {
                 light: false
             };
 
+            weapns = {};
+
             // Armor object
             armor =
             {
@@ -817,6 +819,7 @@ module.exports = {
                         weapon.light = false;
                         char.weapons_equipped.push(weapon);
                         char.offhand_free = false;
+                        message.channel.send(char.weapons_equipped[0].name);
                         // 2 handaxes
                         weapon.name = "handaxe";
                         weapon.hand = "1h";
@@ -828,6 +831,8 @@ module.exports = {
                         weapon.light = true;
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
+                        message.channel.send(char.weapons_equipped[1].name);
+                        message.channel.send(char.weapons_equipped[2].name);
                         // 4 javelins
                         weapon.name = "javelin";
                         weapon.hand = "1h";
@@ -841,6 +846,10 @@ module.exports = {
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
+                        message.channel.send(char.weapons_equipped[3].name);
+                        message.channel.send(char.weapons_equipped[4].name);
+                        message.channel.send(char.weapons_equipped[5].name);
+                        message.channel.send(char.weapons_equipped[6].name);
                         // backpack
                         item.name = "backpack";
                         item.amount = 1;
