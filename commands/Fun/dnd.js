@@ -831,8 +831,8 @@ module.exports = {
                         weapon.light = true;
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
-                        message.channel.send(char.weapons_equipped[1].name);
-                        message.channel.send(char.weapons_equipped[2].name);
+                        message.channel.send(char.weapons[1].name);
+                        message.channel.send(char.weapons[2].name);
                         // 4 javelins
                         weapon.name = "javelin";
                         weapon.hand = "1h";
@@ -846,10 +846,10 @@ module.exports = {
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
-                        message.channel.send(char.weapons_equipped[3].name);
-                        message.channel.send(char.weapons_equipped[4].name);
-                        message.channel.send(char.weapons_equipped[5].name);
-                        message.channel.send(char.weapons_equipped[6].name);
+                        message.channel.send(char.weapons[3].name);
+                        message.channel.send(char.weapons[4].name);
+                        message.channel.send(char.weapons[5].name);
+                        message.channel.send(char.weapons[6].name);
                         // backpack
                         item.name = "backpack";
                         item.amount = 1;
