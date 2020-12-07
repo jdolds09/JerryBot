@@ -89,7 +89,7 @@ module.exports = {
             url: songInfo.video_url
           };
 
-          message.channel.send(song.title);
+          message.channel.send(`${song.title} fuck`);
           // Push the song onto the queue
           queueContruct.songs.push(song);
 
