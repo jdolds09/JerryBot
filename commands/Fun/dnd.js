@@ -46,8 +46,7 @@ module.exports = {
                 weapons: [],
                 armor: [],
                 weapons_equipped: [],
-                armor_equipped: [],
-                offhand_free: false
+                armor_equipped: []
             };
 
             // Item object
@@ -233,7 +232,7 @@ module.exports = {
                     message.channel.send(`**${char.name}'s WEAPONS**`);
                     message.channel.send("**---------------------------**");
                     // Character has no weapons
-                    if(char.weapons.length == 0 && char.weapons.length == 0)
+                    if(char.weapons.length == 0 && char.weapons_equipped.length == 0)
                         message.channel.send("None");
 
                     // Output weapons
@@ -801,7 +800,7 @@ module.exports = {
                     if(char_class == "barbarian")
                     {
                         // Add saving throws
-                        char.saving_throws.push("strength, constitution");
+                        char.saving_throws.push("strength", "constitution");
 
                         // Add proficiencies
                         char.armor_proficiencies.push("light", "medium", "shield");
@@ -818,8 +817,6 @@ module.exports = {
                         weapon.finesse = false;
                         weapon.light = false;
                         char.weapons_equipped.push(weapon);
-                        char.offhand_free = false;
-                        message.channel.send(char.weapons_equipped[0].name);
                         // 2 handaxes
                         weapon.name = "handaxe";
                         weapon.hand = "1h";
@@ -831,8 +828,6 @@ module.exports = {
                         weapon.light = true;
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
-                        message.channel.send(char.weapons[0].name);
-                        message.channel.send(char.weapons[1].name);
                         // 4 javelins
                         weapon.name = "javelin";
                         weapon.hand = "1h";
@@ -846,10 +841,6 @@ module.exports = {
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
                         char.weapons.push(weapon);
-                        message.channel.send(char.weapons[2].name);
-                        message.channel.send(char.weapons[3].name);
-                        message.channel.send(char.weapons[4].name);
-                        message.channel.send(char.weapons[5].name);
                         // backpack
                         item.name = "backpack";
                         item.amount = 1;
@@ -883,6 +874,14 @@ module.exports = {
                         item.amount = 50;
                         char.items.push(item);
 
+                        message.channel.send(char.weapons_equipped[0].name);
+                        message.channel.send(char.weapons[0].name);
+                        message.channel.send(char.weapons[1].name);
+                        message.channel.send(char.weapons[2].name);
+                        message.channel.send(char.weapons[3].name);
+                        message.channel.send(char.weapons[4].name);
+                        message.channel.send(char.weapons[5].name);
+
                         // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Animal Handling**, **Athletics**, **Intimidation**, **Nature**, **Perception**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
@@ -911,7 +910,6 @@ module.exports = {
                         weapon.finesse = true;
                         weapon.light = false;
                         char.weapons_equipped.push(weapon);
-                        char.offhand_free = true;
                         // Dagger
                         weapon.name = "dagger";
                         weapon.hand = "1h";
