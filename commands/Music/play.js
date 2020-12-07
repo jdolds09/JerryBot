@@ -135,7 +135,8 @@ module.exports = {
     } catch (error) {
       console.log("3");
       console.log(error);
-      message.channel.send(error.message);
+      queue.delete(message.guild.id);
+      return message.channel.send(err);
     }
   },
 
