@@ -1094,7 +1094,12 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 2)
                                 return message.channel.send("You already have 2 skills.");
-                            if(skill != "animal handling" && skill != "athletics" && skill != "intimidation" && skill != "nature" && skill != "perception" && skill != "survival")
+                            if(skill == "animal")
+                            {
+                                server[message.guild.id].characters[j].skills.push("animal handling");
+                                i = i + 1;
+                            }
+                            else if(skill != "athletics" && skill != "intimidation" && skill != "nature" && skill != "perception" && skill != "survival")
                                 return message.channel.send(`${args[i]} is an invalid Barbarian skill.`);
                             else
                                 server[message.guild.id].characters[j].skills.push(skill);
@@ -1105,8 +1110,21 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 3)
                                 return message.channel.send("You already have 3 skills.");
-                                
-                            server[message.guild.id].characters[j].skills.push(skill);
+
+                            if(skill == "animal")
+                            {
+                                server[message.guild.id].characters[j].skills.push("animal handling");
+                                i = i + 1;
+                            }
+
+                            else if(skill == "sleight")
+                            {
+                                server[message.guild.id].characters[j].skills.push("sleight of hand");
+                                i = i + 2;
+                            }
+                            
+                            else
+                                server[message.guild.id].characters[j].skills.push(skill);
                         }
 
                         // Add Cleric skills
@@ -1125,7 +1143,12 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 2)
                                 return message.channel.send("You already have 2 skills.");
-                            if(skill != "arcana" && skill != "animal handling" && skill != "insight" && skill != "medicine" && skill != "nature" && skill != "perception" && skill != "religion" && skill != "survival")
+                            if(skill == "animal")
+                            {
+                                server[message.guild.id].characters[j].skills.push("animal handling");
+                                i = i + 1;
+                            }
+                            else if(skill != "arcana" && skill != "insight" && skill != "medicine" && skill != "nature" && skill != "perception" && skill != "religion" && skill != "survival")
                                 return message.channel.send(`${args[i]} is an invalid Druid skill.`);
                             else
                                 server[message.guild.id].characters[j].skills.push(skill);
@@ -1136,7 +1159,12 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 2)
                                 return message.channel.send("You already have 2 skills.");
-                            if(skill != "acrobatics" && skill != "animal handling" && skill != "athletics" && skill != "history" && skill != "insight" && skill != "intimidation" && skill != "perception" && skill != "survival")
+                            if(skill == "animal")
+                            {
+                                server[message.guild.id].characters[j].skills.push("animal handling");
+                                i = i + 1;
+                            }
+                            else if(skill != "acrobatics" && skill != "athletics" && skill != "history" && skill != "insight" && skill != "intimidation" && skill != "perception" && skill != "survival")
                                 return message.channel.send(`${args[i]} is an invalid Fighter skill.`);
                             else
                                 server[message.guild.id].characters[j].skills.push(skill);
@@ -1169,7 +1197,12 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 3)
                                 return message.channel.send("You already have 3 skills.");
-                            if(skill != "animal handling" && skill != "athletics" && skill != "insight" && skill != "investigation" && skill != "nature" && skill != "perception" && skill != "stealth" && skill != "survival")
+                            if(skill == "animal")
+                            {
+                                server[message.guild.id].characters[j].skills.push("animal handling");
+                                i = i + 1;
+                            }
+                            else if(skill != "athletics" && skill != "insight" && skill != "investigation" && skill != "nature" && skill != "perception" && skill != "stealth" && skill != "survival")
                                 return message.channel.send(`${args[i]} is an invalid Ranger skill.`);
                             else
                                 server[message.guild.id].characters[j].skills.push(skill);
@@ -1180,7 +1213,12 @@ module.exports = {
                         {
                             if(server[message.guild.id].characters[j].skills.length == 4)
                                 return message.channel.send("You already have 4 skills.");
-                            if(skill != "acrobatics" && skill != "athletics" && skill != "deception" && skill != "insight" && skill != "intimidation" && skill != "investigation" && skill != "perception" && skill != "performance" && skill != "persuasion" && skill != "sleight of hand" && skill != "stealth")
+                            if(skill == "sleight")
+                            {
+                                server[message.guild.id].characters[j].skills.push("sleight of hand");
+                                i = i + 2;
+                            }
+                            else if(skill != "acrobatics" && skill != "athletics" && skill != "deception" && skill != "insight" && skill != "intimidation" && skill != "investigation" && skill != "perception" && skill != "performance" && skill != "persuasion" && skill != "stealth")
                                 return message.channel.send(`${args[i]} is an invalid Rogue skill.`);
                             else
                                 server[message.guild.id].characters[j].skills.push(skill);
