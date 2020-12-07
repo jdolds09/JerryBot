@@ -236,9 +236,9 @@ module.exports = {
 
                     // Output weapons
                     for(i = 0; i < char.weapons_equipped.length; i++)
-                        message.channel.send(`${char.weapons_equipped[i].charAt(0).toUpperCase() + char.weapons_equipped[i].slice(1)} (equipped)`);
+                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i],name.slice(1)} (equipped)`);
                     for(i = 0; i < char.weapons.length; i++)
-                        message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)}`);
+                        message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
@@ -260,9 +260,9 @@ module.exports = {
 
                     // Output armor
                     for(i = 0; i < char.armor_equipped.length; i++)
-                        message.channel.send(`${char.armor_equipped[i].charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
+                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
                     for(i = 0; i < char.armor.length; i++)
-                        message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)}`);
+                        message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
