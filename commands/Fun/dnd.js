@@ -236,7 +236,7 @@ module.exports = {
 
                     // Output weapons
                     for(i = 0; i < char.weapons_equipped.length; i++)
-                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i],name.slice(1)} (equipped)`);
+                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)`);
                     for(i = 0; i < char.weapons.length; i++)
                         message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}`);
                     
@@ -260,7 +260,7 @@ module.exports = {
 
                     // Output armor
                     for(i = 0; i < char.armor_equipped.length; i++)
-                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
+                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)`);
                     for(i = 0; i < char.armor.length; i++)
                         message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}`);
                     
@@ -286,9 +286,9 @@ module.exports = {
                     for(i = 0; i < char.items.length; i++)
                     {
                         if(char.items[i].amount > 1)
-                            message.channel.send(`${char.items[i].charAt(0).toUpperCase() + char.items[i].slice(1)} x${char.items[i].amount}`);
+                            message.channel.send(`${char.items[i].name.charAt(0).toUpperCase() + char.items[i].name.slice(1)} x${char.items[i].amount}`);
                         else
-                            message.channel.send(`${char.items[i].charAt(0).toUpperCase() + char.items[i].slice(1)}`);
+                            message.channel.send(`${char.items[i].name.charAt(0).toUpperCase() + char.items[i].name.slice(1)}`);
                     }
                     return message.channel.send("**---------------------------**");
                 }
@@ -312,9 +312,9 @@ module.exports = {
                     for(i = 0; i < char.tools.length; i++)
                     {
                         if(char.tools[i].amount > 1)
-                            message.channel.send(`${char.tools[i].charAt(0).toUpperCase() + char.tools[i].slice(1)} x${char.tools[i].amount}`);
+                            message.channel.send(`${char.tools[i].name.charAt(0).toUpperCase() + char.tools[i].name.slice(1)} x${char.tools[i].amount}`);
                         else
-                            message.channel.send(`${char.tools[i].charAt(0).toUpperCase() + char.tools[i].slice(1)}`);
+                            message.channel.send(`${char.tools[i].name.charAt(0).toUpperCase() + char.tools[i].name.slice(1)}`);
                     }
                     return message.channel.send("**---------------------------**");
                 }
