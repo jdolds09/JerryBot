@@ -67,7 +67,6 @@ module.exports = {
                 damage: "",
                 damage_type: "",
                 weapon_type: "",
-                amount: 0,
                 thrown: false,
                 finesse: false,
                 light: false
@@ -79,7 +78,6 @@ module.exports = {
                 name: "",
                 type: "",
                 ac: 0,
-                amount: 0
             };
 
             // Tool object
@@ -209,7 +207,7 @@ module.exports = {
                     // Counter variable
                     var i;
 
-                    // Output classes
+                    // Output races
                     message.channel.send("**RACES**");
                     message.channel.send("**--------------------**");
                     for(i = 0; i < races.length; i++)
@@ -229,22 +227,19 @@ module.exports = {
                     var j = server[message.guild.id].players.indexOf(message.author.username);
                     var char = server[message.guild.id].characters[j];
 
-                    // Ouput weapons
+                    // Weapons header
                     message.channel.send(`**${char.name}'s WEAPONS**`);
                     message.channel.send("**---------------------------**");
                     // Character has no weapons
                     if(char.weapons.length == 0 && char.weapons.length == 0)
                         message.channel.send("None");
 
+                    // Output weapons
                     for(i = 0; i < char.weapons_equipped.length; i++)
                         message.channel.send(`${char.weapons_equipped[i].charAt(0).toUpperCase() + char.weapons_equipped[i].slice(1)} (equipped)`);
                     for(i = 0; i < char.weapons.length; i++)
-                    {
-                        if(char.weapons[i].amount > 1)
-                            message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)} x${char.weapons[i].amount}`);
-                        else
-                            message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)}`);
-                    }
+                        message.channel.send(`${char.weapons[i].charAt(0).toUpperCase() + char.weapons[i].slice(1)}`);
+                    
                     return message.channel.send("**---------------------------**");
                 }
 
@@ -256,22 +251,19 @@ module.exports = {
                     var j = server[message.guild.id].players.indexOf(message.author.username);
                     var char = server[message.guild.id].characters[j];
 
-                    // Ouput armor
+                    // Armor header
                     message.channel.send(`**${char.name}'s ARMOR**`);
                     message.channel.send("**---------------------------**");
                     // Character has no armor
                     if(char.armor.length == 0 && char.armor.length == 0)
                         message.channel.send("None");
 
+                    // Output armor
                     for(i = 0; i < char.armor_equipped.length; i++)
                         message.channel.send(`${char.armor_equipped[i].charAt(0).toUpperCase() + char.armor_equipped[i].slice(1)} (equipped)`);
                     for(i = 0; i < char.armor.length; i++)
-                    {
-                        if(char.armor[i].amount > 1)
-                            message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)} x${char.armor[i].amount}`);
-                        else
-                            message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)}`);
-                    }
+                        message.channel.send(`${char.armor[i].charAt(0).toUpperCase() + char.armor[i].slice(1)}`);
+                    
                     return message.channel.send("**---------------------------**");
                 }
 
@@ -283,13 +275,14 @@ module.exports = {
                     var j = server[message.guild.id].players.indexOf(message.author.username);
                     var char = server[message.guild.id].characters[j];
 
-                    // Ouput items
+                    // Items header
                     message.channel.send(`**${char.name}'s ITEMS**`);
                     message.channel.send("**---------------------------**");
                     // Character has no items
                     if(char.items.length == 0)
                         message.channel.send("None");
 
+                    // Output items
                     for(i = 0; i < char.items.length; i++)
                     {
                         if(char.items[i].amount > 1)
@@ -308,13 +301,14 @@ module.exports = {
                     var j = server[message.guild.id].players.indexOf(message.author.username);
                     var char = server[message.guild.id].characters[j];
 
-                    // Ouput tools
+                    // Tools header
                     message.channel.send(`**${char.name}'s TOOLS**`);
                     message.channel.send("**---------------------------**");
                     // Character has no tools
                     if(char.tools.length == 0)
                         message.channel.send("None");
 
+                    // Output tools
                     for(i = 0; i < char.tools.length; i++)
                     {
                         if(char.tools[i].amount > 1)
@@ -328,17 +322,26 @@ module.exports = {
                 // ******************************** EQUIP WEAPON/ARMOR **********************************************
                 else if(action == "equip")
                 {
-                    // Counter to keep track of args
+                    // Counters
                     var i = 3;
+                    var k;
                     // Find player
                     var j = server[message.guild.id].players.indexOf(message.author.username);
                     var char = server[message.guild.id].characters[j];
+                    // See if player has shield equipped
+                    var shield_equipped = false;
+                    
+                    for(k = 0; k < char.armor_equipped.length; k++)
+                    {
+                        if(char.armor_equipped[k].type == "shield")
+                            shield_equipped = true;
+                    }
 
                     // User didn't supply enough arguments 
                     if(args.length < 4)
                     {
                         message.channel.send("Insufficient arguments supplied with **!dnd equip** command.");
-                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon)**");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon or shield)**");
                     }
 
                     // Gear variable will be equal to "weapon" or "armor" specifing what is being equipped
@@ -347,7 +350,7 @@ module.exports = {
                     if(gear_type != "weapon" || gear_type != "armor")
                     {
                         message.channel.send("Please specify if a weapon or armor is being equipped.");
-                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [mainhand/offhand] <--(optional argument, must be a light weapon to put in offhand)**");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon to put in offhand)**");
                     }
 
                     // Get name of item being equipped
@@ -380,7 +383,7 @@ module.exports = {
                     gear_name = gear_name.toLowerCase();
 
                     // Player wants to equip weapon in offhand
-                    if(i + 1 == args.length - 1)
+                    if((i + 1 == args.length - 1) && gear_type == "weapon")
                     {
                         if(args[i + 1].toLowerCase() == "offhand")
                         {
@@ -398,29 +401,42 @@ module.exports = {
                                 // Weapon that the player wants to equip in the offhand is not light
                                 if(char.weapons[char.weapons.indexOf(gear_name)].light == false)
                                     return message.channel.send("Weapon must be a light weapon to be equipped in the offhand.");
-
-                                // Equip weapon in the offhand
-                                else
+                            
+                                // Equip weapon in empty offhand
+                                if(char.weapons_equipped.length == 1)
                                 {
-                                    // Equip weapon in empty offhand
-                                    if(char.weapons_equipped.length == 1)
+                                    // If shield is equipped
+                                    if(shield_equipped)
+                                    {
+                                        for(k = 0; k < char.armor_equipped.length; k++)
+                                        {
+                                            // Unequip shield
+                                            if(char.armor_equipped[k].type == "shield")
+                                            {
+                                                message.channel.send(`${char.armor_equipped[k].name} was unequipped.`);
+                                                char.armor.push(char.armor_equipped[k]);
+                                                char.armor_equipped.splice(k, 1);
+                                            }
+                                        }
+                                    }
+                                    // Player does not have a shield equipped
+                                    else
                                     {
                                         char.weapons_equipped.push(char.weapons.indexOf(gear_name));
                                         var x = char.weapons.indexOf(gear_name);
                                         char.weapons.splice(x, 1);
                                         return message.channel.send(`${gear_name} was equipped in the offhand.`);
                                     }
-                                    // Replace weapon that's already in offhand
-                                    else
-                                    {
-                                        // TODO: if(char.armor_equipped.length == 2) replace shield with offhand weapon
-                                        message.channel.send(`${char.weapons_equipped[1].name} in the offhand was unequipped.`);
-                                        char.weapons.push(char.weapons_equipped[1]);
-                                        char.weapons_equipped[1] = char.weapons[char.weapons.indexOf(gear_name)];
-                                        var x = char.weapons.indexOf(gear_name);
-                                        char.weapons.splice(x, 1);
-                                        return message.channel.send(`${gear_name} was equipped in the offhand.`);
-                                    }
+                                }
+                                // Replace weapon that's already in offhand
+                                else
+                                {
+                                    message.channel.send(`${char.weapons_equipped[1].name} in the offhand was unequipped.`);
+                                    char.weapons.push(char.weapons_equipped[1]);
+                                    char.weapons_equipped[1] = char.weapons[char.weapons.indexOf(gear_name)];
+                                    var x = char.weapons.indexOf(gear_name);
+                                    char.weapons.splice(x, 1);
+                                    return message.channel.send(`${gear_name} was equipped in the offhand.`);
                                 }
                             }
                         }
@@ -437,8 +453,8 @@ module.exports = {
                             {
                                 message.channel.send(`${char.weapons_equipped[0].name} was unequipped.`);
                                 char.weapons.push(char.weapons_equipped[0]);
-                                char.weapons_equipped[0] = char.weapons[char.weapons.indexOf(gear_name)];
                                 var x = char.weapons.indexOf(gear_name);
+                                char.weapons_equipped[0] = char.weapons[x];
                                 char.weapons.splice(x, 1);
                                 return message.channel.send(`${gear_name} was equipped.`);
                             }
@@ -446,8 +462,9 @@ module.exports = {
                             // No weapons are equipped
                             else
                             {
-                                char.weapons_equipped.push(char.weapons[char.weapons.indexOf(gear_name)]);
+                                // Equip weapon
                                 var x = char.weapons.indexOf(gear_name);
+                                char.weapons_equipped.push(char.weapons[x]);
                                 char.weapons.splice(x, 1);
                                 return message.channel.send(`${gear_name} was equipped.`);
                             }
@@ -475,6 +492,24 @@ module.exports = {
                                 // Player is not dual wielding
                                 else
                                 {
+                                    // Player has shield equipped
+                                    if(shield_equipped)
+                                    {
+                                        if(char.weapons[char.weapons.indexOf(gear_name)].hand == "2h")
+                                        {
+                                            for(k = 0; k < char.armor_equipped.length; k++)
+                                            {
+                                                // Unequip shield
+                                                if(char.armor_equipped[k].type == "shield")
+                                                {
+                                                    message.channel.send(`${char.armor_equipped[k].name} was unequipped.`);
+                                                    char.armor.push(char.armor_equipped[k]);
+                                                    char.armor_equipped.splice(k, 1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    // Equip weapon
                                     message.channel.send(`${char.weapons_equipped[0].name} was unequipped`);   
                                     char.weapons.push(char.weapons_equipped[0]);
                                     char.weapons_equipped[0] = char.weapons[char.weapons.indexOf(gear_name)];
@@ -487,8 +522,26 @@ module.exports = {
                             // Player does not have a weapon equipped
                             else
                             {
-                                char.weapons_equipped.push(char.weapons[char.weapons.indexOf(gear_name)]);
+                                // Player has shield equipped
+                                if(shield_equipped)
+                                {
+                                    if(char.weapons[char.weapons.indexOf(gear_name)].hand == "2h")
+                                    {
+                                        for(k = 0; k < char.armor_equipped.length; k++)
+                                        {
+                                            // Unequip shield
+                                            if(char.armor_equipped[k].type == "shield")
+                                            {
+                                                 message.channel.send(`${char.armor_equipped[k].name} was unequipped.`);
+                                                 char.armor.push(char.armor_equipped[k]);
+                                                 char.armor_equipped.splice(k, 1);
+                                            }
+                                        }
+                                    }
+                                }
+                                // Equip weapon
                                 var x = char.weapons.indexOf(gear_name);
+                                char.weapons_equipped.push(char.weapons[x]);
                                 char.weapons.splice(x, 1);
                                 return message.channel.send(`${gear_name} was equipped.`);
                             }
@@ -498,10 +551,173 @@ module.exports = {
                     // Equip armor
                     if(char.armor.indexOf(gear_name) != -1)
                     {
-                        // Player wants to equip shield without a weapon equipped
-                        if(char.weapons_equipped.length == 0 && char.armor[char.armor.indexOf(gear_name)])
-                            return message.channel.send("Please equip a 1h weapon before equipping a shield.");
+                        // Player wants to equip a shield
+                        if(char.armor[char.armor.indexOf(gear_name)].type == "shield")
+                        {
+                            // Character has weapons equipped
+                            if(char.weapons_equipped.length > 0)
+                            {
+                                // Character has 2h weapon equipped
+                                if(char.weapons_equipped[0].hand == "2h")
+                                {
+                                    message.channel.send(`${char.weapons_equipped[0].name} was unequipped`);
+                                    char.weapons.push(char.weapons_equipped[0]);
+                                    char.weapons_equipped.pop();
+                                }
+
+                                // Character is dual wielding
+                                if(char.weapons_equipped.length == 2)
+                                {
+                                    message.channel.send(`${char.weapons_equipped[1].name} was unequipped.`);
+                                    char.weapons.push(char.weapons_equipped[1]);
+                                    char.weapons_equipped.pop();
+                                }
+
+                                // If player has shield equipped
+                                if(shield_equipped)
+                                {
+                                    for(k = 0; k < char.armor_equipped.length; k++)
+                                        {
+                                            // Unequip shield
+                                            if(char.armor_equipped[k].type == "shield")
+                                            {
+                                                 message.channel.send(`${char.armor_equipped[k].name} was unequipped.`);
+                                                 char.armor.push(char.armor_equipped[k]);
+                                                 char.armor_equipped.splice(k, 1);
+                                            }
+                                        }
+                                }
+
+                                // Equip shield
+                                var x = char.armor.indexOf(gear_name);
+                                char.armor_equipped.push(char.armor[x]);
+                                char.armor.splice(x, 1);
+                                return message.channel.send(`${gear_name} was equipped.`);
+                            }
+                        }
+
+                        // Player wants to equip armor
+                        else
+                        {
+                            var x;
+                            // Player has armor already equipped
+                            if(char.armor_equipped.length > 0)
+                            {
+                                for(x = 0; x < char.armor_equipped.length; x++)
+                                {
+                                    // Unequip armor
+                                    if(char.armor_equipped[x].type != "shield")
+                                    {
+                                        message.channel.send(`${char.armor_equipped[x].name} was unequipped`);
+                                        char.armor.push(char.armor_equipped[x]);
+                                        char.armor_equipped.splice(x, 1);
+                                    }
+                                }
+                            }
+                            // Equip armor
+                            x = char.armor.indexOf(gear_name);
+                            char.armor_equipped.push(char.armor[x]);
+                            char.armor.splice(x, 1);
+                            return message.channel.send(`${gear_name} was equipped.`);
+                        }
                     }
+                    return message.channel.send(`Could not equip ${gear_name}`);
+                }
+
+                // ******************************** UNEQUIP WEAPON/ARMOR **********************************************
+                else if(action == "unequip")
+                {
+                    // Counter variable for number of args
+                    var i = 3;
+
+                    // See if player has shield equipped
+                    var shield_equipped = false;
+                    
+                    for(k = 0; k < char.armor_equipped.length; k++)
+                    {
+                        if(char.armor_equipped[k].type == "shield")
+                            shield_equipped = true;
+                    }
+
+                    // User didn't supply enough arguments 
+                    if(args.length < 4)
+                    {
+                        message.channel.send("Insufficient arguments supplied with **!dnd unequip** command.");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd unequip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon or shield)**");
+                    }
+
+                    // Gear variable will be equal to "weapon" or "armor" specifing what is being equipped
+                    var gear_type = args[2].toLowerCase();
+                    // User didn't specify if armor or weapon is being equipped
+                    if(gear_type != "weapon" || gear_type != "armor")
+                    {
+                        message.channel.send("Please specify if a weapon or armor is being equipped.");
+                        return message.channel.send("To equip armor or a weapon, use the **!dnd unequip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon to put in offhand)**");
+                    }
+
+                    // Get name of item being equipped
+                    if(!(args[3].charAt(0) == "\""))
+                        return message.channel.send("Please put the name of the armor or weapon between quotation marks. \"weapon/armor name\".");
+
+                    var gear_name = args[3].substring(1);
+
+                    // If name of weapon or armor is only one word or contains no spaces
+                    if(gear_name.charAt(gear_name.length - 1) == "\"")
+                        gear_name = gear_name.substring(0, gear_name.length - 1);
+                    
+                    // Name of weapon/armor has spaces
+                    else
+                    {
+                        i = 4;
+
+                        while(!(args[i].charAt(args[i].length - 1) == "\""))
+                        {
+                            gear_name = gear_name.concat(` ${args[i]}`);
+                            i = i + 1;
+                            if(i == args.length)
+                                return message.channel.send("Please put the name of the armor or weapon between quotation marks. \"weapon/armor name\".");
+                        }
+
+                        gear_name = gear_name.concat(` ${args[i].substring(0, args[i].length - 1)}`);
+                    }
+
+                    // Set letters of item being equipped to lower case
+                    gear_name = gear_name.toLowerCase();
+
+                    if((i + 1 == args.length - 1) && gear_type == "weapon")
+                    {
+                        if((args[i + 1] == "offhand") && char.weapons_equipped.length == 2)
+                        {
+                            if(gear_name == char.weapons_equipped[1].name)
+                            {
+                                char.weapons.push(char.weapons_equipped[1]);
+                                char.weapons_equipped.pop();
+                                return message.channel.send(`${gear_name} was unequipped.`);
+                            }
+                        }
+                    }
+
+                    if(gear_type == "weapon")
+                    {
+                        if(char.weapons_equipped.indexOf(gear_name) != -1)
+                        {
+                            char.weapons.push(char.weapons_equipped[char.weapons_equipped.indexOf(gear_name)]);
+                            char.weapons_equipped.slice(char.weapons_equipped.indexOf(gear_name), 1);
+                            return message.channel.send(`${gear_name} was unequipped.`);
+                        }
+                    }
+
+                    if(gear_type == "armor")
+                    {
+                        if(char.armor_equipped.indexOf(gear_name) != -1)
+                        {
+                            char.armor.push(char.armor_equipped[char.armor_equipped.indexOf(gear_name)]);
+                            char.armor_equipped.slice(char.armor_equipped.indexOf(gear_name), 1);
+                            return message.channel.send(`${gear_name} was unequipped.`);
+                        }
+                    }
+
+                    return message.channel.send(`Could not unequip ${gear_name}.`);
                 }
 
                 // ******************************** CREATE CHARACTERS **********************************************
@@ -599,7 +815,6 @@ module.exports = {
                         weapon.thrown = false;
                         weapon.finesse = false;
                         weapon.light = false;
-                        weapon.amount = 1;
                         char.weapons_equipped.push(weapon);
                         char.offhand_free = false;
                         // 2 handaxes
@@ -611,7 +826,7 @@ module.exports = {
                         weapon.thrown = true;
                         weapon.finesse = false;
                         weapon.light = true;
-                        weapon.amount = 2;
+                        char.weapons.push(weapon);
                         char.weapons.push(weapon);
                         // 4 javelins
                         weapon.name = "javelin";
@@ -622,7 +837,9 @@ module.exports = {
                         weapon.thrown = true;
                         weapon.finesse = false;
                         weapon.light = false;
-                        weapon.amount = 4;
+                        char.weapons.push(weapon);
+                        char.weapons.push(weapon);
+                        char.weapons.push(weapon);
                         char.weapons.push(weapon);
                         // backpack
                         item.name = "backpack";
@@ -684,7 +901,6 @@ module.exports = {
                         weapon.thrown = false;
                         weapon.finesse = true;
                         weapon.light = false;
-                        weapon.amount = 1;
                         char.weapons_equipped.push(weapon);
                         char.offhand_free = true;
                         // Dagger
@@ -696,13 +912,11 @@ module.exports = {
                         weapon.thrown = true;
                         weapon.finesse = true;
                         weapon.light = true;
-                        weapon.amount = 1;
                         char.weapons.push(weapon);
                         // Leather armor
                         armor.name = "leather armor";
                         armor.type = "light";
                         armor.ac = 11;
-                        armor.amount = 1;
                         char.armor_equipped.push(armor);
                         // lute
                         tool.name = "lute";
