@@ -340,7 +340,7 @@ module.exports = {
                     // Gear variable will be equal to "weapon" or "armor" specifing what is being equipped
                     var gear_type = args[2].toLowerCase();
                     // User didn't specify if armor or weapon is being equipped
-                    if(gear_type != "weapon" || gear_type != "armor")
+                    if(gear_type != "weapon" && gear_type != "armor")
                     {
                         message.channel.send("Please specify if a weapon or armor is being equipped.");
                         return message.channel.send("To equip armor or a weapon, use the **!dnd equip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon to put in offhand)**");
@@ -671,7 +671,7 @@ module.exports = {
                     // Gear variable will be equal to "weapon" or "armor" specifing what is being unequipped
                     var gear_type = args[2].toLowerCase();
                     // User didn't specify if armor or weapon is being unequipped
-                    if(gear_type != "weapon" || gear_type != "armor")
+                    if(gear_type != "weapon" && gear_type != "armor")
                     {
                         message.channel.send("Please specify if a weapon or armor is being equipped.");
                         return message.channel.send("To equip armor or a weapon, use the **!dnd unequip [weapon/armor] \"[weapon/armor name]\" [offhand] <--(optional argument, must be a light weapon to put in offhand)**");
