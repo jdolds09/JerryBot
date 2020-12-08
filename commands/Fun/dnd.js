@@ -218,12 +218,14 @@ module.exports = {
                     // Character has no weapons
                     if(char.weapons.length == 0 && char.weapons_equipped.length == 0)
                         message.channel.send("None");
+                    
 
                     // Output weapons
+                    message.channel.send("**__Name:__**\t**__Hand:__**\t**__Dmg:__**");
                     for(i = 0; i < char.weapons_equipped.length; i++)
-                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)`);
+                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)\t${char.weapons_equipped.hand}\t${char.weapons_equipped.damage}`);
                     for(i = 0; i < char.weapons.length; i++)
-                        message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}`);
+                        message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}\t${char.weapons.hand}\t${char.weapons.damage}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
@@ -244,10 +246,11 @@ module.exports = {
                         message.channel.send("None");
 
                     // Output armor
+                    message.channel.send("**__Name:__**\t**__Type:__**\t**__AC:__**");
                     for(i = 0; i < char.armor_equipped.length; i++)
-                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)`);
+                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)\t${char.armor_equipped.type}\t${char.armor_equipped.ac}`);
                     for(i = 0; i < char.armor.length; i++)
-                        message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}`);
+                        message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}\t${char.armor.type}\t${char.armor.ac}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
