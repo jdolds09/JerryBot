@@ -58,9 +58,9 @@ module.exports = {
           queueContruct.videos = videos;
 
           // Get first song in playlist
-          const video2 = await youtube.getVideoByID(videos[0].id);
+          var video2 = await youtube.getVideoByID(videos[0].id);
           
-          const song = {
+          var song = {
           title: video2.title,
           url: `https://www.youtube.com/watch?v=${video2.id}`
           };
@@ -100,8 +100,8 @@ module.exports = {
         else
         {
           // Get song info
-          const songInfo = await ytdl.getInfo(args[1])
-          const song = 
+          var songInfo = await ytdl.getInfo(args[1])
+          var song = 
           {
             title: songInfo.title,
             url: songInfo.video_url
@@ -153,8 +153,8 @@ module.exports = {
         else
         {
           // Get song info
-          const songInfo = await ytdl.getInfo(args[1])
-          const song = 
+          var songInfo = await ytdl.getInfo(args[1])
+          var song = 
           {
             title: songInfo.title,
             url: songInfo.video_url
