@@ -63,17 +63,6 @@ module.exports = {
           title: video2.title,
           url: `https://www.youtube.com/watch?v=${video2.id}`
           };
-
-          while (song.title == undefined)
-          {
-            // Get first song in playlist
-            video2 = await youtube.getVideoByID(videos[0].id);
-          
-            song = {
-            title: video2.title,
-            url: `https://www.youtube.com/watch?v=${video2.id}`
-            };
-          }
           
           queueContruct.songs.push(song);
 
@@ -100,17 +89,6 @@ module.exports = {
             title: songInfo.title,
             url: songInfo.video_url
           };
-
-          while(song.title == undefined)
-          {
-            // Get song info
-            const songInfo = await ytdl.getInfo(args[1])
-            song = 
-            {
-              title: songInfo.title,
-              url: songInfo.video_url
-            };
-          }
 
           // Push the song onto the queue
           queueContruct.songs.push(song);
@@ -147,17 +125,6 @@ module.exports = {
             title: songInfo.title,
             url: songInfo.video_url
           };
-
-          while(song.title == undefined)
-          {
-            // Get song info
-            const songInfo = await ytdl.getInfo(args[1])
-            song = 
-            {
-              title: songInfo.title,
-              url: songInfo.video_url
-            };
-          }
 
           // Add song to queue
           serverQueue.songs.push(song);
