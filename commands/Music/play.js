@@ -42,7 +42,8 @@ module.exports = {
           playing: true,
           song_num: 0,
           videos: [],
-          playlist: false
+          playlist: false,
+          tries: 0
         };
 
         queue.set(message.guild.id, queueContruct);
@@ -63,6 +64,22 @@ module.exports = {
           title: video2.title,
           url: `https://www.youtube.com/watch?v=${video2.id}`
           };
+
+          while(video2.id == undefined)
+          {
+            queueContruct.tries = queueContruct.tries + 1;
+            if(queueContruct.tries == 5)
+            {
+              queue.delete(message.guild.id);
+              return message.channel.send("Unable to play song")
+            }
+            video2 = await youtube.getVideoByID(videos[0].id);
+            song = 
+            {
+              title: video2.title,
+              url: `https://www.youtube.com/watch?v=${video2.id}`
+            };
+          }
           
           queueContruct.songs.push(song);
 
@@ -90,6 +107,22 @@ module.exports = {
             url: songInfo.video_url
           };
 
+          while(song.url == undefined)
+          {
+            queueContruct.tries = queueContruct.tries + 1;
+            if(queueContruct.tries == 5)
+            {
+              queue.delete(message.guild.id);
+              return message.channel.send("Unable to play song")
+            }
+            songInfo = await ytdl.getInfo(args[1])
+            song = 
+            {
+              title: songInfo.title,
+              url: songInfo.video_url
+            };
+          }
+
           // Push the song onto the queue
           queueContruct.songs.push(song);
 
@@ -101,6 +134,7 @@ module.exports = {
           } catch (err) {
             console.log("2");
             console.log(err);
+            serverQueue.voiceChannel.leave();
             queue.delete(message.guild.id);
             return message.channel.send(err);
           }
@@ -126,6 +160,22 @@ module.exports = {
             url: songInfo.video_url
           };
 
+          while(song.url == undefined)
+          {
+            queueContruct.tries = queueContruct.tries + 1;
+            if(queueContruct.tries == 5)
+            {
+              queue.delete(message.guild.id);
+              return message.channel.send("Unable to play song")
+            }
+            songInfo = await ytdl.getInfo(args[1])
+            song = 
+            {
+              title: songInfo.title,
+              url: songInfo.video_url
+            };
+          }
+
           // Add song to queue
           serverQueue.songs.push(song);
           return message.channel.send(
@@ -137,6 +187,7 @@ module.exports = {
     } catch (error) {
       console.log("3");
       console.log(error);
+      serverQueue.voiceChannel.leave();
       queue.delete(message.guild.id);
       return message.channel.send(err);
     }
@@ -223,6 +274,8 @@ module.exports = {
     catch(error)
     {
       console.log("5");
+      serverQueue.voiceChannel.leave();
+      queue.delete(message.guild.id);
       return console.log(error);
     }
   }
