@@ -223,10 +223,11 @@ module.exports = {
                     // Output weapons
                     message.channel.send("**__Name:__**\t\t**__Hand:__**\t**__Dmg:__**");
                     for(i = 0; i < char.weapons_equipped.length; i++)
-                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)\t${char.weapons_equipped[i].hand}\t${char.weapons_equipped[i].damage}`);
+                        message.channel.send(`**${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)}**\t${char.weapons_equipped[i].hand}\t${char.weapons_equipped[i].damage}`);
                     for(i = 0; i < char.weapons.length; i++)
                         message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}\t${char.weapons[i].hand}\t${char.weapons[i].damage}`);
                     
+                    message.channel.send("*Weapons in bold are weapons that are currently equipped.");
                     return message.channel.send("**---------------------------**");
                 }
 
@@ -248,10 +249,11 @@ module.exports = {
                     // Output armor
                     message.channel.send("**__Name:__**\t**__Type:__**\t**__AC:__**");
                     for(i = 0; i < char.armor_equipped.length; i++)
-                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)\t${char.armor_equipped[i].type}\t${char.armor_equipped[i].ac}`);
+                        message.channel.send(`**${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)}**\t${char.armor_equipped[i].type}\t${char.armor_equipped[i].ac}`);
                     for(i = 0; i < char.armor.length; i++)
                         message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}\t${char.armor[i].type}\t${char.armor[i].ac}`);
                     
+                    message.channel.send("*Armor in bold is armor currently equipped.");
                     return message.channel.send("**---------------------------**");
                 }
 
