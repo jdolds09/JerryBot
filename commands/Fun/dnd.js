@@ -1397,6 +1397,7 @@ module.exports = {
                         // This else block should never be executed
                         else
                             message.channel.send("I FUCKED UP!");
+                    }
 
                         // Prompt user to set attributes
                         message.channel.send("Skills set!");
@@ -1409,7 +1410,6 @@ module.exports = {
                         }
                         else
                             return message.channel.send("Replace attribute placeholders above with desired value of attribute.");
-                    }
                 }
 
                 // ******************************** SET CHARACTER ATTRIBUTES **********************************************
