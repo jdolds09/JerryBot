@@ -217,7 +217,7 @@ module.exports = {
                     message.channel.send("**---------------------------**");
                     // Character has no weapons
                     if(char.weapons.length == 0 && char.weapons_equipped.length == 0)
-                        message.channel.send("None");
+                        return message.channel.send("None");
                     
 
                     // Output weapons
@@ -1586,13 +1586,17 @@ module.exports = {
                         else
                             server[message.guild.id].characters[i].charisma = Number(args[7]);
 
-
+                        var z;
                         // Output player's character
                         const char = server[message.guild.id].characters[i];
                         message.channel.send("**PLAYER INFO**");
                         message.channel.send(`Name: ${char.name}`);
                         message.channel.send(`Class: ${char.char_class.charAt(0).toUpperCase() + char.char_class.slice(1)}`);
                         message.channel.send(`Race: ${char.race.charAt(0).toUpperCase() + char.race.slice(1)}`);
+                        message.channel.send("**------------------------**");
+                        message.channel.send("**SKILLS**");
+                        for(z = 0; z < char.skills.length; z++)
+                            message.channel.send(`${char.skills[z].charAt(0).toUpperCase() + char.skills[z].slice(1)}`);
                         message.channel.send("**------------------------**");
                         message.channel.send("**ATTRIBUTES**");
                         message.channel.send(`Strength: ${char.strength}`);
