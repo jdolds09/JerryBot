@@ -221,11 +221,11 @@ module.exports = {
                     
 
                     // Output weapons
-                    message.channel.send("**__Name:__**\t**__Hand:__**\t**__Dmg:__**");
+                    message.channel.send("**__Name:__**\t\t**__Hand:__**\t**__Dmg:__**");
                     for(i = 0; i < char.weapons_equipped.length; i++)
-                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)\t${char.weapons_equipped.hand}\t${char.weapons_equipped.damage}`);
+                        message.channel.send(`${char.weapons_equipped[i].name.charAt(0).toUpperCase() + char.weapons_equipped[i].name.slice(1)} (equipped)\t${char.weapons_equipped[i].hand}\t${char.weapons_equipped[i].damage}`);
                     for(i = 0; i < char.weapons.length; i++)
-                        message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}\t${char.weapons.hand}\t${char.weapons.damage}`);
+                        message.channel.send(`${char.weapons[i].name.charAt(0).toUpperCase() + char.weapons[i].name.slice(1)}\t${char.weapons[i].hand}\t${char.weapons[i].damage}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
@@ -248,9 +248,9 @@ module.exports = {
                     // Output armor
                     message.channel.send("**__Name:__**\t**__Type:__**\t**__AC:__**");
                     for(i = 0; i < char.armor_equipped.length; i++)
-                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)\t${char.armor_equipped.type}\t${char.armor_equipped.ac}`);
+                        message.channel.send(`${char.armor_equipped[i].name.charAt(0).toUpperCase() + char.armor_equipped[i].name.slice(1)} (equipped)\t${char.armor_equipped[i].type}\t${char.armor_equipped[i].ac}`);
                     for(i = 0; i < char.armor.length; i++)
-                        message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}\t${char.armor.type}\t${char.armor.ac}`);
+                        message.channel.send(`${char.armor[i].name.charAt(0).toUpperCase() + char.armor[i].name.slice(1)}\t${char.armor[i].type}\t${char.armor[i].ac}`);
                     
                     return message.channel.send("**---------------------------**");
                 }
@@ -952,7 +952,7 @@ module.exports = {
                             name: "backpack",
                             amount: 1
                         };
-                        char.weapons.push(backpack);
+                        char.items.push(backpack);
                         // bedroll
                         bedroll =
                         {
@@ -960,7 +960,7 @@ module.exports = {
                             name: "bedroll",
                             amount: 1
                         };
-                        char.weapons.push(bedroll);
+                        char.items.push(bedroll);
                         // mess kit
                         mess_kit =
                         {
@@ -968,7 +968,7 @@ module.exports = {
                             name: "mess kit",
                             amount: 1
                         };
-                        char.weapons.push(mess_kit);
+                        char.items.push(mess_kit);
                         // tinderbox
                         tinderbox =
                         {
@@ -976,7 +976,7 @@ module.exports = {
                             name: "tinderbox",
                             amount: 1
                         };
-                        char.weapons.push(tinderbox);
+                        char.items.push(tinderbox);
                         // 10 torches
                         torch =
                         {
@@ -984,7 +984,7 @@ module.exports = {
                             name: "torch",
                             amount: 10
                         };
-                        char.weapons.push(torch);
+                        char.items.push(torch);
                         // 10 days of rations
                         ration =
                         {
@@ -992,7 +992,7 @@ module.exports = {
                             name: "ration",
                             amount: 10
                         };
-                        char.weapons.push(ration);
+                        char.items.push(ration);
                         // waterskin
                         waterskin =
                         {
@@ -1000,7 +1000,7 @@ module.exports = {
                             name: "waterskin",
                             amount: 1
                         };
-                        char.weapons.push(waterskin);
+                        char.items.push(waterskin);
                         // 50 feet of hempen rope
                         hempen_rope =
                         {
@@ -1008,7 +1008,7 @@ module.exports = {
                             name: "hempen rope",
                             amount: 50
                         };
-                        char.weapons.push(hempen_rope);
+                        char.items.push(hempen_rope);
 
                         // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Animal Handling**, **Athletics**, **Intimidation**, **Nature**, **Perception**, **Survival**.");
