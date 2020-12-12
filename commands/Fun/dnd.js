@@ -39,7 +39,6 @@ module.exports = {
                 armor_class: 0,
                 armor_proficiencies: [],
                 weapon_proficiencies: [],
-                tool_proficiencies: [],
                 tools: [],
                 saving_throws: [],
                 skills: [],
@@ -48,14 +47,6 @@ module.exports = {
                 armor: [],
                 weapons_equipped: [],
                 armor_equipped: []
-            };
-
-            // Tool object
-            tool =
-            {
-                name: "",
-                type: "",
-                amount: 0
             };
 
             // Playable classes and races
@@ -1012,9 +1003,8 @@ module.exports = {
                         // Add proficiencies
                         char.weapon_proficiencies.push("simple", "hand crossbow", "longsword", "rapier", "shortsword");
                         char.armor_proficiencies.push("light");
-                        char.tool_proficiencies.push("musical instrument");
 
-                         // Add starting items
+                        // Add starting items
                         // Rapier
                         rapier =
                         {
@@ -1033,7 +1023,7 @@ module.exports = {
                         dagger =
                         {
                             // Weapon attributes
-                            name: "rapier",
+                            name: "dagger",
                             hand: "1h",
                             damage: "1d4",
                             damage_type: "piercing",
@@ -1084,6 +1074,7 @@ module.exports = {
                             name: "costume",
                             amount: 2
                         };
+                        char.items.push(costume);
                         // 5 candles
                         candle =
                         {
@@ -1091,6 +1082,7 @@ module.exports = {
                             name: "candle",
                             amount: 5
                         };
+                        char.items.push(candle);
                         // 5 days of rations
                         ration =
                         {
@@ -1098,6 +1090,7 @@ module.exports = {
                             name: "ration",
                             amount: 5
                         };
+                        char.items.push(ration);
                         // waterskin
                         waterskin =
                         {
@@ -1105,6 +1098,7 @@ module.exports = {
                             name: "waterskin",
                             amount: 1
                         };
+                        char.items.push(waterskin);
                         // disguise kit
                         disguise_kit =
                         {
@@ -1112,6 +1106,7 @@ module.exports = {
                             name: "disguise kit",
                             amount: 1
                         };
+                        char.items.push(disguise_kit);
 
                         // Prompt user to set skills
                         message.channel.send("Please choose any 3 skills.");
@@ -1175,6 +1170,14 @@ module.exports = {
                             ac: 2
                         };
                         char.armor_equipped.push(shield);
+                        // 20 Crossbow bolts
+                        bolt =
+                        {
+                            // Item attributes
+                            name: "bolt",
+                            amount: 20
+                        };
+                        char.items.push(bolt);
                         // Backpack
                         backpack =
                         {
@@ -1199,14 +1202,6 @@ module.exports = {
                             amount: 10
                         };
                         char.items.push(candle);
-                        // 20 Crossbow bolts
-                        bolt =
-                        {
-                            // Item attributes
-                            name: "bolt",
-                            amount: 20
-                        };
-                        char.items.push(bolt);
                         // tinderbox
                         tinderbox =
                         {
@@ -1264,6 +1259,7 @@ module.exports = {
                         };
                         char.items.push(waterskin);
 
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **History**, **Insight**, **Medicine**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1277,17 +1273,8 @@ module.exports = {
                         // Armor proficiencies
                         char.armor_proficiencies.push("light", "medium", "shield");
                         // Weapon proficiencies
-                        char.weapon_proficiencies.push("simple", "martial");
+                        char.weapon_proficiencies.push("club", "dagger", "dart", "javelin", "mace", "quarterstaff", "scimitar", "sickle", "sling", "spear");
 
-                        // Shield
-                        shield = 
-                        {
-                            // Armor attribtues
-                            shield: "shield",
-                            type: "shield",
-                            ac: 2
-                        };
-                        char.armor_equipped.push(shield);
                         // Scimitar
                         scimitar =
                         {
@@ -1301,9 +1288,98 @@ module.exports = {
                             light: true
                         };
                         char.weapons_equipped.push(scimitar);
+                        // Leather armor
+                        leather_armor =
+                        {
+                            // Weapon attributes
+                            name: "leather armor",
+                            type: "light",
+                            ac: 11
+                        };
+                        char.armor_equipped.push(leather_armor);
+                        // Shield
+                        shield = 
+                        {
+                            // Armor attribtues
+                            shield: "shield",
+                            type: "shield",
+                            ac: 2
+                        };
+                        char.armor_equipped.push(shield);
+                        // Herbalism kit
+                        herbalism_kit =
+                        {
+                            name: "herbalism kit",
+                            type: "herbalism kit",
+                            amount: 1
+                        }
+                        char.tools.push(herbalism_kit);
+                        // backpack
+                        backpack =
+                        {
+                            // Item attributes
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // bedroll
+                        bedroll =
+                        {
+                            // Item attributes
+                            name: "bedroll",
+                            amount: 1
+                        };
+                        char.items.push(bedroll);
+                        // mess kit
+                        mess_kit =
+                        {
+                            // Item attributes
+                            name: "mess kit",
+                            amount: 1
+                        };
+                        char.items.push(mess_kit);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // 10 torches
+                        torch =
+                        {
+                            // Item attributes
+                            name: "torch",
+                            amount: 10
+                        };
+                        char.items.push(torch);
+                        // 10 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 10
+                        };
+                        char.items.push(ration);
+                        // waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+                        // 50 feet of hempen rope
+                        hempen_rope =
+                        {
+                            // Item attributes
+                            name: "hempen rope",
+                            amount: 50
+                        };
+                        char.items.push(hempen_rope);
 
-                        
-
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Animal Handling**, **Insight**, **Medicine**, **Nature**, **Perception**, **Religion**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1312,6 +1388,136 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "fighter")
                     {
+                        // Saving throws
+                        char.saving_throws.push("strength", "constitution");
+                        // Armor proficiencies
+                        char.armor_proficiencies.push("light", "medium", "heavy", "shield");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("simple", "martial");
+
+                        // Starting items
+                        // Longsword
+                        longsword = 
+                        {
+                            // Weapon attributes
+                            name: "longsword",
+                            hand: "v",
+                            damage: "1d8",
+                            damage_type: "slashing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons_equipped.push(longsword);
+                        // Chain mail
+                        chain_mail =
+                        {
+                            // Armor attributes
+                            name: "chain mail",
+                            type: "heavy",
+                            ac: 16
+                        };
+                        char.armor_equipped.push(chain_mail);
+                        // Shield
+                        shield = 
+                        {
+                            // Armor attribtues
+                            shield: "shield",
+                            type: "shield",
+                            ac: 2
+                        };
+                        char.armor_equipped.push(shield);
+                        // Light crossbow
+                        light_crossbow = 
+                        {
+                            name: "light crossbow",
+                            hand: "2h",
+                            damage: "1d8",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(light_crossbow);
+                        // 20 bolts
+                        bolt = 
+                        {
+                            name: "bolt",
+                            amount: 20
+                        };
+                        char.items.push(bolt);
+                        // Backpack
+                        backpack = 
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Crowbar
+                        crowbar = 
+                        {
+                            name: "crowbar",
+                            amount: 1
+                        };
+                        char.items.push(crowbar);
+                        // Hammer
+                        hammer = 
+                        {
+                            name: "hammer",
+                            amount: 1
+                        };
+                        char.items.push(hammer);
+                        // 10 pitons
+                        piton =
+                        {
+                            name: "piton",
+                            amount: 10
+                        };
+                        char.items.push(piton);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // 10 torches
+                        torch =
+                        {
+                            // Item attributes
+                            name: "torch",
+                            amount: 10
+                        };
+                        char.items.push(torch);
+                        // 10 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 10
+                        };
+                        char.items.push(ration);
+                        // waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+                        // 50 feet of hempen rope
+                        hempen_rope =
+                        {
+                            // Item attributes
+                            name: "hempen rope",
+                            amount: 50
+                        };
+                        char.items.push(hempen_rope);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Animal Handling**, **Athletics**, **History**, **Insight**, **Intimidation**, **Perception**, **Survival**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1320,6 +1526,216 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "monk")
                     {
+                        // Saving throws
+                        char.saving_throws.push("strength", "dexterity");
+                        // Weapon proficiencies (monks have no armor proficiencies)
+                        char.weapon_proficiencies.push("simple", "shortsword");
+
+                        // Starting items
+                        // Shortsword
+                        shortsword =
+                        {
+                            name: "shortsword",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(shortsword);
+                        // 10 darts
+                        dart1 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart1);
+                        dart2 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart2);
+                        dart3 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart3);
+                        dart4 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart4);
+                        dart5 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart5);
+                        dart6 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart6);
+                        dart7 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart7);
+                        dart8 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart8);
+                        dart9 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart9);
+                        dart10 = 
+                        {
+                            name: "dart",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(dart10);
+                        // Backpack
+                        backpack = 
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Crowbar
+                        crowbar = 
+                        {
+                            name: "crowbar",
+                            amount: 1
+                        };
+                        char.items.push(crowbar);
+                        // Hammer
+                        hammer = 
+                        {
+                            name: "hammer",
+                            amount: 1
+                        };
+                        char.items.push(hammer);
+                        // 10 pitons
+                        piton =
+                        {
+                            name: "piton",
+                            amount: 10
+                        };
+                        char.items.push(piton);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // 10 torches
+                        torch =
+                        {
+                            // Item attributes
+                            name: "torch",
+                            amount: 10
+                        };
+                        char.items.push(torch);
+                        // 10 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 10
+                        };
+                        char.items.push(ration);
+                        // waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+                        // 50 feet of hempen rope
+                        hempen_rope =
+                        {
+                            // Item attributes
+                            name: "hempen rope",
+                            amount: 50
+                        };
+                        char.items.push(hempen_rope);
+
+                        // Prompt user for skills
                         message.channel.send("Please choose 2 of the following skills: **Acrobatics**, **Athletics**, **History**, **Insight**, **Religion**, **Stealth**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1328,6 +1744,202 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "paladin")
                     {
+                        // Saving throws
+                        char.saving_throws.push("wisdom", "charisma");
+                        // Armor proficiencies
+                        char.armor_proficiencies.push("light", "medium", "heavy", "shield");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("simple", "martial");
+
+                        // Starting items
+                         // Longsword
+                         longsword = 
+                         {
+                             // Weapon attributes
+                             name: "longsword",
+                             hand: "v",
+                             damage: "1d8",
+                             damage_type: "slashing",
+                             weapon_type: "martial",
+                             thrown: false,
+                             finesse: false,
+                             light: false
+                         };
+                         char.weapons_equipped.push(longsword);
+                         // Chain mail
+                         chain_mail =
+                         {
+                             // Armor attributes
+                             name: "chain mail",
+                             type: "heavy",
+                             ac: 16
+                         };
+                         char.armor_equipped.push(chain_mail);
+                         // Shield
+                         shield = 
+                         {
+                             // Armor attribtues
+                             shield: "shield",
+                             type: "shield",
+                             ac: 2
+                         };
+                         char.armor_equipped.push(shield);
+                         // 5 javelins
+                         javelin1 =
+                        {
+                            // Weapon attributes
+                            name: "javelin",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(javelin1);
+                        javelin2 =
+                        {
+                            // Weapon attributes
+                            name: "javelin",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(javelin2);
+                        javelin3 =
+                        {
+                            // Weapon attributes
+                            name: "javelin",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(javelin3);
+                        javelin4 =
+                        {
+                            // Weapon attributes
+                            name: "javelin",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(javelin4);
+                        javelin5 =
+                        {
+                            // Weapon attributes
+                            name: "javelin",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons.push(javelin5);
+                        // 20 Crossbow bolts
+                        bolt =
+                        {
+                            // Item attributes
+                            name: "bolt",
+                            amount: 20
+                        };
+                        char.items.push(bolt);
+                        // Backpack
+                        backpack =
+                        {
+                            // Item attributes
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Blanket
+                        blanket =
+                        {
+                            // Item attributes
+                            name: "blanket",
+                            amount: 1
+                        };
+                        char.items.push(blanket);
+                        // 10 Candles
+                        candle =
+                        {
+                            // Item attributes
+                            name: "candle",
+                            amount: 10
+                        };
+                        char.items.push(candle);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // Alms box
+                        alms_box =
+                        {
+                            // Item attributes
+                            name: "alms box",
+                            amount: 1
+                        };
+                        char.items.push(alms_box);
+                        // Incense
+                        incense =
+                        {
+                            // Item attributes
+                            name: "incense",
+                            amount: 2
+                        };
+                        char.items.push(incense);
+                        // Censer
+                        censer =
+                        {
+                            // Item attributes
+                            name: "censer",
+                            amount: 1
+                        };
+                        char.items.push(censer);
+                        // Vestments
+                        vestments =
+                        {
+                            // Item attributes
+                            name: "vestments",
+                            amount: 1
+                        };
+                        char.items.push(vestments);
+                        // Rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 2
+                        };
+                        char.items.push(ration);
+                        // Waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Athletics**, **Insight**, **Intimidation**, **Medicine**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1336,6 +1948,131 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "ranger")
                     {
+                        // Saving throws
+                        char.saving_throws.push("strength", "dexterity");
+                        // Armor proficiencies
+                        char.armor_proficiencies.push("light", "medium", "shield");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("simple", "martial");
+
+                        // Starting items
+                        // Longbow
+                        longbow = 
+                        {
+                            name: "longbow",
+                            hand: "2h",
+                            damage: "1d8",
+                            damage_type: "piercing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons_equipped.push(longbow);
+                        // 2 shortswords
+                        shortsword1 =
+                        {
+                            // Weapon attributes
+                            name: "shortsword",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(shortsword1);
+                        shortsword2 =
+                        {
+                            // Weapon attributes
+                            name: "shortsword",
+                            hand: "1h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(shortsword2);
+                        // 20 arrows
+                        arrow =
+                        {
+                            name: "arrow",
+                            amount: 20
+                        };
+                        char.items.push(arrow);
+                        // Backpack
+                        backpack = 
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Crowbar
+                        crowbar = 
+                        {
+                            name: "crowbar",
+                            amount: 1
+                        };
+                        char.items.push(crowbar);
+                        // Hammer
+                        hammer = 
+                        {
+                            name: "hammer",
+                            amount: 1
+                        };
+                        char.items.push(hammer);
+                        // 10 pitons
+                        piton =
+                        {
+                            name: "piton",
+                            amount: 10
+                        };
+                        char.items.push(piton);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // 10 torches
+                        torch =
+                        {
+                            // Item attributes
+                            name: "torch",
+                            amount: 10
+                        };
+                        char.items.push(torch);
+                        // 10 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 10
+                        };
+                        char.items.push(ration);
+                        // waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+                        // 50 feet of hempen rope
+                        hempen_rope =
+                        {
+                            // Item attributes
+                            name: "hempen rope",
+                            amount: 50
+                        };
+                        char.items.push(hempen_rope);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 3 of the following skills: **Animal Handling**, **Athletics**, **Insight**, **Investigation**, **Nature**, **Perception**, **Stealth**, **Survival**");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3]** command.");
                     }
@@ -1344,6 +2081,194 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "rogue")
                     {
+                        // Saving throws
+                        char.saving_throws.push("dexterity", "intelligence");
+                        // Armor proficiencies
+                        char.armor_proficiencies.push("light");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("simple", "longsword", "rapier", "shortsword", "hand crossbow");
+
+                        // Starting items
+                        rapier = 
+                        {
+                            // Weapon attributes
+                            name: "rapier",
+                            hand: "1h",
+                            damage: "1d8",
+                            damage_type: "piercing",
+                            weapon_type: "martial",
+                            thrown: false,
+                            finesse: true,
+                            light: false
+                        };
+                        char.weapons.push(rapier);
+                        // 2 daggers
+                        dagger1 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons_equipped.push(dagger1);
+                        dagger2 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons_equipped.push(dagger2);
+                        // Shortbow
+                        shortbow = 
+                        {
+                            name: "shortbow",
+                            hand: "2h",
+                            damage: "1d6",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: false,
+                            finesse: false,
+                            thrown: false
+                        };
+                        char.weapons.push(shortbow);
+                        // Leather armor
+                        leather_armor =
+                        {
+                            name: "leather armor",
+                            type: "light",
+                            ac: 11
+                        };
+                        char.armor_equipped.push(leather_armor);
+                        // Thieves' tools
+                        theif_tools =
+                        {
+                            name: "theif tools",
+                            type: "theif tools",
+                            amount: 1
+                        };
+                        char.tools.push(theif_tools);
+                        // 20 arrows
+                        arrow =
+                        {
+                            name: "arrow",
+                            amount: 20
+                        };
+                        // Backpack
+                        backpack =
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Backpack
+                        ball_bearing =
+                        {
+                            name: "ball bearing",
+                            amount: 1000
+                        };
+                        char.items.push(ball_bearing);
+                        // string
+                        ball_of_string =
+                        {
+                            name: "string",
+                            amount: 10
+                        };
+                        char.items.push(ball_of_string);
+                        // Bell
+                        bell =
+                        {
+                            name: "bell",
+                            amount: 1
+                        };
+                        char.items.push(bell);
+                        // 5 Candles
+                        candle =
+                        {
+                            // Item attributes
+                            name: "candle",
+                            amount: 5
+                        };
+                        char.items.push(candle);
+                        // Crowbar
+                        crowbar = 
+                        {
+                            name: "crowbar",
+                            amount: 1
+                        };
+                        char.items.push(crowbar);
+                        // Hammer
+                        hammer = 
+                        {
+                            name: "hammer",
+                            amount: 1
+                        };
+                        char.items.push(hammer);
+                        // 10 pitons
+                        piton =
+                        {
+                            name: "piton",
+                            amount: 10
+                        };
+                        char.items.push(piton);
+                        // Hooded lantern
+                        hooded_lantern =
+                        {
+                            name: "hooded lantern",
+                            amount: 1
+                        };
+                        char.items.push(hooded_lantern);
+                        // 2 flasks of oil
+                        flask_of_oil =
+                        {
+                            name: "flask of oil",
+                            amount: 2
+                        };
+                        char.items.push(flask_of_oil);
+                        // 5 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 5
+                        };
+                        char.items.push(ration)
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // waterskin
+                         waterskin =
+                         {
+                             // Item attributes
+                             name: "waterskin",
+                             amount: 1
+                         };
+                         char.items.push(waterskin);
+                         // 50 feet of hempen rope
+                         hempen_rope =
+                         {
+                             // Item attributes
+                             name: "hempen rope",
+                             amount: 50
+                         };
+                         char.items.push(hempen_rope);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 4 of the following skills: **Acrobatics**, **Athletics**, **Deception**, **Insight**, **Intimidation**, **Investigation**, **Perception**, **Performance**, **Persuasion**, **Sleight of Hand**, **Stealth**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2] [skill 3] [skill 4]** command.");
                     }
@@ -1352,6 +2277,129 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "sorcerer")
                     {
+                        // Saving throws
+                        char.saving_throws.push("constitution", "charisma");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("dagger", "dart", "sling", "quarterstaff", "light crossbow");
+                        
+                        // Starting items
+                        // Light crossbow
+                        light_crossbow = 
+                        {
+                            name: "light crossbow",
+                            hand: "2h",
+                            damage: "1d8",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons_equipped.push(light_crossbow);
+                        // 2 daggers
+                        dagger1 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(dagger1);
+                        dagger2 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(dagger2);
+                        // 20 bolts
+                        bolt =
+                        {
+                            name: "bolt",
+                            amount: 20
+                        };
+                        char.items.push(bolt);
+                        // Backpack
+                        backpack = 
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Crowbar
+                        crowbar = 
+                        {
+                            name: "crowbar",
+                            amount: 1
+                        };
+                        char.items.push(crowbar);
+                        // Hammer
+                        hammer = 
+                        {
+                            name: "hammer",
+                            amount: 1
+                        };
+                        char.items.push(hammer);
+                        // 10 pitons
+                        piton =
+                        {
+                            name: "piton",
+                            amount: 10
+                        };
+                        char.items.push(piton);
+                        // tinderbox
+                        tinderbox =
+                        {
+                            // Item attributes
+                            name: "tinderbox",
+                            amount: 1
+                        };
+                        char.items.push(tinderbox);
+                        // 10 torches
+                        torch =
+                        {
+                            // Item attributes
+                            name: "torch",
+                            amount: 10
+                        };
+                        char.items.push(torch);
+                        // 10 days of rations
+                        ration =
+                        {
+                            // Item attributes
+                            name: "ration",
+                            amount: 10
+                        };
+                        char.items.push(ration);
+                        // waterskin
+                        waterskin =
+                        {
+                            // Item attributes
+                            name: "waterskin",
+                            amount: 1
+                        };
+                        char.items.push(waterskin);
+                        // 50 feet of hempen rope
+                        hempen_rope =
+                        {
+                            // Item attributes
+                            name: "hempen rope",
+                            amount: 50
+                        };
+                        char.items.push(hempen_rope);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **Insight**, **Intimidation**, **Persuasion**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1360,6 +2408,119 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "warlock")
                     {
+                        // Saving throws
+                        char.saving_throws.push("wisdom", "charisma");
+                        // Armor proficiencies
+                        char.armor_proficiencies.push("light");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("simple");
+
+                        // Light crossbow
+                        light_crossbow = 
+                        {
+                            name: "light crossbow",
+                            hand: "2h",
+                            damage: "1d8",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons_equipped.push(light_crossbow);
+                        // 2 daggers
+                        dagger1 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(dagger1);
+                        dagger2 =
+                        {
+                            // Weapon attributes
+                            name: "dagger",
+                            hand: "1h",
+                            damage: "1d4",
+                            damage_type: "piercing",
+                            weapon_type: "simple",
+                            thrown: true,
+                            finesse: true,
+                            light: true
+                        };
+                        char.weapons.push(dagger2);
+                        // 20 bolts
+                        bolt =
+                        {
+                            name: "bolt",
+                            amount: 20
+                        };
+                        char.items.push(bolt);
+                        // Leather armor
+                        leather_armor =
+                        {
+                            name: "leather armor",
+                            type: "light",
+                            ac: 11
+                        };
+                        char.armor_equipped.push(leather_armor);
+                        // Backpack
+                        backpack =
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Book of lore
+                        book_of_lore =
+                        {
+                            name: "book of lore",
+                            amount: 1
+                        };
+                        char.items.push(book_of_lore);
+                        // Bottle of ink
+                        bottle_of_ink =
+                        {
+                            name: "bottle of ink",
+                            amount = 1
+                        };
+                        char.items.push(bottle_of_ink);
+                        // Ink pen
+                        ink_pen =
+                        {
+                            name: "ink pen",
+                            amount: 1
+                        };
+                        char.items.push(ink_pen);
+                        // 10 sheets of parchment
+                        parchment =
+                        {
+                            name: "parchment",
+                            amount: 1
+                        };
+                        char.items.push(parchment);
+                        // Bag of sand
+                        bag_of_sand =
+                        {
+                            name: "little bag of sand",
+                            amount: 1
+                        };
+                        char.items.push(bag_of_sand);
+                        // Small knife
+                        small_knife =
+                        {
+                            name: "small knife",
+                            amount: 1
+                        };
+                        char.items.push(small_knife);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **Deception**, **History**, **Intimidation**, **Investigation**, **Nature**, **Religion**");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
@@ -1368,6 +2529,75 @@ module.exports = {
                     // Then prompt user to choose skills
                     else if(char_class == "wizard")
                     {
+                        //  Saving throws
+                        char.saving_throws.push("intelligence", "wisdom");
+                        // Weapon proficiencies
+                        char.weapon_proficiencies.push("dagger", "dart", "sling", "quarterstaff", "light crossbow");
+                        
+                        // Quarterstaff
+                        quarterstaff =
+                        {
+                            name: "quarterstaff",
+                            hand: "v",
+                            damage: "1d6",
+                            damage_type: "bludgeoning",
+                            weapon_type: "simple",
+                            thrown: false,
+                            finesse: false,
+                            light: false
+                        };
+                        char.weapons_equipped.push(quarterstaff);
+                        // Backpack
+                        backpack =
+                        {
+                            name: "backpack",
+                            amount: 1
+                        };
+                        char.items.push(backpack);
+                        // Book of lore
+                        book_of_lore =
+                        {
+                            name: "book of lore",
+                            amount: 1
+                        };
+                        char.items.push(book_of_lore);
+                        // Bottle of ink
+                        bottle_of_ink =
+                        {
+                            name: "bottle of ink",
+                            amount = 1
+                        };
+                        char.items.push(bottle_of_ink);
+                        // Ink pen
+                        ink_pen =
+                        {
+                            name: "ink pen",
+                            amount: 1
+                        };
+                        char.items.push(ink_pen);
+                        // 10 sheets of parchment
+                        parchment =
+                        {
+                            name: "parchment",
+                            amount: 1
+                        };
+                        char.items.push(parchment);
+                        // Bag of sand
+                        bag_of_sand =
+                        {
+                            name: "little bag of sand",
+                            amount: 1
+                        };
+                        char.items.push(bag_of_sand);
+                        // Small knife
+                        small_knife =
+                        {
+                            name: "small knife",
+                            amount: 1
+                        };
+                        char.items.push(small_knife);
+
+                        // Prompt user to set skills
                         message.channel.send("Please choose 2 of the following skills: **Arcana**, **History**, **Insight**, **Investigation**, **Medicine**, **Religion**.");
                         return message.channel.send("You can choose skills by using the **!dnd skills [skill 1] [skill 2]** command.");
                     }
