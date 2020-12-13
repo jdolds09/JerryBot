@@ -29,6 +29,8 @@ module.exports = {
                 name: "",
                 char_class: "",
                 race: "",
+                lvl: 1,
+                xp_to_lvl: 300,
                 strength: 8,
                 dexterity: 8,
                 constitution: 8,
@@ -821,13 +823,17 @@ module.exports = {
                     // Then prompt user to choose skills
                     if(char_class == "barbarian")
                     {
+                        /*
+                            Devin added code here
+                        */
+
                         // Add saving throws
                         char.saving_throws.push("strength", "constitution");
 
                         // Add proficiencies
                         char.armor_proficiencies.push("light", "medium", "shield");
                         char.weapon_proficiencies.push("simple", "martial");
-                        
+
                         // Add starting items
                         // Greataxe
                         greataxe =
