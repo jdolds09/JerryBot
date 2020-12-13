@@ -2565,7 +2565,7 @@ module.exports = {
                         bottle_of_ink =
                         {
                             name: "bottle of ink",
-                            amount = 1
+                            amount: 1
                         };
                         char.items.push(bottle_of_ink);
                         // Ink pen
