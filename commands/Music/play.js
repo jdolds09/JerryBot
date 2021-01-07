@@ -113,7 +113,7 @@ module.exports = {
             if(queueContruct.tries == 5)
             {
               queue.delete(message.guild.id);
-              return message.channel.send("Unable to play song")
+              message.channel.send("Unable to play song")
             }
             songInfo = await youtube.getVideo(args[1])
             song = 
