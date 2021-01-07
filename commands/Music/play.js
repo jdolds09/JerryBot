@@ -100,7 +100,7 @@ module.exports = {
         else
         {
           // Get song info
-          var songInfo = await ytdl.getInfo(args[1])
+          var songInfo = await youtube.getVideo(args[1])
           var song = 
           {
             title: songInfo.title,
@@ -115,7 +115,7 @@ module.exports = {
               queue.delete(message.guild.id);
               return message.channel.send("Unable to play song")
             }
-            songInfo = await ytdl.getInfo(args[1])
+            songInfo = await youtube.getVideo(args[1])
             song = 
             {
               title: songInfo.title,
@@ -153,7 +153,7 @@ module.exports = {
         else
         {
           // Get song info
-          var songInfo = await ytdl.getInfo(args[1])
+          var songInfo = await youtube.getVideo(args[1])
           var song = 
           {
             title: songInfo.title,
@@ -168,7 +168,7 @@ module.exports = {
               queue.delete(message.guild.id);
               return message.channel.send("Unable to play song")
             }
-            songInfo = await ytdl.getInfo(args[1])
+            songInfo = await youtube.getVideo(args[1])
             song = 
             {
               title: songInfo.title,
