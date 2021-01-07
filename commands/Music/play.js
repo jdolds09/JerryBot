@@ -100,11 +100,12 @@ module.exports = {
         else
         {
           // Get song info
-          var songInfo = await youtube.getVideo(args[1])
+          var id = args[1].substring(32);
+          var songInfo = await youtube.getVideoByID(id);
           var song = 
           {
             title: songInfo.title,
-            url: songInfo.video_url
+            url: `https://www.youtube.com/watch?v=${id}`
           };
 
           while(song.url == undefined)
@@ -115,11 +116,11 @@ module.exports = {
               queue.delete(message.guild.id);
               message.channel.send("Unable to play song")
             }
-            songInfo = await youtube.getVideo(args[1])
+            songInfo = await youtube.getVideoByID(id);
             song = 
             {
               title: songInfo.title,
-              url: songInfo.video_url
+              url: `https://www.youtube.com/watch?v=${id}`
             };
           }
 
@@ -153,11 +154,12 @@ module.exports = {
         else
         {
           // Get song info
-          var songInfo = await youtube.getVideo(args[1])
+          var id = args[1].substring(32);
+          var songInfo = await youtube.getVideoByID(id);
           var song = 
           {
             title: songInfo.title,
-            url: songInfo.video_url
+            url: `https://www.youtube.com/watch?v=${id}`
           };
 
           while(song.url == undefined)
@@ -168,11 +170,11 @@ module.exports = {
               queue.delete(message.guild.id);
               return message.channel.send("Unable to play song")
             }
-            songInfo = await youtube.getVideo(args[1])
+            songInfo = await youtube.getVideoByID(id);
             song = 
             {
               title: songInfo.title,
-              url: songInfo.video_url
+              url: `https://www.youtube.com/watch?v=${id}`
             };
           }
 
