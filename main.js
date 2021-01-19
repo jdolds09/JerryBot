@@ -461,6 +461,9 @@ client.on('message', async message => {
                 message.channel.send("", {files: ['./images/lul.png']});
         }
 
+        else if(msg.includes("residentsleeper"))
+            message.channel.send("", {files: ['./images/sleeper.png']});
+
         else if(msg.includes("pepega"))
             message.channel.send("", {files: ['./images/pepega.png']});
 
