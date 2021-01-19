@@ -270,7 +270,7 @@ module.exports = {
             this.play(message, serverQueue.songs[0], false, videos, i);
           }
         });
-      dispatcher.setVolumeLogarithmic(serverQueue.volume / 7);
+      dispatcher.setVolumeLogarithmic(serverQueue.volume / 6);
       serverQueue.textChannel.send(`Start playing: **${song.title}**`);
     }
     catch(error)
