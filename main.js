@@ -457,6 +457,9 @@ client.on('message', async message => {
             if(msg.includes("omega"))
                 message.channel.send("", {files: ['./images/omegalul.jpg']});
 
+            else if(msg.lncludes("lulwut"))
+                message.channel.send("", {files: ['./images/lulwut.png']});
+
             else
                 message.channel.send("", {files: ['./images/lul.png']});
         }
