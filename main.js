@@ -447,7 +447,13 @@ client.on('message', async message => {
             message.channel.send("", {files: ['./images/gasm.png']});
             
         else if(msg.includes("kek"))
-            message.channel.send("", {files: ['./images/kek.gif']});
+        {
+            if(msg.includes("kekleo"))
+                message.channel.send("", {files: ['./images/kekleo.gif']});
+
+            else
+                message.channel.send("", {files: ['./images/kek.gif']});
+        }
     
         else if(msg.includes("painschamp"))
             message.channel.send("", {files: ['./images/painschamp.jpg']});
