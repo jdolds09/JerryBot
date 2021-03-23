@@ -360,6 +360,9 @@ async function poll(msg, args) {
         database.remove({ createdOn: { $lt: aWeekAgo } }, { multi: true }, (err, n) => console.log(n + " entries removed."));
     }
 
+// Last message variable
+var last_message;
+
 // Get all commands
 const music_command_files = fs.readdirSync('./commands/Music').filter(file => file.endsWith('.js'));
 const nsfw_command_files = fs.readdirSync('./commands/NSFW').filter(file => file.endsWith('.js'));
@@ -575,10 +578,17 @@ client.on('message', async message => {
 
         if(message.author.username == "ThatSaltySnipezGuy")
         {
-            if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
+            if(last_message.content.toLowerCase().includes("!penis"))
+                return message.channel.send("Shut the fuck up. You know that's the realistic size of your wee wee");
+
+            else if((msg.includes("jerry") && msg.includes("bot")) && !(msg.includes("!")))
             {
                 message.channel.send("Fuck you Alex :)");
             }
+            
+            else
+            {}
+
         }
 
         if(message.author.username == "Machen Gaming")
@@ -708,6 +718,9 @@ client.on('message', async message => {
             message.reply("Sorry, give me more at least a question");
         }
     }
+
+    if(!message.author.bot)
+        last_message = message;
 
     // Execute all other commands
     else
