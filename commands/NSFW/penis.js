@@ -6,10 +6,10 @@ module.exports = {
     {
         const size = Math.floor(Math.random() * 11);
         var i;
-        var shaft;
+        var shaft = "";
 
         for(i = 0; i < size; i++)
-            shaft = shaft.concat("=");
+            shaft = shaft + "=";
 
         message.channel.send(`${message.author.username}'s penis size:`);
         return message.channel.send(`8${shaft}D`);
