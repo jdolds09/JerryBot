@@ -11,7 +11,7 @@ module.exports = {
         for(i = 0; i < size; i++)
             shaft = shaft + "=";
 
-        if(message.author.username == "DrunkenMaster89" || message.author.username == "ThatSaltySnipezGuy")
+        if(message.author.username == "DrunkenMaster89")
             shaft = "";
 
         message.channel.send(`${message.author.username}'s penis size:`);
