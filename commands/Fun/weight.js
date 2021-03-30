@@ -12,9 +12,7 @@ module.exports = {
         if(!(args.length > 1))
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
 
-        message.channel.send(typeof(args[1]));
-
-        if(Number(args[1]) === 'number')
+        if(typeof(Number(args[1])) === 'number')
         {
             message.channel.send("fuck");
             fs.writeFile(`/weight/${message.author.username}.txt`, args[1], function (err) {
