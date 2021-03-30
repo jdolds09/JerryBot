@@ -29,11 +29,14 @@ module.exports = {
 
             else
             {
-                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, err => {
-                    if(err){
-                        return console.log(err);
-                    }
-                });
+                try
+                {
+                    const data = fs.writeFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`);
+                }
+                catch(err)
+                {
+                    return console.log(err);
+                }
             }
         }
     },
