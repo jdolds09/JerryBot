@@ -12,7 +12,7 @@ module.exports = {
             if(result < 6)
             {
                 message.channel.send("That is an act that I cannot forgive my son, may you burn in eternal hellfire for your actions.");
-                return message.channel.send("", {files: ['/app/images/devl.gif']});
+                return message.channel.send("", {files: ['/app/images/devil.gif']});
             }
 
             else
