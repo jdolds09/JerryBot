@@ -1,4 +1,6 @@
-fs = require('fs');
+const fs = require('fs');
+const path = require('path');
+
 
 // Weight command
 module.exports = {
@@ -12,7 +14,7 @@ module.exports = {
         if(!(args.length > 1))
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
 
-        message.channel.send(process.cwd());
+        message.channel.send(path.resolve("./commands/Fun"));
 
         if(typeof(Number(args[1])) === 'number')
         {
