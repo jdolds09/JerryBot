@@ -14,7 +14,7 @@ module.exports = {
 
         message.channel.send(typeof(args[1]));
 
-        if(typeof(args[1]) === 'number')
+        if(Number(args[1]) === 'number')
         {
             message.channel.send("fuck");
             fs.writeFile(`/weight/${message.author.username}.txt`, args[1], function (err) {
