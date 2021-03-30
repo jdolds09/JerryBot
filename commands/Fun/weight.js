@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 
 // Weight command
@@ -30,12 +29,10 @@ module.exports = {
 
             else
             {
-                var stream = fs.createWriteStream(`/app/commands/Fun/weight/${message.author.username}.txt`);
-                stream.once('open', function(fd) {
-                    stream.write(`${args[1]}`);
-                    stream.write(`${months[month]}`);
-                    stream.write(`${year}`);
-                    stream.end();
+                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, err => {
+                    if(err){
+                        return console.log(err);
+                    }
                 });
             }
         }
