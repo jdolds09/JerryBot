@@ -12,6 +12,8 @@ module.exports = {
         if(!(args.length > 1))
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
 
+        message.channel.send(process.cwd());
+
         if(typeof(Number(args[1])) === 'number')
         {
             message.channel.send("fuck");
