@@ -22,6 +22,7 @@ module.exports = {
 
         if(typeof(Number(args[1])) === 'number')
         {
+            return message.channel.send("Fuck");
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
 
