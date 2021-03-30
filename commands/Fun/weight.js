@@ -11,18 +11,28 @@ module.exports = {
         // Get all arguments
         const args = message.content.split(" ");
 
+        // Get date
+        const date_ob = new Date();
+        const month = date_ob.getMonth();
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const year = date_ob.getFullYear();
+
         if(!(args.length > 1))
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
 
-        message.channel.send(path.resolve("./commands/Fun"));
-
         if(typeof(Number(args[1])) === 'number')
         {
-            message.channel.send("fuck");
-            fs.writeFile(`${message.author.username}.txt`, args[1], function (err) {
-                if (err) return console.log(err);
-            });
-            return message.channel.send("added file");
+            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
+            {
+
+            }
+
+            else
+            {
+                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, function (err) {
+                    if (err) return console.log(err);
+                });
+            }
         }
     },
 };
