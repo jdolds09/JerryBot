@@ -25,15 +25,16 @@ module.exports = {
             
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
-                return message.channel.send("Fuck");
+                
             }
 
             else
             {
                 var stream = fs.createWriteStream(`/app/commands/Fun/weight/${message.author.username}.txt`);
                 stream.once('open', function(fd) {
-                    stream.write("My first row\n");
-                    stream.write("My second row\n");
+                    stream.write(`${args[1]}`);
+                    stream.write(`${months[month]}`);
+                    stream.write(`${year}`);
                     stream.end();
                 });
             }
