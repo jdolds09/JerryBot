@@ -1,4 +1,4 @@
-// Roll command
+// Penis command
 module.exports = {
 	name: 'penis',
 	description: 'See how big your pee pee is',
@@ -11,7 +11,7 @@ module.exports = {
         for(i = 0; i < size; i++)
             shaft = shaft + "=";
 
-        if(message.author.username == "DrunkenMaster89")
+        if(message.author.username == "DrunkenMaster89" || message.author.username == "ThatSaltySnipezGuy")
             shaft = "";
 
         message.channel.send(`${message.author.username}'s penis size:`);
