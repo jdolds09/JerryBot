@@ -23,11 +23,11 @@ module.exports = {
         {
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
-                fs.appendFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}`, function (err) {
+                fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}`, function (err) {
                     if (err) return console.log(err);
                 });
 
-                fs.readFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
+                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
                     if(err) return console.log(err);
                     console.log(data);
                     console.log(data.indexOf(months[month]));
