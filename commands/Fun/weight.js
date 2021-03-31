@@ -20,7 +20,20 @@ module.exports = {
         if(!(args.length > 1))
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
 
-        if(typeof(Number(args[1])) === 'number')
+        if(args[1] == "clear")
+        {
+            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
+            {
+                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, "", function (err) {
+                    if (err) return console.log(err);
+                });
+            }
+    
+            else
+                return message.channel.send("This user is not in the database. Jerry needs to add you.");
+        }
+
+        else if(typeof(Number(args[1])) == 'number')
         {
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
@@ -52,19 +65,6 @@ module.exports = {
             else
                 return message.channel.send("This user is not in the database. Jerry needs to add you.");
         }
-
-    else if(args[1] == "clear")
-    {
-        if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
-        {
-            fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, "", function (err) {
-                if (err) return console.log(err);
-            });
-        }
-
-        else
-            return message.channel.send("This user is not in the database. Jerry needs to add you.");
-    }
     
     else
         return message.channel.send("Incorrect arguments supplied with the weight command");
