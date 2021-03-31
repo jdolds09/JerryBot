@@ -21,23 +21,21 @@ module.exports = {
 
         if(typeof(Number(args[1])) === 'number')
         {
-            
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
-                
+                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
+                    if(err) return console.log(err);
+                    console.log(data);
+                    console.log(data.indexOf(months[month]));
+                });
+
+                fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}`, function (err) {
+                    if (err) return console.log(err);
+                });
             }
 
             else
-            {
-                try
-                {
-                    const data = fs.writeFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`);
-                }
-                catch(err)
-                {
-                    return console.log(err);
-                }
-            }
+                return message.channel.send("This user is not in the database. Jerry needs to add you.");
         }
     },
 };
