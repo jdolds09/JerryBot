@@ -23,7 +23,7 @@ module.exports = {
         {
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
-                fs.writeFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}`, function (err) {
+                fs.appendFileSync(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}`, function (err) {
                     if (err) return console.log(err);
                 });
 
