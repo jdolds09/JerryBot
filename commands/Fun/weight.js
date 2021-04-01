@@ -82,12 +82,21 @@ module.exports = {
                 goal = weight_loss * .1;
                 if(goal > 8)
                     goal = 8;
-                return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
+
+                if(target_weight > current_weight)
+                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
+                else
+                    return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
                 });
             }
 
             else
                 return message.channel.send("This user is not in the database. Jerry needs to add you.");
+        }
+
+        else if(args[1].toLowerCase() == "progress")
+        {
+            
         }
 
         else if(Number(args[1]) != NaN)
@@ -126,6 +135,23 @@ module.exports = {
                             if (err) return console.log(err);
                             if(empty_file)
                                 return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
+                            else
+                            {
+                                current_weight = Number(args[1]);
+                                fs.readFile(`/app/commands/Fun/weight/${message.author.username}_goal.txt`, 'utf8', function (err, goal_data) {
+                                    if(err) return console.log(err);
+                                    target_weight = Number(goal_data);
+                                });
+                                weight_loss = Math.abs(current_weight - target_weight);
+                                goal = weight_loss * .1;
+                                if(goal > 8)
+                                    goal = 8;
+
+                                if(target_weight > current_weight)
+                                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
+                                else
+                                    return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
+                            }
                         });
                     }
                 });
