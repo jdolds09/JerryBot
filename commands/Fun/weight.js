@@ -33,7 +33,7 @@ module.exports = {
                 return message.channel.send("This user is not in the database. Jerry needs to add you.");
         }
 
-        else if(typeof(Number(args[1])) == 'number')
+        else if(Number(args[1]) != NaN)
         {
             if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
             {
@@ -50,8 +50,10 @@ module.exports = {
                             return message.channel.send("It's too much damn work to go back and replace that value. Fuck you.");
                         }
                     }
+                    
                     else
                     {
+                        message.channel.send("Fuck");
                         fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, function (err) {
                             if (err) return console.log(err);
                             if(empty_file)
