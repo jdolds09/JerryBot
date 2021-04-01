@@ -20,11 +20,11 @@ module.exports = {
         // User object
         var user = {
             name: message.author.username,
-            current_weight: 0,
-            month: "",
-            year: "",
+            weight: [],
+            month: [],
+            year: [],
             target_weight: 0,
-            month_goal: 0,
+            month_goal: [],
         };
 
         if(args.length <= 1)
@@ -74,14 +74,14 @@ module.exports = {
                     {
                         var boy = JSON.parse(data);
                         boy.target_weight = target_weight;
-                        boy.month_goal = (Math.abs(boy.current_weight - target_weight)) * .1;
+                        boy.month_goal.push((Math.abs(boy.weight - target_weight)) * .1);
 
-                        if(target_weight > boy.current_weight)
+                        if(target_weight > boy.weight[boy.weight.length - 1])
                         {
                             fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                                 if(err) console.log(err);
                             });
-                            return message.channel.send(`Your goal this month is to gain ${boy.month_goal} pound(s). Good luck! :)`);
+                            return message.channel.send(`Your goal this month is to gain ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                         }
 
                         else
@@ -89,7 +89,7 @@ module.exports = {
                             fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                                 if(err) console.log(err);
                             });
-                            return message.channel.send(`Your goal this month is to lose ${boy.month_goal} pound(s). Good luck! :)`);
+                            return message.channel.send(`Your goal this month is to lose ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                         }
                     }
                 });
@@ -112,9 +112,9 @@ module.exports = {
                     if (err) console.log(err);
                     if(data.length == 0)
                     {
-                        user.current_weight = Number(args[1]);
-                        user.month = months[month];
-                        user.year = year;
+                        user.weights.push(Number(args[1]));
+                        user.month.push(months[month]);
+                        user.year.push(year);
                         fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
                             if(err) console.log(err);
                         });
@@ -123,30 +123,34 @@ module.exports = {
 
                     else
                     {
-                        // Get user
-                        const dude = require(`/app/commands/Fun/weight/${message.author.username}.json`);
-                        users = JSON.parse(data);
-                        users.forEach(boy => {
-                            if(boy.month == months[month] && boy.year == year)
+                        var boy = JSON.parse(data);
+                        var i;
+
+                        if(boy.target_weight == 0)
+                        {
+                            message.channel.send("You must set a target weight before setting a new weight");
+                            return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
+                        }
+
+                        for(i = 0; i < boy.weight.length; i++)
+                        {
+                            if(boy.month[i] == months[month] && boy.year[i] == year)
                             {
-                                message.channel.send("You already set a weight for this month. It's too hard to go back and change that.");
-                                return message.channel.send("Fuck you.");
+                                return message.channel.send("You already entered a weight this month. It's too much work to go back and change it. Fuck you.");
                             }
-                            user.target_weight = boy.target_weight;
-                        });
+                        }
 
-                        user.current_weight = Number(args[1]);
-                        user.month = months[month];
-                        user.year = year;
-                        user.month_goal = (Math.abs(user.current_weight - user.target_weight)) * .1;
+                        boy.weight.push(Number(args[1]));
+                        boy.month.push = months[month];
+                        boy.year.push(year);
+                        boy.month_goal.push((Math.abs(user.current_weight - user.target_weight)) * .1);
 
-                        dude.push(user);
-                        fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(dude), err => {
+                        fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                             if(err) console.log(err);
-                            if(user.target_weight > user.current_weight)
-                                return message.channel.send(`Your goal this month is to gain ${user.month_goal} pound(s). Good luck! :)`);
+                            if(boy.target_weight > boy.weight[boy.weight.length - 1])
+                                return message.channel.send(`Your goal this month is to gain ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                             else
-                                return message.channel.send(`Your goal this month is to gain ${user.month_goal} pound(s). Good luck! :)`);
+                                return message.channel.send(`Your goal this month is to gain ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                         });
                     }
                 });
