@@ -26,6 +26,7 @@ module.exports = {
             {
                 fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.txt`, "", function (err) {
                     if (err) return console.log(err);
+                    return message.channel.send("Your weight tracking data has been cleared.");
                 });
             }
     
@@ -53,13 +54,16 @@ module.exports = {
                     
                     else
                     {
-                        message.channel.send("Fuck");
                         fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, function (err) {
                             if (err) return console.log(err);
                             if(empty_file)
                                 return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
                         });
                     }
+                });
+
+                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
+                    if(err) return console.log(err);
                     console.log(data);
                 });
             }
