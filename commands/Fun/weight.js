@@ -1,12 +1,13 @@
 const fs = require('fs');
 
-
 // Weight command
 module.exports = {
 	name: 'weight',
 	description: 'Keep track of your weight loss progress',
     execute(message) 
     {
+        // Get user
+        const dude = require(`/app/commands/Fun/weight/${message.author.username}.json`);
         // Get all arguments
         const args = message.content.split(" ");
 
@@ -15,11 +16,18 @@ module.exports = {
         const month = date_ob.getMonth();
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const year = date_ob.getFullYear();
-        var current_weight = "";
         var target_weight = 0;
-        var goal = 0;
-        var weight_loss = 0;
-        var empty_file = false;
+        var users;
+
+        // User object
+        var user = {
+            name: message.author.username,
+            current_weight: 0,
+            month: "",
+            year: "",
+            target_weight: 0,
+            month_goal: 0,
+        };
 
         if(args.length <= 1)
             return message.channel.send("You must supply additional argument(s) along with the weight command.");
@@ -54,42 +62,38 @@ module.exports = {
 
             target_weight = Number(args[2]);
 
-            fs.readFile(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
-                if(err) return console.log(err);
-                if(data.length == 0)
-                    return message.channel.send("You must enter your current weight before entering your target weight.");
-                const month_length = months[month].length + 2;    
-                data = data.substring(0, data.length - (8 + month_length));
-                if(!(data.includes("January") || data.includes("February") || data.includes("March") || data.includes("April") || data.includes("May") || data.includes("June") || data.includes("July") || data.includes("August") || data.includes("September") || data.includes("October") || data.includes("November") || data.includes("December")))
-                    current_weight = Number(data);
-                else
-                {
-                    while(data.charAt(data.length - 1) != '\n')
-                    {
-                        current_weight = data.charAt(data.length - 1) + current_weight;
-                        data = data.substring(0, data.length - 1);
-                    }
-                }
-            });
-
-            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}_goal.txt`))
+            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.json`))
             {
-                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}_goal.txt`, `${args[2]}`, function (err) {
-                    if (err) return console.log(err);
-                    current_weight = Number(current_weight);
-                console.log(current_weight);
-                console.log(target_weight);
-                weight_loss = Math.abs(current_weight - target_weight);
-                console.log(weight_loss);
-                goal = weight_loss * .1;
-                console.log(goal);
-                if(goal > 8)
-                    goal = 8;
+                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.json`, (err, data) => {
+                    if (err) console.log(err);
+                    if(data.length == 0)
+                    {
+                        message.channel.send("You must set your current weight before setting target weight");
+                        return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
+                    }
+                    
+                    else
+                    {
+                        var boy = JSON.parse(data);
+                        boy.target_weight = target_weight;
+                        boy.month_goal = (Math.abs(boy.current_weight - target_weight)) * .1;
 
-                if(target_weight > current_weight)
-                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
-                else
-                    return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
+                        if(target_weight > boy.current_weight)
+                        {
+                            fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
+                                if(err) console.log(err);
+                            });
+                            return message.channel.send(`Your goal this month is to gain ${boy.month_goal} pound(s). Good luck! :)`);
+                        }
+
+                        else
+                        {
+                            fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
+                                if(err) console.log(err);
+                            });
+                            return message.channel.send(`Your goal this month is to lose ${boy.month_goal} pound(s). Good luck! :)`);
+                        }
+                    }
                 });
             }
 
@@ -104,57 +108,45 @@ module.exports = {
 
         else if(Number(args[1]) != NaN)
         {
-            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.txt`))
+            if(fs.existsSync(`/app/commands/Fun/weight/${message.author.username}.json`))
             {
-                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.txt`, 'utf8', function (err, data) {
-                    if(err) return console.log(err);
-                    if (data.length == 0)
-                        empty_file = true;
-                    else
+                fs.readFile(`/app/commands/Fun/weight/${message.author.username}.json`, (err, data) => {
+                    if (err) console.log(err);
+                    if(data.length == 0)
                     {
-                        fs.readFile(`/app/commands/Fun/weight/${message.author.username}_goal.txt`, 'utf8', function (err, goal_data) {
-                            if(err) return console.log(err);
-                            if(data.length == 0)
-                            {
-                                message.channel.send("You must enter a target weight before entering another weight.");
-                                return message.channel.send("You can enter a target weight by using the !weight target [desired weight] command.");
-                            }
+                        user.current_weight = Number(args[1]);
+                        user.month = months[month];
+                        user.year = year;
+                        fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                            if(err) console.log(err);
                         });
+                        return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
                     }
 
-                    if(data.includes(months[month]))
-                    {
-                        var length = months[month].length + 2;
-                        if(data.substring(data.indexOf(months[month]) + length, data.indexOf(months[month]) + length + 4) == year)
-                        {
-                            message.channel.send("You have already entered a weight for this month.");
-                            return message.channel.send("It's too much damn work to go back and replace that value. Fuck you.");
-                        }
-                    }
-                    
                     else
                     {
-                        fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, function (err) {
-                            if (err) return console.log(err);
-                            if(empty_file)
-                                return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
-                            else
+                        users = JSON.parse(data);
+                        users.forEach(boy => {
+                            if(boy.month == months[month] && boy.year == year)
                             {
-                                current_weight = Number(args[1]);
-                                fs.readFile(`/app/commands/Fun/weight/${message.author.username}_goal.txt`, 'utf8', function (err, goal_data) {
-                                    if(err) return console.log(err);
-                                    target_weight = Number(goal_data);
-                                });
-                                weight_loss = Math.abs(current_weight - target_weight);
-                                goal = weight_loss * .1;
-                                if(goal > 8)
-                                    goal = 8;
-
-                                if(target_weight > current_weight)
-                                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
-                                else
-                                    return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
+                                message.channel.send("You already set a weight for this month. It's too hard to go back and change that.");
+                                return message.channel.send("Fuck you.");
                             }
+                            user.target_weight = boy.target_weight;
+                        });
+
+                        user.current_weight = Number(args[1]);
+                        user.month = months[month];
+                        user.year = year;
+                        user.month_goal = (Math.abs(user.current_weight - user.target_weight)) * .1;
+
+                        dude.push(user);
+                        fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(dude), err => {
+                            if(err) console.log(err);
+                            if(user.target_weight > user.current_weight)
+                                return message.channel.send(`Your goal this month is to gain ${user.month_goal} pound(s). Good luck! :)`);
+                            else
+                                return message.channel.send(`Your goal this month is to gain ${user.month_goal} pound(s). Good luck! :)`);
                         });
                     }
                 });
