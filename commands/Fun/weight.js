@@ -83,9 +83,9 @@ module.exports = {
                 if(goal > 8)
                     goal = 8;
 
-                if(target_weight > current_weight)
-                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
-                else
+                //if(target_weight > current_weight)
+                    //return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
+                //else
                     return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
                 });
             }
