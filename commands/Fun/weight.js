@@ -112,7 +112,7 @@ module.exports = {
                     if (err) console.log(err);
                     if(data.length == 0)
                     {
-                        user.weights.push(Number(args[1]));
+                        user.weight.push(Number(args[1]));
                         user.month.push(months[month]);
                         user.year.push(year);
                         fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
