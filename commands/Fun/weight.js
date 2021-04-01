@@ -60,7 +60,6 @@ module.exports = {
                     return message.channel.send("You must enter your current weight before entering your target weight.");
                 const month_length = months[month].length + 2;    
                 data = data.substring(0, data.length - (8 + month_length));
-                console.log(data);
                 if(!(data.includes("January") || data.includes("February") || data.includes("March") || data.includes("April") || data.includes("May") || data.includes("June") || data.includes("July") || data.includes("August") || data.includes("September") || data.includes("October") || data.includes("November") || data.includes("December")))
                     current_weight = Number(data);
                 else
