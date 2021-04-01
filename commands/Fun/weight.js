@@ -56,8 +56,8 @@ module.exports = {
                     {
                         fs.appendFile(`/app/commands/Fun/weight/${message.author.username}.txt`, `${args[1]}\r\n${months[month]}\r\n${year}\r\n`, function (err) {
                             if (err) return console.log(err);
-                            if(empty_file)
-                                return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
+                            //if(empty_file)
+                                //return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
                         });
                     }
                 });
