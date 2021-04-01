@@ -6,8 +6,6 @@ module.exports = {
 	description: 'Keep track of your weight loss progress',
     execute(message) 
     {
-        // Get user
-        const dude = require(`/app/commands/Fun/weight/${message.author.username}.json`);
         // Get all arguments
         const args = message.content.split(" ");
 
@@ -125,6 +123,8 @@ module.exports = {
 
                     else
                     {
+                        // Get user
+                        const dude = require(`/app/commands/Fun/weight/${message.author.username}.json`);
                         users = JSON.parse(data);
                         users.forEach(boy => {
                             if(boy.month == months[month] && boy.year == year)
