@@ -78,14 +78,18 @@ module.exports = {
                 fs.writeFile(`/app/commands/Fun/weight/${message.author.username}_goal.txt`, `${args[2]}`, function (err) {
                     if (err) return console.log(err);
                     current_weight = Number(current_weight);
+                console.log(current_weight);
+                console.log(target_weight);
                 weight_loss = Math.abs(current_weight - target_weight);
+                console.log(weight_loss);
                 goal = weight_loss * .1;
+                console.log(goal);
                 if(goal > 8)
                     goal = 8;
 
-                //if(target_weight > current_weight)
-                    //return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
-                //else
+                if(target_weight > current_weight)
+                    return message.channel.send(`${message.author.username}, your goal is to gain ${goal} pound(s) this month. Good luck! :)`);
+                else
                     return message.channel.send(`${message.author.username}, your goal is to lose ${goal} pound(s) this month. Good luck! :)`);
                 });
             }
