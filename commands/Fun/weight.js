@@ -19,7 +19,6 @@ module.exports = {
         var target_weight = 0;
         var goal = 0;
         var weight_loss = 0;
-        var
         var empty_file = false;
 
         if(args.length <= 1)
