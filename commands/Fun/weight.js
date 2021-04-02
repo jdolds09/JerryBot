@@ -11,7 +11,7 @@ module.exports = {
         const args = message.content.split(" ");
 
         // Database
-        let database = new Datastore({ filename: `/app/commands/Fun/weight/${message.author.username}.json`});
+        let database = new Datastore({ filename: `/app/commands/Fun/weight/${message.author.username}.db`});
 
         // Get date
         const date_ob = new Date();
