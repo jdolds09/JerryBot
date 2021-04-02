@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Datastore = require('nedb');
 
 // Weight command
 module.exports = {
@@ -9,13 +10,15 @@ module.exports = {
         // Get all arguments
         const args = message.content.split(" ");
 
+        // Database
+        let database = new Datastore({ filename: `/app/commands/Fun/weight/${message.author.username}.json`});
+
         // Get date
         const date_ob = new Date();
         const month = date_ob.getMonth();
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const year = date_ob.getFullYear();
         var target_weight = 0;
-        var users;
 
         // User object
         var user = {
@@ -66,21 +69,63 @@ module.exports = {
                     if (err) console.log(err);
                     if(data.length == 0)
                     {
-                        message.channel.send("You must set your current weight before setting target weight");
-                        return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
+                        database.loadDatabase();
+                        database.find({name: message.author.username}, function (err, doc) {
+                            if(err) console.log(err);
+                            if(Object.keys(doc).length == 0)
+                            {
+                                message.channel.send("You must set your current weight before setting target weight");
+                                return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
+                            }
+                            
+                            else
+                            {
+                                user.weight = doc.weight;
+                                user.month = doc.month;
+                                user.year = doc.year;
+                                user.target_weight = target_weight;
+                                user.month_goal = doc.month_goal;
+                                user.month_goal[user.month_goal.length - 1] = (Math.abs(boy.weight[boy.weight.length - 1] - target_weight)) * .1;
+
+                                if(target_weight > user.weight[user.weight.length - 1])
+                                {
+                                    fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                                        if(err) console.log(err);
+                                    });
+
+                                    database.insert(user);
+
+                                    return message.channel.send(`Your goal this month is to gain ${user.month_goal[user.month_goal.length - 1]} pound(s). Good luck! :)`);
+                                }
+
+                                else
+                                {
+                                    fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                                        if(err) console.log(err);
+                                    });
+
+                                    database.insert(user);
+
+                                    return message.channel.send(`Your goal this month is to lose ${user.month_goal[user.month_goal.length - 1]} pound(s). Good luck! :)`);
+                                }
+                            }
+                        });
                     }
                     
                     else
                     {
                         var boy = JSON.parse(data);
                         boy.target_weight = target_weight;
-                        boy.month_goal.push((Math.abs(boy.weight - target_weight)) * .1);
+                        boy.month_goal.push((Math.abs(boy.weight[boy.weight.length - 1] - target_weight)) * .1);
 
                         if(target_weight > boy.weight[boy.weight.length - 1])
                         {
                             fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                                 if(err) console.log(err);
                             });
+
+                            database.insert(boy);
+
                             return message.channel.send(`Your goal this month is to gain ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                         }
 
@@ -89,6 +134,9 @@ module.exports = {
                             fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                                 if(err) console.log(err);
                             });
+
+                            database.insert(boy);
+
                             return message.channel.send(`Your goal this month is to lose ${boy.month_goal[boy.month_goal.length - 1]} pound(s). Good luck! :)`);
                         }
                     }
@@ -112,19 +160,63 @@ module.exports = {
                     if (err) console.log(err);
                     if(data.length == 0)
                     {
-                        user.weight.push(Number(args[1]));
-                        user.month.push(months[month]);
-                        user.year.push(year);
-                        fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                        database.loadDatabase();
+                        database.find({name: message.author.username}, function (err, doc) {
                             if(err) console.log(err);
+                            if(Object.keys(doc).length == 0)
+                            {
+                                user.weight.push(Number(args[1]));
+                                user.month.push(months[month]);
+                                user.year.push(year);
+                                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                                    if(err) console.log(err);
+                                });
+                                return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
+                            }
+                            
+                            else
+                            {
+                                user.weight = doc.weight;
+                                user.month = doc.month;
+                                user.year = doc.year;
+                                user.target_weight = doc.target_weight;
+                                user.month_goal = doc.month_goal;
+
+                                if(user.target_weight == 0)
+                                {
+                                    message.channel.send("You must set a target weight before setting a new weight");
+                                    return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
+                                }
+
+                                if(boy.month[boy.month.length - 1] == months[month] && boy.year[boy.year.length - 1] == year)
+                                    return message.channel.send("You already entered a weight this month. It's too much work to go back and change it. Fuck you.");
+
+                                user.weight.push(Number(args[1]));
+                                user.month.push(months[month]);
+                                user.year.push(year);
+                                user.month_goal.push((Math.abs(user.weight[user.weight.length - 1] - user.target_weight)) * .1);
+                                fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(user), err => {
+                                    if(err) console.log(err);
+                                });
+                                
+                                if(user.target_weight > user.weight[user.weight.length - 1])
+                                {
+                                    database.insert(user);
+                                    return message.channel.send(`Your goal this month is to gain ${user.month_goal[user.month_goal.length - 1]} pound(s). Good luck! :)`);
+                                }
+
+                                else
+                                {
+                                    database.insert(user);
+                                    return message.channel.send(`Your goal this month is to lose ${user.month_goal[user.month_goal.length - 1]} pound(s). Good luck! :)`);
+                                }
+                            }
                         });
-                        return message.channel.send("Please enter the weight you wish to be at by using the !weight target [desired weight] command");
                     }
 
                     else
                     {
                         var boy = JSON.parse(data);
-                        var i;
 
                         if(boy.target_weight == 0)
                         {
@@ -132,18 +224,13 @@ module.exports = {
                             return message.channel.send("You can set your current weight by using !weight [current_weight] command.");
                         }
 
-                        for(i = 0; i < boy.weight.length; i++)
-                        {
-                            if(boy.month[i] == months[month] && boy.year[i] == year)
-                            {
-                                return message.channel.send("You already entered a weight this month. It's too much work to go back and change it. Fuck you.");
-                            }
-                        }
+                        if(boy.month[boy.month.length - 1] == months[month] && boy.year[boy.year.length - 1] == year)
+                            return message.channel.send("You already entered a weight this month. It's too much work to go back and change it. Fuck you.");
 
                         boy.weight.push(Number(args[1]));
                         boy.month.push = months[month];
                         boy.year.push(year);
-                        boy.month_goal.push((Math.abs(user.current_weight - user.target_weight)) * .1);
+                        boy.month_goal.push((Math.abs(boy.current_weight - boy.target_weight)) * .1);
 
                         fs.writeFile(`/app/commands/Fun/weight/${message.author.username}.json`, JSON.stringify(boy), err => {
                             if(err) console.log(err);
