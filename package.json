@@ -22,7 +22,7 @@
     "line-reader": "^0.4.0",
     "mongoose": "^5.12.3",
     "nedb": "^1.8.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "one-liner-joke": "^1.2.0",
     "opusscript": "0.0.7",
     "pornsearch": "^2.4.3",
