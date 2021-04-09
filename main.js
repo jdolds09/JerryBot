@@ -1,7 +1,6 @@
 const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
-const Datastore = require('nedb');
 const hash = require("string-hash");
 
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
@@ -442,6 +441,9 @@ client.on('message', async message => {
             else
                 message.channel.send("", {files: ['./images/gachi.gif']});
         }
+
+        else if(msg.includes("pepelaugh"))
+            message.channel.send("", {files: ['./images/pepelaugh.gif']});
 
         else if(msg.includes("gasm") && !msg.includes("gachi"))
             message.channel.send("", {files: ['./images/gasm.png']});
