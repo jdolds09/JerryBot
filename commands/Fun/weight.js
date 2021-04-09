@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 const Datastore = require('nedb');
 
 // Weight command
@@ -251,3 +251,4 @@ module.exports = {
             return message.channel.send("Incorrect arguments supplied with the weight command");
     },
 };
+*/
