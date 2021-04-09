@@ -2,6 +2,7 @@ const fs = require('fs') // For file parsing
 const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
 const hash = require("string-hash");
+const Datastore = require('nedb');
 
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
 const handEmojis = ["👍", "👎"];
