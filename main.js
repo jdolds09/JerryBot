@@ -509,7 +509,7 @@ client.on('message', async message => {
                 message.channel.send("", {files: ['./images/kappaross.png']});
 
             else
-                message.channel.send("", {files: ['./images/kapp.png']});
+                message.channel.send("", {files: ['./images/kapp.jpg']});
         }
 
         else if(msg.includes("4head"))
