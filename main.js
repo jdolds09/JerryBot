@@ -449,6 +449,9 @@ client.on('message', async message => {
         else if(msg.includes("copium"))
             message.channel.send("", {files: ['./images/copium.jpeg']});
 
+        else if(msg.includes("uhm"))
+            message.channel.send("", {files: ['./images/uhm.png']});
+
         else if(msg.includes("gasm") && !msg.includes("gachi"))
             message.channel.send("", {files: ['./images/gasm.png']});
             
