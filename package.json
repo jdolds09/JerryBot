@@ -11,7 +11,7 @@
   "dependencies": {
     "@danclay/discord-dialogflow": "^1.0.2",
     "apiai": "^4.0.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "cron": "^1.8.2",
     "dabi-images": "^2.7.5",
     "dialogflow": "^1.2.0",
