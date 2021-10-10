@@ -20,7 +20,7 @@ module.exports = {
         {        
             var CronJob = require('cron').CronJob;
 
-            var job = new CronJob('00 51 18 * *', function() {
+            var job = new CronJob('0 0 19 * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
