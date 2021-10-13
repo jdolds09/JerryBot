@@ -4,7 +4,7 @@ const Client = require('./classes/Client'); // To save commands
 const hash = require("string-hash");
 const Datastore = require('nedb');
 const Images = require("dabi-images");
-const Client = new Images.Client();
+const img_client = new Images.Client();
 
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
 const handEmojis = ["👍", "👎"];
@@ -736,7 +736,7 @@ client.on('message', async message => {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
-                    Client.nsfw.real.butts().then(json => {
+                    img_client.nsfw.real.butts().then(json => {
                         /* Discord does not currently support embedding videos, If one day they do support embedding videos, this code will work
                         if(json.is_video)
                         {
@@ -768,7 +768,7 @@ client.on('message', async message => {
                 for (i = 0; i < 15; i++)
                 {
                     // Fetch boobs image
-                    Client.nsfw.real.boobs().then(json => {
+                    img_client.nsfw.real.boobs().then(json => {
                         /* Discord does not currently support embedding videos, If one day they do support embedding videos, this code will work
                         if(json.is_video)
                         {
@@ -797,6 +797,8 @@ client.on('message', async message => {
                 }
 
             }, null, true, 'America/Chicago');
+
+            message.channel.send("Scheduled to post at 10AM CST.");
             
             job.start();
         }
