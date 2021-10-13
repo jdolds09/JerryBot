@@ -732,7 +732,7 @@ client.on('message', async message => {
         {        
             const CronJob = require('node-cron');
 
-            var job = CronJob.schedule('0 0 8 * * *', function() {
+            var job = CronJob.schedule('0 30 14 * * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
@@ -804,7 +804,7 @@ client.on('message', async message => {
                 
             });
 
-            message.channel.send("Scheduled to post at 10AM CST.");
+            message.channel.send("Scheduled to post at 2:40PM CST.");
             
             job.start();
         }
