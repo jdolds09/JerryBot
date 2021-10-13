@@ -3,7 +3,7 @@ const Discord = require('discord.js'); // For Discord functions
 const Client = require('./classes/Client'); // To save commands
 const hash = require("string-hash");
 const Datastore = require('nedb');
-const Images = require("dabi-images");
+const Images = require("dabi-images"); 
 const img_client = new Images.Client();
 
 const numEmojis = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣", "🔟"];
@@ -732,7 +732,7 @@ client.on('message', async message => {
         {        
             const CronJob = require('node-cron');
 
-            var job = CronJob.schedule('0 30 12 * * *', function() {
+            var job = CronJob.schedule('0 52 10 * * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
@@ -796,7 +796,13 @@ client.on('message', async message => {
                     });
                 }
 
-            }, null, true, 'America/Chicago');
+            },
+
+            {
+                scheduled: true,
+                timezone: America/Los_Angeles
+                
+            });
 
             message.channel.send("Scheduled to post at 10AM CST.");
             
