@@ -732,7 +732,7 @@ client.on('message', async message => {
         {        
             var CronJob = require('cron').CronJob;
 
-            var job = new CronJob('0 12 10 * *', function() {
+            var job = new CronJob('0 15 12 * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
