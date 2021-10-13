@@ -24,6 +24,7 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.3",
     "nedb": "^1.8.0",
+    "node-cron": "^3.0.0",
     "node-fetch": "^2.6.0",
     "one-liner-joke": "^1.2.0",
     "opusscript": "0.0.7",

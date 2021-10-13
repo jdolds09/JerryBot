@@ -730,9 +730,9 @@ client.on('message', async message => {
             return message.channel.send("Must be in a NSFW channel.");
         else
         {        
-            var CronJob = require('cron').CronJob;
+            const CronJob = require('node-cron');
 
-            var job = new CronJob('0 15 12 * *', function() {
+            var job = CronJob.schedule('0 25 12 * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
