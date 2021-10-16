@@ -732,8 +732,8 @@ client.on('message', async message => {
         {        
             const CronJob = require('node-cron');
 
-            var job = CronJob.schedule('0 0 8 * * *', function() {
-                for(i = 0; i < 10; i++)
+            var job = CronJob.schedule('0 0 */2 * * *', function() {
+                for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
                     img_client.nsfw.real.butts().then(json => {
@@ -765,7 +765,7 @@ client.on('message', async message => {
 
                 }
 
-                for (i = 0; i < 10; i++)
+                for (i = 0; i < 5; i++)
                 {
                     // Fetch boobs image
                     img_client.nsfw.real.boobs().then(json => {
@@ -796,7 +796,7 @@ client.on('message', async message => {
                     });
                 }
 
-                for (i = 0; i < 10; i++)
+                for (i = 0; i < 5; i++)
                 {
                     // Fetch boobs image
                     img_client.nsfw.real.cosplay().then(json => {
@@ -836,7 +836,7 @@ client.on('message', async message => {
                 
             });
 
-            message.channel.send("Scheduled to post at 10:00AM CST.");
+            message.channel.send("Scheduled to post every 2 hours.");
             
             job.start();
         }
