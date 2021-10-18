@@ -732,7 +732,7 @@ client.on('message', async message => {
         {        
             const CronJob = require('node-cron');
 
-            var job = CronJob.schedule('0 0 */2 * * *', function() {
+            var job = CronJob.schedule('* * */2 * * *', function() {
                 for(i = 0; i < 5; i++)
                 {
                     // Fetch butts image
