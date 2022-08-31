@@ -22,7 +22,7 @@
     "ffmpeg-static": "^4.2.3",
     "give-me-a-joke": "^0.3.2",
     "line-reader": "^0.4.0",
-    "moment-timezone": "^0.5.33",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^5.12.3",
     "nedb": "^1.8.0",
     "node-cron": "^3.0.0",
