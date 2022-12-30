@@ -33,7 +33,7 @@
     "random-joke": "^1.0.5",
     "random-jokes-gen": "0.0.1",
     "random-puppy": "^1.1.0",
-    "random-words": "^1.1.1",
+    "random-words": "^1.2.0",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
     "simple-youtube-api": "^5.2.1",
